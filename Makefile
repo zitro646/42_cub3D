@@ -6,18 +6,19 @@ CYAN = @echo "\033[0;36m"
 RESET = "\033[1;0m"
 
 # VARIABLES #
-NAME = cub3D
+NAME = test
 LIBFT_NAME = libft.a
 
 AR = ar rcs
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra #-fsanitize=address -g3
 CFLAGS += -I ./$(INC_PATH) -I ./$(LIBFT_PATH)
-MINILIBX = #-lmlx -framework OpenGL -framework AppKit
+MINILIBX_FLAGS = #-lmlx -framework OpenGL -framework AppKit
 
 # PATHs #
 LIBFT_PATH  = srcs/libft
 MAP_PATH  = srcs/map
+MINILIBX_PATH = srcs/minilibx_opengl_20191021
 INC_PATH    = includes
 SRC_PATH    = srcs
 OBJ_PATH    = objects
@@ -63,10 +64,16 @@ $(OBJ_PATH)/%.o: $(MAP_PATH)/%.c | $(OBJ_PATH)
 $(OBJ_PATH)/%.o: $(LIBFT_PATH)/%.c | $(OBJ_PATH)
 	$(CC) $(CFLAGS) -c $< -o $@
             
-$(NAME): $(OBJS) $(OBJS_LIBFT) $(OBJS_MAPS)
+$(NAME): $(OBJS) $(OBJS_LIBFT) $(OBJS_MAPS) | $(MINILIBX_NAME)
+	$(MAKE) -sC $(MINILIBX_PATH)
 	$(GREEN) Objects compiled $(RESET)
-	$(CC) $(CFLAGS) $(OBJS_MAPS) $(OBJS) $(OBJS_LIBFT) $(MINILIBX) -o $(NAME) 
+	$(CC) $(CFLAGS) $(OBJS_MAPS) $(OBJS) $(OBJS_LIBFT) $(MINILIBX_FLAGS) -o $(NAME) 
+	clear
 	$(GREEN) Program asembled $(RESET)
+
+$(MINILIBX_NAME):
+	$(CYAN) HOLA $(RESET)
+	
 
 ##RULES
 $(MAKE): make
@@ -79,8 +86,7 @@ norminette:
 clean:
 	$(PURPLE) CLEANING OBJECTS $(RESET)
 	rm -rf $(OBJ_PATH)
-#rm -rf $(OBJS)
-#rm -rf $(OBJS_MAPS)
+	$(MAKE) clean -sC $(MINILIBX_PATH)
 	
 fclean: clean
 	$(PURPLE) CLEANING DIRECTORY AND EXEC $(RESET)

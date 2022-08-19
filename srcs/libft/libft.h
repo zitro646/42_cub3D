@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 12:51:39 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/01/25 14:43:54 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/08/18 17:14:43 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,17 @@ typedef struct s_list
 	struct s_list	*prev;
 }	t_list;
 
-/*
-typedef struct s_list_enemy
-{
-	int					x_axis;
-	int					y_axis;
 
-	char				type;
-	struct s_list_enemy	*next;
-	struct s_list_enemy	*prev;
-}	t_list_enemy;
-*/
+// typedef struct s_list_enemy
+// {
+// 	int					x_axis;
+// 	int					y_axis;
+
+// 	char				type;
+// 	struct s_list_enemy	*next;
+// 	struct s_list_enemy	*prev;
+// }	t_list_enemy;
+
 
 typedef struct window
 {
@@ -58,11 +58,11 @@ typedef struct window
 typedef struct data_map
 {
 	int				counter_moves;
-	char			**background_map;
 	char			**showmap;
 	t_window		*window;
-	t_list			**player;
-	t_list			**enemy;
+	int				height;
+	// t_list			**player;
+	// t_list			**enemy;
 }	t_data_map;
 
 int			ft_isalpha(int c);
