@@ -6,16 +6,16 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 10:38:08 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/08/19 16:30:39 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/08/19 17:50:01 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map/map.h"
+#include "window/window.h"
 #include <stdio.h>
 
-void leaks (void)
+void	leaks(void)
 {
-	system("leaks -q test");	
+	system("leaks -q test");
 }
 
 void	free_all(t_data_map *data_map)
@@ -64,6 +64,7 @@ int	main(int argc, char **argv)
 	if (check == 1)
 	{
 		printf("Check ok\n");
+		make_window(map);
 	}
 	else
 		printf("Check Error\n");

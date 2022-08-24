@@ -13,12 +13,13 @@ AR = ar rcs
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra #-fsanitize=address -g3
 CFLAGS += -I ./$(INC_PATH) -I ./$(LIBFT_PATH)
-MINILIBX_FLAGS = #-lmlx -framework OpenGL -framework AppKit
+MINILIBX_FLAGS = -lmlx -framework OpenGL -framework AppKit
 
 # PATHs #
 LIBFT_PATH  = srcs/libft
 MAP_PATH  = srcs/map
-MINILIBX_PATH = srcs/minilibx_opengl_20191021
+WINDOW_PATH  = srcs/window
+MINILIBX_PATH = srcs/minilibx
 INC_PATH    = includes
 SRC_PATH    = srcs
 OBJ_PATH    = objects
@@ -27,6 +28,8 @@ OBJ_PATH    = objects
 SRC =   main.c
 
 SRC_MAP = mapreader.c mapcheck.c get_file_height.c
+
+SRC_WINDOW = start_window.c image_control.c
 
 SRC_LIBFT = ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_memchr.c \
 ft_memcmp.c ft_strlen.c ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c  \
@@ -47,10 +50,12 @@ all: $(NAME)
 SRCS = $(addprefix $(SRC_PATH)/, $(SRC))
 SRCS_MAP = $(addprefix $(MAP_PATH)/, $(SRC_MAP))
 SRCS_LIBFT = $(addprefix $(LIBFT_PATH)/, $(SRC_LIBFT))
+SRCS_WINDOW = $(addprefix $(LIBFT_WINDOW)/, $(SRC_WINDOW))
 
 OBJS =  $(addprefix $(OBJ_PATH)/, $(SRC:%.c=%.o))
 OBJS_MAPS =  $(addprefix $(OBJ_PATH)/, $(SRC_MAP:%.c=%.o))
 OBJS_LIBFT =  $(addprefix $(OBJ_PATH)/, $(SRC_LIBFT:%.c=%.o))
+OBJS_WINDOW =  $(addprefix $(OBJ_PATH)/, $(SRC_WINDOW:%.c=%.o))
 
 $(OBJ_PATH):
 	mkdir -p $(OBJ_PATH) 2> /dev/null
@@ -63,11 +68,14 @@ $(OBJ_PATH)/%.o: $(MAP_PATH)/%.c | $(OBJ_PATH)
 
 $(OBJ_PATH)/%.o: $(LIBFT_PATH)/%.c | $(OBJ_PATH)
 	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_PATH)/%.o: $(WINDOW_PATH)/%.c | $(OBJ_PATH)
+	$(CC) $(CFLAGS) -c $< -o $@
             
-$(NAME): $(OBJS) $(OBJS_LIBFT) $(OBJS_MAPS) | $(MINILIBX_NAME)
+$(NAME): $(OBJS) $(OBJS_LIBFT) $(OBJS_MAPS) $(OBJS_WINDOW) | $(MINILIBX_NAME)
 	$(MAKE) -sC $(MINILIBX_PATH)
 	$(GREEN) Objects compiled $(RESET)
-	$(CC) $(CFLAGS) $(OBJS_MAPS) $(OBJS) $(OBJS_LIBFT) $(MINILIBX_FLAGS) -o $(NAME) 
+	$(CC) $(CFLAGS) $(OBJS_MAPS) $(OBJS_WINDOW) $(OBJS) $(OBJS_LIBFT) $(MINILIBX_FLAGS) -o $(NAME) 
 	clear
 	$(GREEN) Program asembled $(RESET)
 

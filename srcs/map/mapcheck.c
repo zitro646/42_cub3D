@@ -6,13 +6,13 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:24:16 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/08/19 16:03:07 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/08/24 13:25:03 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map.h" 
 
-int check_good_sorroundings(t_data_map *map, int x, int y, char *good_chars)
+int	check_good_sorroundings(t_data_map *map, int x, int y, char *good_chars)
 {
 	if (x != 0 && map->showmap[y][x + 1] != '\0')
 	{

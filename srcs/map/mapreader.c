@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 08:31:10 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/08/19 16:17:17 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/08/24 13:25:12 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ char	**create_showmap(char *str_dir, int y_max)
 
 	i = 0;
 	show_map = ft_calloc(sizeof(char *), y_max + 1);
-	//printf("%s\n",str_dir);
 	fd = open(str_dir, O_RDONLY);
 	show_map[i] = get_next_line(fd);
 	i = 0;
