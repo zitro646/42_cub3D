@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:10:31 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/01/24 11:20:55 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/08/29 14:56:03 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,15 @@ int	get_file_height(char *str)
 		count++;
 	}
 	close(fd);
+	return (count);
+}
+
+int	get_matrix_height(char **matrix)
+{	
+	int		count;
+
+	count = 0;
+	while (matrix[count])
+		count++;
 	return (count);
 }

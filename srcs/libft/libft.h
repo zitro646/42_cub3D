@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 12:51:39 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/08/18 17:14:43 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/08/29 19:35:21 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,15 @@ typedef struct window
 
 typedef struct data_map
 {
-	int				counter_moves;
 	char			**showmap;
 	t_window		*window;
 	int				height;
+	char			*_north_texture_path;
+	char			*_south_texture_path;
+	char			*_east_texture_path;
+	char			*_west_texture_path;
+	char			*_floor_colour_path;
+	char			*_roof_colour_path;
 	// t_list			**player;
 	// t_list			**enemy;
 }	t_data_map;

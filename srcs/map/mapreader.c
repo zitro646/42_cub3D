@@ -6,13 +6,26 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 08:31:10 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/08/24 13:25:12 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/08/29 20:51:39 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map.h" 
 
-char	**create_showmap(char *str_dir, int y_max)
+void	see_matrix(char **map)
+{
+	int	y;
+
+	y = 0;
+	printf ("Matrix %p\n", &map);
+	while (map[y])
+	{
+		printf ("%i - %p - %s\n", y, &map[y] , map[y]);
+		y++;
+	}
+}
+
+static char	**read_filedata(char *str_dir, int y_max)
 {
 	int			fd;
 	int			i;
@@ -40,77 +53,101 @@ char	**create_showmap(char *str_dir, int y_max)
 	return (show_map);
 }
 
-// t_list	**create_playerlist(t_list **player, char **show_map, int y_max)
-// {
-// 	int		y;
-// 	int		x;
-
-// 	y = 0;
-// 	x = 0;
-// 	player = ft_calloc(sizeof(t_list *), 1);
-// 	while (y < y_max)
-// 	{
-// 		while (show_map[y][x] != '\0')
-// 		{
-// 			if (show_map[y][x] == 'P')
-// 			{
-// 				ft_lstadd_back(player, ft_lstnew(show_map[y][x], x, y));
-// 			}
-// 			x++;
-// 		}
-// 		y++;
-// 		x = 0;
-// 	}
-// 	return (player);
-// }
-
-// t_list	**create_enemylist(t_list **enemy, char **showmap)
-// {
-// 	int		y;
-// 	int		x;
-
-// 	y = 0;
-// 	x = 0;
-// 	enemy = ft_calloc(sizeof(t_list *), 1);
-// 	while (showmap[y])
-// 	{
-// 		while (showmap[y][x] != '\0')
-// 		{
-// 			if (showmap[y][x] == 'X')
-// 			{
-// 				ft_lstadd_back(enemy, \
-// 					ft_lstnew(showmap[y][x], x, y));
-// 			}
-// 			x++;
-// 		}
-// 		y++;
-// 		x = 0;
-// 	}
-// 	return (enemy);
-// }
-
-void see_map(t_data_map *map)
+static	char	*get_var(char **file_data, char *id)
 {
-	int	y;
+	char	*aux;
+	char	*aux2;
+	int		i;
 
+	i = 0;
+	aux = "";
+	while (file_data[i])
+	{
+		if (ft_strnstr(file_data[i], id, ft_strlen(file_data[i])) != NULL)
+		{
+			aux2 = ft_strjoin(aux, file_data[i]);
+			ft_bzero(file_data[i], ft_strlen(file_data[i]));
+			file_data[i][0] = '\0';
+			return (aux2);
+		}
+		i++;
+	}
+	return (NULL);
+}
+
+static	char	**get_infile_variables(char **file_data, char **identicators)
+{
+	char	**values;
+	int		i;
+
+	i = 0;
+	values = ft_calloc(sizeof(char *), 6 + 1);
+	while (identicators[i])
+	{
+		values[i] = get_var(file_data, identicators[i]);
+		i++;
+	}
+	return (values);
+}
+
+static void	add_data_map(t_data_map	*map, char **infile_var)
+{
+	map->_north_texture_path = ft_strjoin(infile_var[0], "");
+	map->_south_texture_path = ft_strjoin(infile_var[1], "");
+	map->_east_texture_path = ft_strjoin(infile_var[2], "");
+	map->_west_texture_path = ft_strjoin(infile_var[3], "");
+	map->_floor_colour_path = ft_strjoin(infile_var[4], "");
+	map->_roof_colour_path = ft_strjoin(infile_var[5], "");
+}
+
+static void resize_map(t_data_map	*data, char **map ,int y , int i)
+{
+	char	**newmap;
+
+	while (map[i])
+	{
+		if (map[i][0] != '\0')
+			y++;
+		i++;
+	}
+	newmap = ft_calloc(sizeof(char *), y + 1);
 	y = 0;
-	printf ("Height (%i) --> 0 - %i \n", map->height, (map->height - 1));
-	while (y < map->height)
-		printf ("%s\n",map->showmap[y++]);
+	i = 0;
+	while (map[i])
+	{
+		if (map[i][0] != '\0')
+		{
+			newmap[y++] = ft_strjoin(map[i], "");
+		}
+		i++;
+	}
+	data->showmap = newmap;
 }
 
 t_data_map	*mapreader(char *str_dir)
 {
 	t_data_map	*map;
+	char		**_crudedata;
+	char		**identificators;
+	char		**infile_var;
 
-	if (get_file_height(str_dir) < 2)
+	if (get_file_height(str_dir) < 1)
 		return (0);
 	map = ft_calloc(sizeof(t_data_map), 1);
+	identificators = ft_split("NO SO WE EA F C", ' ');
 	map->height = get_file_height(str_dir);
-	map->showmap = create_showmap(str_dir, map->height);
-	// map->player = create_playerlist(map->player, map->showmap, map->height);
-	// map->enemy = create_enemylist(map->enemy, map->showmap);
-	map->counter_moves = 0;
-	see_map(map);
+	_crudedata = read_filedata(str_dir, map->height);
+	infile_var = get_infile_variables(_crudedata, identificators);
+	add_data_map(map, infile_var);
+	resize_map(map, _crudedata, 0, 0);
+	map->height = get_matrix_height(map->showmap);
+
+	see_matrix(map->showmap);
+
+	free_matrix(_crudedata);
+	free_matrix(identificators);
+	free_matrix(infile_var);
 	return (map);
 }
+// map->player = create_playerlist(map->player, map->showmap, map->height);
+	// map->enemy = create_enemylist(map->enemy, map->showmap);
