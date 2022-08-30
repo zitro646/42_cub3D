@@ -27,7 +27,7 @@ OBJ_PATH    = objects
 # SOURCES #
 SRC =   main.c
 
-SRC_MAP = mapreader.c mapcheck.c get_file_height.c free_data.c
+SRC_MAP = mapreader.c mapcheck.c get_file_height.c free_data.c map_work.c visualize_tools.c
 
 SRC_WINDOW = start_window.c image_control.c key_events.c 
 

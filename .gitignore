@@ -51,3 +51,6 @@ Module.symvers
 Mkfile.old
 dkms.conf
 srcs/assets/.DS_Store
+
+#visual settings
+.vscode/*

@@ -6,24 +6,11 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 08:31:10 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/08/29 20:51:39 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/08/30 16:32:52 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map.h" 
-
-void	see_matrix(char **map)
-{
-	int	y;
-
-	y = 0;
-	printf ("Matrix %p\n", &map);
-	while (map[y])
-	{
-		printf ("%i - %p - %s\n", y, &map[y] , map[y]);
-		y++;
-	}
-}
 
 static char	**read_filedata(char *str_dir, int y_max)
 {
@@ -100,30 +87,6 @@ static void	add_data_map(t_data_map	*map, char **infile_var)
 	map->_roof_colour_path = ft_strjoin(infile_var[5], "");
 }
 
-static void resize_map(t_data_map	*data, char **map ,int y , int i)
-{
-	char	**newmap;
-
-	while (map[i])
-	{
-		if (map[i][0] != '\0')
-			y++;
-		i++;
-	}
-	newmap = ft_calloc(sizeof(char *), y + 1);
-	y = 0;
-	i = 0;
-	while (map[i])
-	{
-		if (map[i][0] != '\0')
-		{
-			newmap[y++] = ft_strjoin(map[i], "");
-		}
-		i++;
-	}
-	data->showmap = newmap;
-}
-
 t_data_map	*mapreader(char *str_dir)
 {
 	t_data_map	*map;
@@ -141,12 +104,10 @@ t_data_map	*mapreader(char *str_dir)
 	add_data_map(map, infile_var);
 	resize_map(map, _crudedata, 0, 0);
 	map->height = get_matrix_height(map->showmap);
-
-	see_matrix(map->showmap);
-
-	free_matrix(_crudedata);
-	free_matrix(identificators);
-	free_matrix(infile_var);
+	switch_chars_on_map(map, '\t', "    ");
+	free_matrix(_crudedata, 0);
+	free_matrix(identificators, 0);
+	free_matrix(infile_var, 6);
 	return (map);
 }
 // map->player = create_playerlist(map->player, map->showmap, map->height);

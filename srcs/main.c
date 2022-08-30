@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 10:38:08 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/08/29 19:12:45 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/08/30 16:45:02 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	leaks(void)
 {
 	system("leaks -q test");
 }
+
+
 
 char	*get_dir(char	*dir)
 {
@@ -32,7 +34,7 @@ char	*get_dir(char	*dir)
 int	main(int argc, char **argv)
 {
 	t_data_map	*map;
-	// int			check;
+	int			check;
 	char		*dir;
 
 	atexit(leaks);
@@ -44,7 +46,8 @@ int	main(int argc, char **argv)
 	dir = get_dir(argv[1]);
 	printf("%s\n",dir);
 	map = mapreader(dir);
-	// check = mapcheck(map);
+	check = mapcheck(map);
+	show_data(map);
 	// if (check == 1)
 	// {
 	// 	printf("Check ok\n");
