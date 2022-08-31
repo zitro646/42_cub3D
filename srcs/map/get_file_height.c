@@ -6,11 +6,11 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:10:31 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/08/29 14:56:03 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/08/31 12:51:30 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map.h"
+#include "data.h"
 
 int	get_file_height(char *str)
 {	

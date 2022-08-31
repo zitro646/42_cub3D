@@ -6,11 +6,11 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 12:05:07 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/08/30 16:37:28 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/08/31 12:51:32 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map.h"
+#include "data.h"
 
 void	free_matrix(char **matrix, int opt_size)
 {

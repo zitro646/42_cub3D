@@ -27,7 +27,7 @@ OBJ_PATH    = objects
 # SOURCES #
 SRC =   main.c
 
-SRC_MAP = mapreader.c mapcheck.c get_file_height.c free_data.c map_work.c visualize_tools.c
+SRC_MAP = data_reader.c data_check.c data_check_aux.c get_file_height.c free_data.c map_work.c visualize_tools.c path_variables.c
 
 SRC_WINDOW = start_window.c image_control.c key_events.c 
 
@@ -79,8 +79,6 @@ $(NAME): $(OBJS) $(OBJS_LIBFT) $(OBJS_MAPS) $(OBJS_WINDOW) | $(MINILIBX_NAME)
 	clear
 	$(GREEN) Program asembled $(RESET)
 
-$(MINILIBX_NAME):
-	$(CYAN) HOLA $(RESET)
 	
 
 ##RULES

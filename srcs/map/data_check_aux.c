@@ -1,18 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mapcheck.c                                         :+:      :+:    :+:   */
+/*   data_check_aux.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/04 13:24:16 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/08/30 15:57:27 by mortiz-d         ###   ########.fr       */
+/*   Created: 2022/08/31 13:39:36 by mortiz-d          #+#    #+#             */
+/*   Updated: 2022/08/31 13:46:50 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map.h" 
+#include "data.h"
 
-int	check_good_sorroundings(t_data_map *data, int x, int y, char *good_chars)
+int	check_map_no_strange_chars(char **map, char *acceptable_chars)
+{
+	int	i;
+	int	y;
+
+	y = 0;
+	i = 0;
+	while (map[i])
+	{
+		while (map[i][y])
+		{
+			if (!ft_strchr(acceptable_chars, map[i][y]))
+				return (0);
+			y++;
+		}
+		y = 0;
+		i++;
+	}
+	return (1);
+}
+
+static	int	check_good_sorroundings(t_data_map *data, int x, \
+									int y, char *good_chars)
 {
 	if (x != 0 && data->showmap[y][x + 1] != '\0')
 	{
@@ -37,7 +59,7 @@ int	check_good_sorroundings(t_data_map *data, int x, int y, char *good_chars)
 	return (1);
 }
 
-int	check_floors(t_data_map *data, int count, char *aceptable_chars)
+int	check_map_closed(t_data_map *data, int count, char *aceptable_chars)
 {	
 	int		y;
 	int		x;
@@ -104,31 +126,4 @@ int	check_paths(t_data_map *data)
 	if (!data->_floor_colour_path)
 		return (0);
 	return (1);
-}
-
-int	mapcheck(t_data_map *data)
-{
-	int		_floors;
-	int		_player;
-	int		_path;
-
-	if (data == NULL)
-		return (0);
-	_floors = check_floors(data, 0, "01NSWE");
-	_player = check_player_on_map(data, "NSWE");
-	_path = check_paths(data);
-	if (_floors && _player && _path)
-		return (1);
-	else
-	{
-		printf("Error ");
-		if (!_floors)
-			printf("- Bad Enclosure ");
-		if (!_player)
-			printf("- Wrong Player Count ");
-		if (!_path)
-			printf("- No paths for textures ");
-		printf("\n");
-	}
-	return (0);
 }

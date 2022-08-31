@@ -6,13 +6,13 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 12:06:32 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/08/29 19:06:56 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/08/31 12:51:14 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WINDOW_H
 # define WINDOW_H
-# include "../map/map.h"
+# include "../map/data.h"
 // # include <mlx.h>
 # include "../minilibx/mlx.h"
 // # include "../minilibx/mlx_int.h"

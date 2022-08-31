@@ -6,11 +6,11 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 12:24:32 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/08/30 14:58:59 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/08/31 12:51:27 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map.h"
+#include "data.h"
 
 void	resize_map(t_data_map	*data, char **map, int y, int i)
 {

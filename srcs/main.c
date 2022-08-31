@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 10:38:08 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/08/30 16:45:02 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/08/31 13:47:50 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	main(int argc, char **argv)
 	dir = get_dir(argv[1]);
 	printf("%s\n",dir);
 	map = mapreader(dir);
-	check = mapcheck(map);
+	check = data_check(map);
 	show_data(map);
 	// if (check == 1)
 	// {
