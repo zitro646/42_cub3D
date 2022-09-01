@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 10:38:08 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/09/01 13:58:01 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/01 16:28:22 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,15 @@ void	leaks(void)
 	system("leaks -q test");
 }
 
-
-
 char	*get_dir(char	*dir)
 {
-	char	*aux;
-
-	aux = ft_strjoin(dir, ".cub");
-	dir = ft_strjoin("./srcs/assets/", aux);
-	free(aux);
+	dir = ft_strjoin("./srcs/assets/", dir);
 	return (dir);
 }
 
 int	main(int argc, char **argv)
 {
 	t_data_map	*data;
-	int			check;
 	char		*dir;
 
 	atexit(leaks);
@@ -47,15 +40,16 @@ int	main(int argc, char **argv)
 	dir = get_dir(argv[1]);
 	printf("%s\n", dir);
 	data = mapreader(dir);
-	check = data_check(data);
 	show_data(data);
-	if (check == 1)
+	if (data_check(data))
 	{
 		printf("Check ok\n");
-		cube(data);
+		//cube(data);
 	}
 	else
+	{
 		printf("Check Error\n");
+	}
 	free_all(data);
 	free(dir);
 	return (0);

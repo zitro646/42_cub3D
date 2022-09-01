@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 08:34:09 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/08/31 13:50:58 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/01 16:06:39 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,13 @@
 
 t_data_map	*mapreader(char *str_dir);
 
+
+//Get sizes of File / Matrix
 int			get_file_height(char *str);
 int			get_matrix_height(char **matrix);
-t_list		**create_objectlist(t_list **list, char **show_map);
-t_list		**create_playerlist(t_list **player, char **show_map, int y_max);
+int			get_matrix_max_size(char **array);
 
-//	Transform path variables
+//Transform path variables
 char		**get_infile_variables(char **file_data, char **identicators);
 
 //Check Data collected is valid
@@ -40,6 +41,7 @@ void		show_data(t_data_map	*data);
 void		see_matrix(char **map);
 
 //Parse map
+void		flatten_map(t_data_map	*data, char **map, int y, int i);
 void		resize_map(t_data_map	*data, char **map, int y, int i);
 void		switch_chars_on_map(t_data_map	*data, char change, char *newchar);
 

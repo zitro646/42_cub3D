@@ -53,7 +53,7 @@ all: $(NAME)
 SRCS = $(addprefix $(SRC_PATH)/, $(SRC))
 SRCS_MAP = $(addprefix $(MAP_PATH)/, $(SRC_MAP))
 SRCS_LIBFT = $(addprefix $(LIBFT_PATH)/, $(SRC_LIBFT))
-SRCS_WINDOW = $(addprefix $(LIBFT_WINDOW)/, $(SRC_WINDOW))
+SRCS_WINDOW = $(addprefix $(WINDOW_PATH)/, $(SRC_WINDOW))
 SRCS_ENGINE = $(addprefix $(ENGINE_PATH)/, $(SRC_ENGINE))
 
 OBJS =  $(addprefix $(OBJ_PATH)/, $(SRC:%.c=%.o))

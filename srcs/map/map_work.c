@@ -6,11 +6,39 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 12:24:32 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/08/31 12:51:27 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/01 16:23:56 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "data.h"
+
+void	flatten_map(t_data_map	*data, char **map, int y, int i)
+{
+	char	**newmap;
+	char	*aux;
+
+	newmap = ft_calloc(sizeof(char *), data->height + 1);
+	y = 0;
+	i = 0;
+	while (map[i])
+	{
+		if (ft_strlen(map[i]) != data->max_width)
+		{
+			newmap[i] = ft_strjoin(map[i], " ");
+			while (ft_strlen(newmap[i]) != data->max_width)
+			{
+				aux = ft_strjoin(newmap[i], " ");
+				free(newmap[i]);
+				newmap[i] = aux;
+			}
+		}
+		else
+			newmap[i] = ft_strjoin(map[i], "");
+		i++;
+	}
+	free_matrix(data->showmap, 0);
+	data->showmap = newmap;
+}
 
 void	resize_map(t_data_map	*data, char **map, int y, int i)
 {

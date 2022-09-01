@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:24:16 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/08/31 13:52:21 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/01 16:15:30 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,12 @@ int	data_check(t_data_map *data)
 {
 	int		_error[4];
 
+	if (data == NULL)
+		return (0);
 	_error[0] = check_map_closed(data, 0, "01NSWE");
 	_error[1] = check_player_on_map(data, "NSWE");
 	_error[2] = check_paths(data);
 	_error[3] = check_map_no_strange_chars(data->showmap, "01NSWE ");
-
-	if (data == NULL)
-		return (0);
 	if (_error[0] && _error[1] && _error[2] && _error[3])
 		return (1);
 	else
