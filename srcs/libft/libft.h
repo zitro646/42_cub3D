@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 12:51:39 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/08/31 12:54:58 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/01 13:48:24 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,6 @@ typedef struct s_list
 	struct s_list	*prev;
 }	t_list;
 
-
-// typedef struct s_list_enemy
-// {
-// 	int					x_axis;
-// 	int					y_axis;
-
-// 	char				type;
-// 	struct s_list_enemy	*next;
-// 	struct s_list_enemy	*prev;
-// }	t_list_enemy;
-
-
 typedef struct window
 {
 	void	*mlx_ptr;
@@ -59,6 +47,7 @@ typedef struct data_map
 {
 	char			**showmap;
 	t_window		*window;
+	int				max_width;
 	int				height;
 	char			*_north_texture_path;
 	char			*_south_texture_path;

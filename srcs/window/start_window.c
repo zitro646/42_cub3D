@@ -6,32 +6,11 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:40:31 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/08/29 16:28:36 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/01 13:56:37 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "window.h"
-
-int	get_array_max_size(char **array)
-{
-	int	x_max;
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	x_max = 0;
-	while (array[j])
-	{
-		while (array[j][i] != 0)
-			i++;
-		if (x_max < i)
-			x_max = i;
-		i = 0;
-		j++;
-	}
-	return (x_max);
-}
 
 void	make_window(t_data_map *data_map)
 {
@@ -40,7 +19,8 @@ void	make_window(t_data_map *data_map)
 	t_window	*window;
 
 	y = data_map->height;
-	x = get_array_max_size(data_map->showmap);
+	//x = get_array_max_size(data_map->showmap);
+	x = 0;
 	printf("Tamaño maximo del mapa es %i \n",x);
 	data_map->window = init_window();
 	window = data_map->window;

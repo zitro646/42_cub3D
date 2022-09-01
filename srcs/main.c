@@ -6,13 +6,14 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 10:38:08 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/08/31 13:47:50 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/01 13:58:01 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "window/window.h"
 #include <stdio.h>
 #include "window/window.h"
+#include "engine/cub3d.h"
 
 void	leaks(void)
 {
@@ -33,7 +34,7 @@ char	*get_dir(char	*dir)
 
 int	main(int argc, char **argv)
 {
-	t_data_map	*map;
+	t_data_map	*data;
 	int			check;
 	char		*dir;
 
@@ -44,18 +45,18 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	dir = get_dir(argv[1]);
-	printf("%s\n",dir);
-	map = mapreader(dir);
-	check = data_check(map);
-	show_data(map);
-	// if (check == 1)
-	// {
-	// 	printf("Check ok\n");
-	// 	// make_window(map);
-	// }
-	// else
-	// 	printf("Check Error\n");
-	free_all(map);
+	printf("%s\n", dir);
+	data = mapreader(dir);
+	check = data_check(data);
+	show_data(data);
+	if (check == 1)
+	{
+		printf("Check ok\n");
+		cube(data);
+	}
+	else
+		printf("Check Error\n");
+	free_all(data);
 	free(dir);
 	return (0);
 }
