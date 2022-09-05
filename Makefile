@@ -19,7 +19,6 @@ MINILIBX_FLAGS = -lmlx -framework OpenGL -framework AppKit
 LIBFT_PATH  = srcs/libft
 MAP_PATH  = srcs/map
 ENGINE_PATH  = srcs/engine
-WINDOW_PATH  = srcs/window
 MINILIBX_PATH = srcs/minilibx
 INC_PATH    = includes
 SRC_PATH    = srcs
@@ -29,8 +28,6 @@ OBJ_PATH    = objects
 SRC =   main.c
 
 SRC_MAP = data_reader.c data_check.c data_check_aux.c get_file_height.c free_data.c map_work.c visualize_tools.c path_variables.c
-
-SRC_WINDOW = start_window.c image_control.c key_events.c 
 
 SRC_ENGINE = assets.c cub.c key_event_dir.c key_event.c lookin.c map.c matrix.c screen.c
 
@@ -53,13 +50,11 @@ all: $(NAME)
 SRCS = $(addprefix $(SRC_PATH)/, $(SRC))
 SRCS_MAP = $(addprefix $(MAP_PATH)/, $(SRC_MAP))
 SRCS_LIBFT = $(addprefix $(LIBFT_PATH)/, $(SRC_LIBFT))
-SRCS_WINDOW = $(addprefix $(WINDOW_PATH)/, $(SRC_WINDOW))
 SRCS_ENGINE = $(addprefix $(ENGINE_PATH)/, $(SRC_ENGINE))
 
 OBJS =  $(addprefix $(OBJ_PATH)/, $(SRC:%.c=%.o))
 OBJS_MAPS =  $(addprefix $(OBJ_PATH)/, $(SRC_MAP:%.c=%.o))
 OBJS_LIBFT =  $(addprefix $(OBJ_PATH)/, $(SRC_LIBFT:%.c=%.o))
-OBJS_WINDOW =  $(addprefix $(OBJ_PATH)/, $(SRC_WINDOW:%.c=%.o))
 OBJS_ENGINE =  $(addprefix $(OBJ_PATH)/, $(SRC_ENGINE:%.c=%.o))
 
 $(OBJ_PATH):
@@ -74,16 +69,14 @@ $(OBJ_PATH)/%.o: $(MAP_PATH)/%.c | $(OBJ_PATH)
 $(OBJ_PATH)/%.o: $(LIBFT_PATH)/%.c | $(OBJ_PATH)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(OBJ_PATH)/%.o: $(WINDOW_PATH)/%.c | $(OBJ_PATH)
-	$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_PATH)/%.o: $(ENGINE_PATH)/%.c | $(OBJ_PATH)
 	$(CC) $(CFLAGS) -c $< -o $@
             
-$(NAME): $(OBJS) $(OBJS_LIBFT) $(OBJS_ENGINE) $(OBJS_MAPS) $(OBJS_WINDOW) | $(MINILIBX_NAME)
+$(NAME): $(OBJS) $(OBJS_LIBFT) $(OBJS_ENGINE) $(OBJS_MAPS) | $(MINILIBX_NAME)
 	$(MAKE) -sC $(MINILIBX_PATH)
 	$(GREEN) Objects compiled $(RESET)
-	$(CC) $(CFLAGS) $(OBJS_MAPS) $(OBJS_WINDOW) $(OBJS_ENGINE) $(OBJS) $(OBJS_LIBFT) $(MINILIBX_FLAGS) -o $(NAME) 
+	$(CC) $(CFLAGS) $(OBJS_MAPS) $(OBJS_ENGINE) $(OBJS) $(OBJS_LIBFT) $(MINILIBX_FLAGS) -o $(NAME) 
 	clear
 	$(GREEN) Program asembled $(RESET)
 

@@ -6,13 +6,12 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 10:38:08 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/09/01 16:28:22 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/05 11:54:28 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "window/window.h"
 #include <stdio.h>
-#include "window/window.h"
+#include "map/data.h"
 #include "engine/cub3d.h"
 
 void	leaks(void)
@@ -44,7 +43,7 @@ int	main(int argc, char **argv)
 	if (data_check(data))
 	{
 		printf("Check ok\n");
-		//cube(data);
+		cube(data);
 	}
 	else
 	{
