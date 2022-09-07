@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:15:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/07 12:21:51 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/07 16:05:18 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_game
 	t_ray		*ray;
 	t_mlx		mlx;
 	t_player	player;
+	double		diff_angle;
 	int			height;
 	int			width;
 	int			size_x;

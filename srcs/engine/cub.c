@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:20:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/07 13:03:03 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/07 16:25:59 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	init(t_game *game, int x, int y, char **map)
 	game->player.speed_t = 7 *(M_PI / 180);	//grados
 	game->width = 1024;
 	game->height = 1280;
+	game->diff_angle = (M_PI / 2) / game->width;
 	game->ray = calloc(sizeof(t_ray) * game->width, 1);
 	init_ray(game);
 	game->mlx.mlx = mlx_init();
