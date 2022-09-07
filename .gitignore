@@ -54,3 +54,5 @@ srcs/assets/.DS_Store
 
 #visual settings
 .vscode/*
+
+.DS_Store
