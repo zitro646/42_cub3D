@@ -3,20 +3,65 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 12:52:30 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/07 12:23:16 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/07 15:19:05 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	player_pixel(t_game *game, int	color)
+int	pos_is_wall( int x_pixel, int y_pixel, t_game *game)
 {
-	int	i;
-	int	j;
-	double line;
+	int	x;
+	int	y;
+
+	x = x_pixel / 15;
+	y = y_pixel / 15;
+	//printf("pos in matrix -> x : %i , y : %i\n", x, y);
+	if (game->matrix[y][x].value == '1')
+	{
+		return (1);
+	}
+	//printf("No toque un muro :(\n");
+	// printf("pos in matrix pixel -> x : %i , y : %i\n", x_pixel, y_pixel);
+	// printf("pos in matrix -> x : %i , y : %i\n", x, y);
+	return (0);
+}
+
+void	ray_vision(t_game *game, int color, double angle)
+{
+	double	line;
+	int		i;
+	int		j;
+
+	line = 0;
+	j = (game->player.y * 15) + (cos(game->player.angle) * line) + 7;
+	i = (game->player.x * 15) + (sin(game->player.angle) * line) + 7;
+	while (!pos_is_wall(j, i, game))
+	{
+		j = (game->player.y * 15) + (cos(game->player.angle + angle) * line) + 7;
+		i = (game->player.x * 15) + (sin(game->player.angle + angle) * line) + 7;
+		pos_is_wall(j, i, game);
+		mlx_pixel_put(game->mlx.mlx, game->mlx.window,
+			j, i, color);
+		line += 0.3;
+	}
+}
+
+void	player_vision_cone(t_game *game, int color)
+{
+	ray_vision(game, color, 0);
+	ray_vision(game, color, 0.2094);
+	ray_vision(game, color, -0.2094);
+	return ;
+}
+
+void	player_pixel(t_game *game, int color)
+{
+	int		i;
+	int		j;
 
 	i = 5;
 	while (i < 10)
@@ -30,17 +75,10 @@ void	player_pixel(t_game *game, int	color)
 		}
 		i++;
 	}
-	line = 0;
-	while (line < 15)
-	{
-		j = cos(game->player.angle) * line;
-		i = sin(game->player.angle) * line;
-		mlx_pixel_put(game->mlx.mlx, game->mlx.window,
-			(game->player.y * 15) + j + 7, (game->player.x * 15 ) + i + 7, color);
-		line += 0.3;
-	}
+	player_vision_cone(game, color);
 }	
-
+//i = sin(game->player.angle) * line;
+//j = cos(game->player.angle) * line;
 void	wall_floor_pixel(t_game *game, int pos_x, int pos_y, int color)
 {
 	int	i;
@@ -59,7 +97,6 @@ void	wall_floor_pixel(t_game *game, int pos_x, int pos_y, int color)
 		i++;
 	}
 }
-
 
 void	image_aux(t_game *game, int pos_x, int pos_y)
 {

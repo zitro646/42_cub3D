@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:20:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/07 12:48:56 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/07 13:03:03 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	cube(t_data_map *data)
 
 	x = data->height;
 	y = data->max_width;
+	game.size_x = x;
+	game.size_y = y;
 	printf("Test 1\n");
 	//matrix_size(argv[1], &x, &y);
 	// game.matrix = NULL;
