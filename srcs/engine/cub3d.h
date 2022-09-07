@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:17:49 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/07 12:58:05 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/07 16:28:22 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		stop(int key_code, t_game *game);
 void	hook(t_game *game, int key_code);
 
 /*Angle*/
-
+double	new_angle(double num);
 void	angle(t_game *game);
 void	looking_at(t_game *game);
 

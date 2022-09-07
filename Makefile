@@ -11,7 +11,7 @@ LIBFT_NAME = libft.a
 
 AR = ar rcs
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra #-fsanitize=address -g3
+CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g3
 CFLAGS += -I ./$(INC_PATH) -I ./$(LIBFT_PATH)
 MINILIBX_FLAGS = -lmlx -framework OpenGL -framework AppKit
 

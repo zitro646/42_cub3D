@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   angle.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:33:35 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/07 09:42:35 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/07 17:18:04 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,19 @@ void    angle(t_game *game)
 	else
 		new = num;
  	game->player.angle = new;
+}
+
+double	new_angle(double num)
+{
+	double	new;
+	double	aux;
+
+	aux = num;
+	while (aux >= 0)
+		aux -= (2 * M_PI);
+	aux += (2 * M_PI);
+	new = aux;
+	return (new);
 }
 
 void	looking_at(t_game *game)
