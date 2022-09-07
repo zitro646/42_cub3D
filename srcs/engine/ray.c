@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 09:39:19 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/07 16:36:11 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/07 17:21:28 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,30 @@ void	init_ray(t_game *game)
 void    ray(t_game *game)
 {
 	int r;
+	int	i;
 
-	r = 0;
+	r = game->width / 2;
+	i = 0;
+	game->ray[game->width / 2].ray_angle = game->player.angle;
 	while (r < game->width)
 	{
-		if (r == 0)
-		{
-			game->ray[r].ray_angle = game->player.angle - M_PI / 4;
-			if (game->player.angle > (2 * M_PI) || game->player.angle < 0)
-				game->ray[r].ray_angle = new_angle(game->ray[r].ray_angle);
-		}
-		else
-			game->ray[r].ray_angle = game->ray[0].ray_angle + game->diff_angle * r;
+		game->ray[r].ray_angle = game->ray[game->width / 2].ray_angle
+			+ game->diff_angle * i;
+		if (game->ray[r].ray_angle > 2 * M_PI || game->ray[r].ray_angle < 0)
+			game->ray[r].ray_angle = new_angle(game->ray[r].ray_angle);  
 		r++;
+		i++;
+	}
+	r = (game->width / 2) - 1;
+	i = 0;
+	while (r >= 0)
+	{
+		game->ray[r].ray_angle = game->ray[game->width / 2].ray_angle
+				- game->diff_angle * i;
+		if (game->ray[r].ray_angle > 2 * M_PI || game->ray[r].ray_angle < 0)
+			game->ray[r].ray_angle = new_angle(game->ray[r].ray_angle); 
+		r--;
+		i++;
 	}
 
 	printf("ray[0]: %f\n", game->ray[0].ray_angle);

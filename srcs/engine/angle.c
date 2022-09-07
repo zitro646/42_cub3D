@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:33:35 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/07 16:36:15 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/07 17:20:52 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,7 @@ double	new_angle(double num)
 	while (aux >= 0)
 		aux -= (2 * M_PI);
 	aux += (2 * M_PI);
-	if (num < 0)
-		new = aux + (2 * M_PI);
-	else
-		new = aux;
+	new = aux;
 	return (new);
 }
 
