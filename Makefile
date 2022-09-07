@@ -32,7 +32,7 @@ SRC_MAP = data_reader.c data_check.c data_check_aux.c get_file_height.c free_dat
 
 SRC_WINDOW = start_window.c image_control.c key_events.c 
 
-SRC_ENGINE = assets.c cub.c key_event_dir.c key_event.c lookin.c map.c matrix.c screen.c
+SRC_ENGINE = cub.c matrix_size.c map.c matrix.c screen.c key_hook.c angle.c ray.c\
 
 SRC_LIBFT = ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_memchr.c \
 ft_memcmp.c ft_strlen.c ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c  \

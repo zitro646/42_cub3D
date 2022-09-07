@@ -6,12 +6,12 @@
 #    By: potero-d <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/30 11:07:15 by potero-d          #+#    #+#              #
-#    Updated: 2022/09/06 12:36:57 by potero-d         ###   ########.fr        #
+#    Updated: 2022/09/07 09:42:47 by potero-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS = cub.c matrix_size.c map.c matrix.c\
-	   screen.c key_hook.c\
+	   screen.c key_hook.c angle.c ray.c\
 	   gnl/get_next_line_utils.c gnl/get_next_line.c\
 
 LIBFT_PATH = libft/

@@ -6,7 +6,7 @@
 /*   By: potero <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 10:36:49 by potero            #+#    #+#             */
-/*   Updated: 2022/09/06 12:33:50 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/07 12:15:22 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,13 @@ int	stop(int key_code, t_game *game)
 	return (0);
 }
 
-int	movement(t_game *game, int x, int y, int key_code)
+int	movement(t_game *game, double x, double y)
 {
-	printf("(%d,%d)->%c\n", x, y, game->matrix[x][y].value); 
-	if (key_code == 1)
-		x++;
-	else if (key_code == 2)
-		y++;
-	if (game->matrix[x][y].value == '1')
+	if (x - (int)x >= 0.5)
+		x = x + 1;
+	if (y - (int)y >= 0.5)
+		y = y + 1;
+	if (game->matrix[(int)x][(int)y].value == '1')
 	{
 		printf("Impossible movement\n");
 		return (1);
@@ -85,8 +84,13 @@ void	hook(t_game *game, int key_code)
 		new_y = game->player.y;
 	}
 	game->player.angle += game->player.turn * game->player.speed_t;
-	printf("(%f,%f)->%c\n", new_x, new_y, game->matrix[(int)new_x][(int)new_y].value); 
-	if (movement(game, new_x, new_y, key_code) == 0)
+	if (game->player.angle > (2 * M_PI) || game->player.angle < 0)
+		angle(game);
+	printf("angle: %f\n", game->player.angle);
+	looking_at(game);
+	printf("looking at: %d\n", game->player.looking_at);
+	//ray(game);
+	if (movement(game, new_x, new_y) == 0)
 	{
 		image(game);
 		game->player.x = new_x;

@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:20:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/06 12:42:49 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/07 12:34:16 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,32 +18,30 @@ int	cube(t_data_map *data)
 	int		y;
 	t_game	game;
 
-	if (argc != 2)
-	{
-		printf("Error\nWrong number of arguments\n");
-		exit(0);
-	}
-	x = 0;
-	matrix_size(argv[1], &x, &y);
-	game.matrix = malloc(sizeof(t_matrix *) * x + 1);
-	game.matrix[x] = 0;
+	x = data->height;
+	y = data->max_width;
+	//matrix_size(argv[1], &x, &y);
+	// game.matrix = NULL;
+	game.matrix = calloc(sizeof(t_matrix *) * x , 1);
+	// game.matrix[x] = 0;
 	if (!game.matrix)
 		return (0);
-	init(&game, x, y, argv[1]);
-	game.size_x = x;
-	game.size_y = y;
+	init(&game, x, y, *data->showmap);
 	image(&game);
 	//screen_game(&game, x, y);
 	hook_loop(&game);
+	return (0);
 }
 
 void	init(t_game *game, int x, int y, char *argv)
 {
 	create_matrix(argv, x, y, game->matrix);
 	game->player.speed_m = 0.3;	//pixels
-	game->player.speed_t = 3 *(M_PI / 180);	//grados
+	game->player.speed_t = 7 *(M_PI / 180);	//grados
 	game->width = 1024;
 	game->height = 1280;
+	game->ray = calloc(sizeof(t_ray) * game->width, 1);
+	init_ray(game);
 	game->mlx.mlx = mlx_init();
 	game->mlx.window = mlx_new_window(game->mlx.mlx, (y * 15), (x * 15), "minimap");
 	//game->mlx.screen = mlx_new_window(game->mlx.mlx, game->height, game->width, "cub3D"); 
