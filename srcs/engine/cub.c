@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:20:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/08 13:25:03 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/08 15:55:27 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	cube(t_data_map *data)
 void	init(t_game *game, int x, int y, char **map)
 {
 	create_matrix(map, x, y, game->matrix);
-	game->player.speed_m = 0.3;	//pixels
+	game->player.speed_m = 1;	//pixels
 	game->player.speed_t = (M_PI * 2) / 32;	//grados
 	game->width = 1024;
 	game->height = 1024;

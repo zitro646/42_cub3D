@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 12:52:30 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/08 13:24:23 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/08 15:55:23 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,14 @@ void	wall_floor_pixel(t_game *game, int pos_x, int pos_y, int color)
 
 void	image_aux(t_game *game, int pos_x, int pos_y)
 {
+	//double	aux;
+
+	//aux = 0.5;
 	wall_floor_pixel(game, pos_x, pos_y, 0x8C8C8C);
 	if (game->matrix[pos_x][pos_y].value == 'N')
 	{
+	//	game->player.x = pos_x + aux;
+	//	game->player.y = pos_y + aux;
 		game->player.x = pos_x;
 		game->player.y = pos_y;
 		player_pixel(game, 0X0000FF);
@@ -112,6 +117,8 @@ void	image_aux(t_game *game, int pos_x, int pos_y)
 
 	else if (game->matrix[pos_x][pos_y].value == 'S')
 	{
+	//	game->player.x = pos_x + aux;
+	//	game->player.y = pos_y + aux;
 		game->player.x = pos_x;
 		game->player.y = pos_y;
 		player_pixel(game, 0X0000FF);
@@ -120,6 +127,8 @@ void	image_aux(t_game *game, int pos_x, int pos_y)
 	}
 	else if (game->matrix[pos_x][pos_y].value == 'O')
 	{
+	//	game->player.x = pos_x  + aux ;
+	//	game->player.y = pos_y + aux;
 		game->player.x = pos_x;
 		game->player.y = pos_y;
 		player_pixel(game, 0X0000FF);
@@ -128,6 +137,8 @@ void	image_aux(t_game *game, int pos_x, int pos_y)
 	}
 	else if (game->matrix[pos_x][pos_y].value == 'E')
 	{
+	//	game->player.x = pos_x + aux;
+	//	game->player.y = pos_y + aux;
 		game->player.x = pos_x;
 		game->player.y = pos_y;
 		player_pixel(game, 0X0000FF);
