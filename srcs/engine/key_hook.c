@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 10:36:49 by potero            #+#    #+#             */
-/*   Updated: 2022/09/07 16:13:33 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/08 12:20:22 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void	hook(t_game *game, int key_code)
 	printf("looking at: %d\n", game->player.looking_at);
 	printf("________________________\n");
 	ray(game);
+//	screen_game(game);
 	if (movement(game, new_x, new_y) == 0)
 	{
 		image(game);

@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:17:49 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/08 10:54:33 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/08 12:08:12 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ray_vision(t_game *game, int color, double angle);
 void	player_vision_cone(t_game *game, int color);
 
 /*Screen*/
-void	screen_game(t_game *game, int x, int y);
+void	screen_game(t_game *game);
 
 /*Key hook*/
 int		advance(int key_code, t_game *game);

@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:20:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/07 16:25:59 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/08 12:20:25 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	init(t_game *game, int x, int y, char **map)
 	game->ray = calloc(sizeof(t_ray) * game->width, 1);
 	init_ray(game);
 	game->mlx.mlx = mlx_init();
+//	game->mlx.screen = mlx_new_window(game->mlx.mlx, game->height, game->width, "cub3D"); 
 	game->mlx.window = mlx_new_window(game->mlx.mlx, (y * 15), (x * 15), "minimap");
-	//game->mlx.screen = mlx_new_window(game->mlx.mlx, game->height, game->width, "cub3D"); 
 }
 
 int	hook_loop(t_game *game)
