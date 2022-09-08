@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 09:39:19 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/08 12:20:20 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/08 13:24:35 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void    ray(t_game *game)
 	double	pow_x;
 	double	pow_y;
 	double	abs;
+	double	angle;
 
 	r = game->width / 2;
 	i = 0;
@@ -90,11 +91,26 @@ void    ray(t_game *game)
 		r++;
 	}
 
-	r = 0;
+	r = game->width / 2;
+	i = 0;
 	while (r < game->width)
 	{
-		game->ray[r].point = cos(game->ray[r].ray_angle) * game->ray[r].distance;
+		angle = game->diff_angle * i;
+		game->ray[r].point = cos(angle) * game->ray[r].distance;
+		if (game->ray[r].point < 0)
+			game->ray[r].point *= - 1;
 		r++;
+	}
+
+	r = game->width / 2 - 1;
+	i = 1;
+	while (r >= 0)
+	{
+		angle = (M_PI / 2) - game->diff_angle * i;
+		game->ray[r].point = cos(angle) * game->ray[r].distance;
+//		if (game->ray[r].point < 0)
+//			game->ray[r].point *= - 1;
+		r--;
 	}
 
 	printf("ray[0]: %f, hit[0]: (%f, %f)\n", game->ray[0].ray_angle,
