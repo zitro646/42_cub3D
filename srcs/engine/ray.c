@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 09:39:19 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/08 11:10:03 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/08 11:40:16 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ void    ray(t_game *game)
 	double	new_hit_x;
 	double	new_hit_y;
 	double	cont;
+	double	pow_x;
+	double	pow_y;
+	double	abs;
 
 	r = game->width / 2;
 	i = 0;
@@ -74,11 +77,26 @@ void    ray(t_game *game)
 		game->ray[r].hit_x = new_hit_y / 15;
 		r++;
 	}
+
+	r = 0;
+	while (r < game->width)
+	{
+		pow_x = pow(game->ray[r].hit_x - game->player.x, 2);
+		pow_y = pow(game->ray[r].hit_y - game->player.y, 2);
+		abs = pow_x + pow_y;
+		if (abs < 0)
+			abs *= - 1;
+		game->ray[r].distance = sqrt(abs);
+		r++;
+	}
 	printf("ray[0]: %f, hit[0]: (%f, %f)\n", game->ray[0].ray_angle,
 			game->ray[0].hit_x, game->ray[0].hit_y);
+	printf("distance to hit: %f\n", game->ray[0].distance);
 	printf("ray[512]: %f, hit[512]: (%f, %f)\n", game->ray[512].ray_angle,
 			game->ray[512].hit_x, game->ray[512].hit_y);
+	printf("distance to hit: %f\n", game->ray[512].distance);
 	printf("ray[1023]: %f, hit[1023]: (%f, %f)\n", game->ray[1023].ray_angle,
 			game->ray[1023].hit_x, game->ray[1023].hit_y);
+	printf("distance to hit: %f\n", game->ray[1023].distance);
 
 }
