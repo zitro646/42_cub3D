@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 08:34:09 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/09/01 16:06:39 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/08 13:57:46 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ char		**get_infile_variables(char **file_data, char **identicators);
 //Check Data collected is valid
 int			data_check(t_data_map *data); //Primary checker
 int			check_paths(t_data_map *data);
+int			path_exist(char *str);
 int			check_player_on_map(t_data_map *data, char *player_type);
 int			check_map_no_strange_chars(char **map, char *acceptable_chars);
 int			check_map_closed(t_data_map *data, int count, \

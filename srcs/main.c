@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 10:38:08 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/09/07 12:42:46 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/08 13:26:21 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	main(int argc, char **argv)
 	if (data_check(data))
 	{
 		printf("Iniciamos cube\n");
-		cube(data);
+		//cube(data);
 	}
 	else
 	{

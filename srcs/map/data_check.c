@@ -6,13 +6,11 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:24:16 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/09/01 16:15:30 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/08 13:10:04 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "data.h" 
-
-
 
 int	data_check(t_data_map *data)
 {

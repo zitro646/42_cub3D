@@ -6,11 +6,74 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:39:36 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/08/31 13:46:50 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/08 15:50:14 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "data.h"
+
+int	path_exist(char *str)
+{
+	int	fd;
+
+	fd = open(str, O_RDONLY);
+	if (fd != -1)
+	{
+		close (fd);
+		return (1);
+	}
+	return (0);
+}
+
+int	colour_is_valid(char *str)
+{
+	char	**aux_str;
+	int		num;
+	int		i;
+	int		tam;
+	int		check;
+
+	check = 1;
+	i = 0;
+	aux_str = ft_split(str, ',');
+	tam = get_matrix_height(aux_str);
+	while (i < tam)
+	{
+		num = ft_atoi(aux_str[i]);
+		if (num == 0 && ft_strncmp(aux_str[i], "0", ft_strlen(aux_str[i])))
+			check = 0;
+		if (num < 0 || num > 255)
+			check = 0;
+		i++;
+	}
+	if (tam != 3)
+		check = 0;
+	free_matrix(aux_str, 0);
+	return (check);
+}
+// int	check_value_paths(t_data_map *data)
+// {
+// 	char **aux;
+// 	if ()
+// 	return (1);
+// }
+
+int	check_paths(t_data_map *data)
+{
+	if (!data->_east_texture_path || !path_exist(data->_east_texture_path))
+		return (0);
+	if (!data->_north_texture_path || !path_exist(data->_north_texture_path))
+		return (0);
+	if (!data->_south_texture_path || !path_exist(data->_south_texture_path))
+		return (0);
+	if (!data->_west_texture_path || !path_exist(data->_west_texture_path))
+		return (0);
+	if (!data->_roof_colour_path || !colour_is_valid(data->_roof_colour_path))
+		return (0);
+	if (!data->_floor_colour_path || !colour_is_valid(data->_floor_colour_path))
+		return (0);
+	return (1);
+}
 
 int	check_map_no_strange_chars(char **map, char *acceptable_chars)
 {
@@ -107,23 +170,6 @@ int	check_player_on_map(t_data_map *data, char *player_type)
 		i++;
 	}
 	if (player_count != 1)
-		return (0);
-	return (1);
-}
-
-int	check_paths(t_data_map *data)
-{
-	if (!data->_east_texture_path)
-		return (0);
-	if (!data->_north_texture_path)
-		return (0);
-	if (!data->_south_texture_path)
-		return (0);
-	if (!data->_west_texture_path)
-		return (0);
-	if (!data->_roof_colour_path)
-		return (0);
-	if (!data->_floor_colour_path)
 		return (0);
 	return (1);
 }

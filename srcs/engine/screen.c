@@ -3,22 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   screen.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 12:07:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/07 11:34:33 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/08 13:11:13 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	screen_game(t_game *game, int x, int y)
+void	screen_game(t_game *game)
 {
-//	double	tile_x;
-//	double	tile_y;
-	int		tile_x;
-	int		tile_y;
+	int		r;
+	double	proportion;
+	double	x;
+	double	y;
+	double	point;
 
-	tile_x = game->width / x;
-	tile_y = game->height / y;
+	proportion = 85.33;
+	r = 0;
+	while (r < game->width)
+	{
+		x = r;
+		point = game->ray[r].point * proportion;
+		y = 0;
+		while (y < game->height)
+		{
+			if ( y <= point)
+				mlx_pixel_put(game->mlx.mlx, game->mlx.screen, x, y, 0x4B0082);
+			y++;
+		}
+		r++;
+	}
 }
+
