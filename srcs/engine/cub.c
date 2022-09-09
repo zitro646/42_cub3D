@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:20:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/08 15:55:27 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/09 09:57:20 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,16 @@ int	cube(t_data_map *data)
 	y = data->max_width;
 	game.size_x = x;
 	game.size_y = y;
-	printf("Test 1\n");
 	//matrix_size(argv[1], &x, &y);
 	// game.matrix = NULL;
 	game.matrix = calloc(sizeof(t_matrix *) * x , 1);
-	printf("Test 2\n");
 	// game.matrix[x] = 0;
 	if (!game.matrix)
 		return (0);
-	printf("Test 3\n");
 	init(&game, x, y, data->showmap);
-	printf("Test 4\n");
 	image(&game);
-	printf("Test 5\n");
 	//screen_game(&game, x, y);
 	hook_loop(&game);
-	printf("Test 6\n");
 	return (0);
 }
 

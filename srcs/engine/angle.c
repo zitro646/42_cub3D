@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:33:35 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/07 17:20:52 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/09 10:41:19 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,3 +53,26 @@ void	looking_at(t_game *game)
 	else if ((game->player.angle > 3 * M_PI / 2) && (game->player.angle <  2 * M_PI))
 		game->player.looking_at = 1; //arriba derecha
 }
+
+void	ray_at(t_game *game)
+{
+	int	r;
+
+	r = 0;
+	while (r < game->width)
+	{
+		if ((game->ray[r].ray_angle > 0) && (game->ray[r].ray_angle < M_PI / 2))
+			game->ray[r].ray_at = 2;
+		else if ((game->ray[r].ray_angle > M_PI / 2) && (game->ray[r].ray_angle < M_PI))
+			game->ray[r].ray_at = 3;
+		else if ((game->ray[r].ray_angle > M_PI) && (game->ray[r].ray_angle <  3 * M_PI / 2))
+			game->ray[r].ray_at = 4;
+		else if ((game->ray[r].ray_angle > 3 * M_PI / 2) && (game->ray[r].ray_angle < 2 * M_PI))
+			game->ray[r].ray_at = 1;
+		r++;
+	}
+};
+
+
+
+	

@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 12:26:44 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/07 12:48:12 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/09 09:57:47 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,4 @@ void	create_matrix(char **file, int x, int y, t_matrix **matrix)
 		free(str);
 		i++;
 	}
-	printf("SALGO :)\n");
 }

@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:39:36 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/08/31 13:46:50 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/01 17:10:07 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	check_map_closed(t_data_map *data, int count, char *aceptable_chars)
 	count = 0;
 	x = 0;
 	y = 0;
-	while (data->showmap[y] != '\0')
+	while (data->showmap[y] != (void *)0)
 	{
 		while (data->showmap[y][x])
 		{
