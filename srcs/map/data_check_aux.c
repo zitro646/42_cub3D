@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:39:36 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/09/08 15:50:14 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/08 15:55:05 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ int	check_paths(t_data_map *data)
 		return (0);
 	if (!data->_west_texture_path || !path_exist(data->_west_texture_path))
 		return (0);
-	if (!data->_roof_colour_path || !colour_is_valid(data->_roof_colour_path))
+	if (!data->_roof_colour_path)
 		return (0);
-	if (!data->_floor_colour_path || !colour_is_valid(data->_floor_colour_path))
+	if (!data->_floor_colour_path)
 		return (0);
 	return (1);
 }
@@ -173,3 +173,5 @@ int	check_player_on_map(t_data_map *data, char *player_type)
 		return (0);
 	return (1);
 }
+
+

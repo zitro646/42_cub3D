@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 09:39:19 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/08 12:59:13 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/08 17:05:00 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,10 @@ void    ray(t_game *game)
 	// 		game->ray[0].hit_x, game->ray[0].hit_y);
 	// printf("distance to hit: %f\n", game->ray[0].distance);
 	// printf("point: %f\n", game->ray[0].point);
-	printf("ray[512]: %f, hit[512]: (%f, %f)\n", game->ray[512].ray_angle,
-			game->ray[512].hit_x, game->ray[512].hit_y);
-	printf("distance to hit: %f\n", game->ray[512].distance);
-	printf("point: %f\n", game->ray[512].point);
+	// printf("ray[511]: %f, hit[511]: (%f, %f)\n", game->ray[511].ray_angle,
+	// 		game->ray[511].hit_x, game->ray[512].hit_y);
+	// printf("distance to hit: %f\n", game->ray[512].distance);
+	// printf("point: %f\n", game->ray[511].point);
 	// printf("ray[1023]: %f, hit[1023]: (%f, %f)\n", game->ray[1023].ray_angle,
 	// 		game->ray[1023].hit_x, game->ray[1023].hit_y);
 	// printf("distance to hit: %f\n", game->ray[1023].distance);

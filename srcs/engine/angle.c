@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   angle.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:33:35 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/07 17:20:52 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/12 14:14:49 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,12 @@
  //Normalizar el angulo (que esté en el primer giro siempre)
 void    angle(t_game *game)
 {
-	double  new;
-	double  num;
-
-	num = game->player.angle;
-	while (num >= 0)
-		num -= (2 * M_PI);
-	num += (2 * M_PI);
 	if (game->player.angle < 0)
-		new = num + (2 * M_PI);
-	else
-		new = num;
- 	game->player.angle = new;
+		game->player.angle += (M_PI * 2);
+	else if (game->player.angle > (M_PI * 2))
+		game->player.angle -= (M_PI * 2);
+	
+	printf("Angle angled :)\n");
 }
 
 double	new_angle(double num)

@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:17:49 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/08 12:08:12 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/12 14:16:34 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,13 @@ void	looking_at(t_game *game);
 double	new_angle(double angle);
 
 /*Ray*/
+int		pos_is_wall( int x_pixel, int y_pixel, t_game *game);
+void	ray_vision_dda(t_game *game, int color, double angle);
 void	init_ray(t_game *game);
 void	ray(t_game *game);
 
+/*RayDDA*/
+void	draw_vision_line(t_game *game, int color, double angle);
+int		draw_new_line(t_game *game, int beginX, int beginY, int endX, int endY, int color);//El bueno
+int		inside_matrix(t_game *game, int y, int x);
 #endif

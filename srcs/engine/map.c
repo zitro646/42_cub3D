@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 12:52:30 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/08 12:27:00 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/12 14:23:01 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,19 @@ int	pos_is_wall( int x_pixel, int y_pixel, t_game *game)
 	return (0);
 }
 
-void	ray_vision(t_game *game, int color, double angle)
+void	draw_vision_line(t_game *game, int color, double angle)
 {
 	double	line;
 	int		i;
 	int		j;
 
 	line = 0;
-	j = (game->player.y * 15) + (cos(game->player.angle) * line) + 7;
-	i = (game->player.x * 15) + (sin(game->player.angle) * line) + 7;
-	while (!pos_is_wall(j, i, game))
+	j = (game->player.y * 15) + (cos(angle) * line);
+	i = (game->player.x * 15) + (sin(angle) * line);
+	while (line < 15)
 	{
-		j = (game->player.y * 15) + (cos(game->player.angle + angle) * line) + 7;
-		i = (game->player.x * 15) + (sin(game->player.angle + angle) * line) + 7;
-		pos_is_wall(j, i, game);
+		j = (game->player.y * 15) + (cos(angle) * line);
+		i = (game->player.x * 15) + (sin(angle) * line);
 		mlx_pixel_put(game->mlx.mlx, game->mlx.window,
 			j, i, color);
 		line += 0.3;
@@ -52,22 +51,25 @@ void	ray_vision(t_game *game, int color, double angle)
 
 void	player_vision_cone(t_game *game, int color)
 {
-	ray_vision(game, color, 0);
-	ray_vision(game, color, M_PI / 4);
-	ray_vision(game, color, - M_PI / 4);
+	// ray_vision(game, 0x0000FF, 0);
+	ray_vision_dda(game, color, 0);
+	// //ray_vision(game, 0x0000FF, 0);
+	// // ray_vision(game, color, M_PI / 4);
+	// // ray_vision(game, color, - M_PI / 4);
 	return ;
 }
 
+	
 void	player_pixel(t_game *game, int color)
 {
 	int		i;
 	int		j;
 
-	i = 5;
-	while (i < 10)
+	i = -2;
+	while (i < 3)
 	{
-		j = 5;
-		while (j < 10)
+		j = -2;
+		while (j < 3)
 		{
 			mlx_pixel_put(game->mlx.mlx, game->mlx.window,
 				(game->player.y * 15) + j, (game->player.x * 15) + i, color);
@@ -75,6 +77,9 @@ void	player_pixel(t_game *game, int color)
 		}
 		i++;
 	}
+	draw_vision_line(game,0xF00F0F,game->player.angle);
+	// printf("%f - %f\n",game->player.pdx *15,game->player.pdy*15);
+	// draw_new_line(game,game->player.x * 15,game->player.y* 15,game->player.pdx* 15 ,game->player.pdy * 15,0xF00F0F);
 	player_vision_cone(game, color);
 }	
 //i = sin(game->player.angle) * line;
@@ -103,8 +108,8 @@ void	image_aux(t_game *game, int pos_x, int pos_y)
 	wall_floor_pixel(game, pos_x, pos_y, 0x8C8C8C);
 	if (game->matrix[pos_x][pos_y].value == 'N')
 	{
-		game->player.x = pos_x;
-		game->player.y = pos_y;
+		game->player.x = pos_x + 0.5;
+		game->player.y = pos_y + 0.5;
 		player_pixel(game, 0X0000FF);
 		game->player.angle = 3 * M_PI / 2;
 		game->matrix[pos_x][pos_y].value = '0';
@@ -112,24 +117,24 @@ void	image_aux(t_game *game, int pos_x, int pos_y)
 
 	else if (game->matrix[pos_x][pos_y].value == 'S')
 	{
-		game->player.x = pos_x;
-		game->player.y = pos_y;
+		game->player.x = pos_x + 0.5;
+		game->player.y = pos_y + 0.5;
 		player_pixel(game, 0X0000FF);
 		game->player.angle = (M_PI / 2);
 		game->matrix[pos_x][pos_y].value = '0';
 	}
 	else if (game->matrix[pos_x][pos_y].value == 'O')
 	{
-		game->player.x = pos_x;
-		game->player.y = pos_y;
+		game->player.x = pos_x + 0.5;
+		game->player.y = pos_y + 0.5;
 		player_pixel(game, 0X0000FF);
 		game->player.angle = M_PI;
 		game->matrix[pos_x][pos_y].value = '0';
 	}
 	else if (game->matrix[pos_x][pos_y].value == 'E')
 	{
-		game->player.x = pos_x;
-		game->player.y = pos_y;
+		game->player.x = pos_x + 0.5;
+		game->player.y = pos_y + 0.5;
 		player_pixel(game, 0X0000FF);
 		game->player.angle = 0;
 		game->matrix[pos_x][pos_y].value = '0';
