@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:20:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/09 09:57:20 by potero           ###   ########.fr       */
+/*   Updated: 2022/09/12 13:13:56 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	cube(t_data_map *data)
 		return (0);
 	init(&game, x, y, data->showmap);
 	image(&game);
-	//screen_game(&game, x, y);
 	hook_loop(&game);
 	return (0);
 }
@@ -45,8 +44,8 @@ void	init(t_game *game, int x, int y, char **map)
 	game->diff_angle = (M_PI / 2) / game->width;
 	game->ray = calloc(sizeof(t_ray) * game->width, 1);
 	init_ray(game);
-	game->mlx.mlx = mlx_init();
-//	game->mlx.screen = mlx_new_window(game->mlx.mlx, game->height, game->width, "cub3D"); 
+	game->mlx.mlx = mlx_init();	
+	game->mlx.screen = mlx_new_window(game->mlx.mlx, game->height, game->width, "cub3D"); 
 	game->mlx.window = mlx_new_window(game->mlx.mlx, (y * 15), (x * 15), "minimap");
 }
 
