@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 10:36:49 by potero            #+#    #+#             */
-/*   Updated: 2022/09/12 13:44:31 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/12 16:08:10 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void	hook(t_game *game, int key_code)
 		new_y = (game->player.advance * (cos(game->player.angle) * game->player.speed_m))			+ game->player.y;
 		new_x = (game->player.advance * (sin(game->player.angle) * game->player.speed_m)) 
 			+ game->player.x;
+		new_x = (int)new_x + 0.5;
+		new_y = (int)new_y + 0.5;
 	}
 	else if (key_code == 2 ||key_code == 0)
 	{
@@ -76,6 +78,9 @@ void	hook(t_game *game, int key_code)
 					* game->player.speed_m)) + game->player.y;
 		new_x = (game->player.advance * (sin(game->player.angle + (90 * M_PI / 180))
 					* game->player.speed_m)) + game->player.x;
+		new_x = (int)new_x + 0.5;
+		new_y = (int)new_y + 0.5;
+
 	}
 	else
 	{
@@ -91,6 +96,7 @@ void	hook(t_game *game, int key_code)
 	looking_at(game);
 	printf("looking at: %d\n", game->player.looking_at);
 	printf("________________________\n");
+
 	ray(game);
 	//screen_game(game);
 	if (movement(game, new_x - 0.5, new_y - 0.5) == 0)

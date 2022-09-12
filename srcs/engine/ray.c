@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 09:39:19 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/12 15:42:40 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/12 16:35:12 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	init_ray(t_game *game)
 	while (i < game->width)
 	{
 		game->ray[i].ray = i;
-	//	printf("ray[%i]:created\n", game->ray->ray);
 		i++;
 	}
 }
@@ -37,6 +36,7 @@ void    ray(t_game *game)
 	double	abs;
 	double	angle;
 	double	aux;
+	double	proportion;
 
 	r = game->width / 2;
 	i = 0;
@@ -92,6 +92,15 @@ void    ray(t_game *game)
 		r++;
 	}
 
+	r = 0;
+	while (r < game->width)
+	{
+		angle = - M_PI / 4 + (game->diff_angle * r);
+		game->ray[r].point = cos(angle) * game->ray[r].distance;
+		r++;
+	}
+
+/*
 	r = game->width / 2;
 	i = 0;
 	while (r < game->width)
@@ -113,15 +122,16 @@ void    ray(t_game *game)
 		r--;
 		i++;
 	}
-
+*/
 
 	ray_at(game);
 
 	aux = 500;
+	proportion = tan(M_PI / 4) * (game->width / 2);
 	r = 0;
 	while (r < game->width)
 	{
-		game->ray[r].wall = 500 /(aux / 512 * game->ray[r].point);
+		game->ray[r].wall = aux /(aux / proportion * game->ray[r].point);
 		r++;
 	}
 /*
