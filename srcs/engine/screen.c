@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 12:07:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/12 13:52:03 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/12 15:42:37 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ void	screen_game(t_game *game)
 	int		start;
 	int		end;
 	double	middle;
-//	double	point;
 
-//	proportion = 85.33;
 	middle = game->height / 2;
 	x = 0;
 	while (x < game->width)
@@ -33,7 +31,7 @@ void	screen_game(t_game *game)
 		end = start + (int) game->ray[x].wall;
 	//	if (x == 0 || x == 512 || x == 1023)
 	//		printf("y_[%d]: %d: %d\n", x, start, end);
-		if ( x%4 == 0)
+		if ( x % 4 == 0)
 		{
 			while (y < start)
 			{
