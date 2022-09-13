@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 09:39:19 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/12 16:35:12 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/13 11:18:52 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,10 @@ void	init_ray(t_game *game)
 	}
 }
 
-void    ray(t_game *game)
+void	ray_angle(t_game *game)
 {
-	int r;
+	int	r;
 	int	i;
-	double	new_hit_x;
-	double	new_hit_y;
-	double	cont;
-	double	pow_x;
-	double	pow_y;
-	double	abs;
-	double	angle;
-	double	aux;
-	double	proportion;
 
 	r = game->width / 2;
 	i = 0;
@@ -61,11 +52,19 @@ void    ray(t_game *game)
 		r--;
 		i++;
 	}
-	
+}
+
+void	ray_hit(t_game *game)
+{
+	int		r;
+	double	new_hit_x;
+	double	new_hit_y;
+	double	cont;
+
 	r = 0;
 	while (r < game->width)
 	{
-		cont = 0.3;
+		cont = 0.25;
 		new_hit_x = (game->player.y * 15) + (cos(game->ray[r].ray_angle) * cont); 
 		new_hit_y = (game->player.x * 15) + (sin(game->ray[r].ray_angle) * cont);
 		while (!pos_is_wall(new_hit_x, new_hit_y, game))
@@ -79,6 +78,14 @@ void    ray(t_game *game)
 		game->ray[r].hit_x = new_hit_y / 15;
 		r++;
 	}
+}
+
+void	ray_distance(t_game *game)
+{
+	int		r;
+	double	pow_x;
+	double	pow_y;
+	double	abs;
 
 	r = 0;
 	while (r < game->width)
@@ -91,7 +98,20 @@ void    ray(t_game *game)
 		game->ray[r].distance = sqrt(abs);
 		r++;
 	}
+}
 
+
+
+void    ray(t_game *game)
+{
+	int 	r;
+	double	angle;
+	double	aux;
+	double	proportion;
+
+	ray_angle(game);
+	ray_hit(game);
+	ray_distance(game);
 	r = 0;
 	while (r < game->width)
 	{
@@ -99,33 +119,7 @@ void    ray(t_game *game)
 		game->ray[r].point = cos(angle) * game->ray[r].distance;
 		r++;
 	}
-
-/*
-	r = game->width / 2;
-	i = 0;
-	while (r < game->width)
-	{
-		angle = game->diff_angle * i;
-		game->ray[r].point = cos(angle) * game->ray[r].distance;
-		if (game->ray[r].point < 0)
-			game->ray[r].point *= - 1;
-		r++;
-		i++;
-	}
-
-	r = game->width / 2 - 1;
-	i = 0;
-	while (r >= 0)
-	{
-		angle = -game->diff_angle * i;
-		game->ray[r].point = cos(angle) * game->ray[r].distance;
-		r--;
-		i++;
-	}
-*/
-
 	ray_at(game);
-
 	aux = 500;
 	proportion = tan(M_PI / 4) * (game->width / 2);
 	r = 0;
@@ -156,20 +150,4 @@ void    ray(t_game *game)
 	printf("point: %f\n", game->ray[1023].point);
 	printf("wall size: %f\n", game->ray[1023].wall);
 */
-/*
-	printf("ray[510]: %f, hit[510]: (%f, %f)\n", game->ray[510].ray_angle,
-			game->ray[510].hit_x, game->ray[510].hit_y);
-	printf("looking at: %d\n", game->ray[510].ray_at);
-	printf("distance to hit: %f\n", game->ray[510].distance);
-	printf("point: %f\n", game->ray[510].point);
-	printf("wall size: %f\n", game->ray[510].wall);
-
-	printf("ray[450]: %f, hit[450]: (%f, %f)\n", game->ray[450].ray_angle,
-			game->ray[450].hit_x, game->ray[450].hit_y);
-	printf("looking at: %d\n", game->ray[450].ray_at);
-	printf("distance to hit: %f\n", game->ray[450].distance);
-	printf("point: %f\n", game->ray[450].point);
-	printf("wall size: %f\n", game->ray[450].wall);
-*/
-
 }

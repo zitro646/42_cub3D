@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 12:52:30 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/09 12:07:52 by potero           ###   ########.fr       */
+/*   Updated: 2022/09/13 10:53:11 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,8 @@ void	image_aux(t_game *game, int pos_x, int pos_y)
 	{
 		game->player.x = pos_x + aux;
 		game->player.y = pos_y + aux;
-	//	game->player.x = pos_x;
-	//	game->player.y = pos_y;
-		player_pixel(game, 0X0000FF);
 		game->player.angle = 3 * M_PI / 2;
+		player_pixel(game, 0X0000FF);
 		game->matrix[pos_x][pos_y].value = '0';
 	}
 
@@ -119,30 +117,24 @@ void	image_aux(t_game *game, int pos_x, int pos_y)
 	{
 		game->player.x = pos_x + aux;
 		game->player.y = pos_y + aux;
-	//	game->player.x = pos_x;
-	//	game->player.y = pos_y;
-		player_pixel(game, 0X0000FF);
 		game->player.angle = (M_PI / 2);
+		player_pixel(game, 0X0000FF);
 		game->matrix[pos_x][pos_y].value = '0';
 	}
 	else if (game->matrix[pos_x][pos_y].value == 'O')
 	{
 		game->player.x = pos_x  + aux ;
 		game->player.y = pos_y + aux;
-	//	game->player.x = pos_x;
-	//	game->player.y = pos_y;
-		player_pixel(game, 0X0000FF);
 		game->player.angle = M_PI;
+		player_pixel(game, 0X0000FF);
 		game->matrix[pos_x][pos_y].value = '0';
 	}
 	else if (game->matrix[pos_x][pos_y].value == 'E')
 	{
 		game->player.x = pos_x + aux;
 		game->player.y = pos_y + aux;
-	//	game->player.x = pos_x;
-	//	game->player.y = pos_y;
-		player_pixel(game, 0X0000FF);
 		game->player.angle = 0;
+		player_pixel(game, 0X0000FF);
 		game->matrix[pos_x][pos_y].value = '0';
 	}
 }

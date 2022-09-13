@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 10:36:49 by potero            #+#    #+#             */
-/*   Updated: 2022/09/12 16:08:10 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/13 11:18:56 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,10 @@ void	hook(t_game *game, int key_code)
 
 	if (key_code == 13 || key_code == 1)
 	{
-		new_y = (game->player.advance * (cos(game->player.angle) * game->player.speed_m))			+ game->player.y;
-		new_x = (game->player.advance * (sin(game->player.angle) * game->player.speed_m)) 
-			+ game->player.x;
-		new_x = (int)new_x + 0.5;
-		new_y = (int)new_y + 0.5;
+		new_y = (game->player.advance * (cos(game->player.angle)
+					* game->player.speed_m)) + game->player.y;
+		new_x = (game->player.advance * (sin(game->player.angle)
+					* game->player.speed_m)) + game->player.x;
 	}
 	else if (key_code == 2 ||key_code == 0)
 	{
@@ -78,15 +77,14 @@ void	hook(t_game *game, int key_code)
 					* game->player.speed_m)) + game->player.y;
 		new_x = (game->player.advance * (sin(game->player.angle + (90 * M_PI / 180))
 					* game->player.speed_m)) + game->player.x;
-		new_x = (int)new_x + 0.5;
-		new_y = (int)new_y + 0.5;
-
 	}
 	else
 	{
 		new_x = game->player.x;
 		new_y = game->player.y;
 	}
+	new_x = (int)new_x + 0.5;
+	new_y = (int)new_y + 0.5;
 	game->player.angle += game->player.turn * game->player.speed_t;
 	if (game->player.angle > (2 * M_PI) || game->player.angle < 0)
 		angle(game);
@@ -98,7 +96,6 @@ void	hook(t_game *game, int key_code)
 	printf("________________________\n");
 
 	ray(game);
-	//screen_game(game);
 	if (movement(game, new_x - 0.5, new_y - 0.5) == 0)
 	{
 		image(game);
