@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 09:39:19 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/13 11:18:52 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/13 13:40:48 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,57 @@ void	ray_angle(t_game *game)
 
 void	ray_hit(t_game *game)
 {
+	int	r;
+	double	new_hit_yh;
+	double	new_hit_xh;
+	double	y_step;
+	double	x_step;
+
+//	double	new_hit_yv;
+//	double	new_hit_yv;
+
+	r  = 512;
+//	r = 0;
+//	while(r < game->width)
+//	{
+		new_hit_yh = game->player.y - 0.5;
+		if (game->ray[r].ray_at == 2 || game->ray[r].ray_at == 3)
+			new_hit_yh++;
+		if (game->ray[r].ray_angle == 0 || game->ray[r].ray_angle == 2 * M_PI)
+		{
+			new_hit_xh = game->player.x + 0.5;
+			new_hit_yh = game->player.y;
+		}
+		else if (game->ray[r].ray_angle == M_PI)
+		{
+			new_hit_xh = game->player.x  - 0.5;
+			new_hit_yh = game->player.y;
+		}
+		else
+			new_hit_xh = game->player.x + (0.5 / tan(game->ray[r].ray_angle));
+		if (game->ray[r].ray_at == 4)
+			new_hit_xh--;
+		else if (game->ray[r].ray_at == 1)
+			new_hit_xh++;
+		y_step = 1;
+		x_step = y_step / tan(game->ray[r].ray_angle);
+	//	printf("hit[%d](%f, %f)\n", r, new_hit_xh, new_hit_yh);
+		
+		while (!pos_is_wall(new_hit_xh, new_hit_yh, game))
+		{
+			new_hit_yh += y_step;
+			new_hit_xh += x_step;
+			pos_is_wall(new_hit_xh, new_hit_yh, game);
+		}
+		printf("hit[%d](%f, %f)\n", r, new_hit_xh, new_hit_yh);
+//		r++;
+//	}
+
+}
+
+/*
+void	ray_hit(t_game *game)
+{
 	int		r;
 	double	new_hit_x;
 	double	new_hit_y;
@@ -79,7 +130,7 @@ void	ray_hit(t_game *game)
 		r++;
 	}
 }
-
+*/
 void	ray_distance(t_game *game)
 {
 	int		r;
@@ -104,14 +155,16 @@ void	ray_distance(t_game *game)
 
 void    ray(t_game *game)
 {
-	int 	r;
-	double	angle;
-	double	aux;
-	double	proportion;
+//	int 	r;
+//	double	angle;
+//	double	aux;
+//	double	proportion;
 
 	ray_angle(game);
+	ray_at(game);
 	ray_hit(game);
-	ray_distance(game);
+//	ray_distance(game);
+/*
 	r = 0;
 	while (r < game->width)
 	{
@@ -119,7 +172,7 @@ void    ray(t_game *game)
 		game->ray[r].point = cos(angle) * game->ray[r].distance;
 		r++;
 	}
-	ray_at(game);
+	//ray_at(game);
 	aux = 500;
 	proportion = tan(M_PI / 4) * (game->width / 2);
 	r = 0;
@@ -128,6 +181,7 @@ void    ray(t_game *game)
 		game->ray[r].wall = aux /(aux / proportion * game->ray[r].point);
 		r++;
 	}
+*/
 /*
 	printf("ray[0]: %f, hit[0]: (%f, %f)\n", game->ray[0].ray_angle,
 			game->ray[0].hit_x, game->ray[0].hit_y);
@@ -135,14 +189,14 @@ void    ray(t_game *game)
 	printf("distance to hit: %f\n", game->ray[0].distance);
 	printf("point: %f\n", game->ray[0].point);
 	printf("wall size: %f\n", game->ray[0].wall);
-
+*/
 	printf("ray[512]: %f, hit[512]: (%f, %f)\n", game->ray[512].ray_angle,
 			game->ray[512].hit_x, game->ray[512].hit_y);
 	printf("looking at: %d\n", game->ray[512].ray_at);
-	printf("distance to hit: %f\n", game->ray[512].distance);
-	printf("point: %f\n", game->ray[512].point);
-	printf("wall size: %f\n", game->ray[512].wall);
-
+//	printf("distance to hit: %f\n", game->ray[512].distance);
+//	printf("point: %f\n", game->ray[512].point);
+//	printf("wall size: %f\n", game->ray[512].wall);
+/*
 	printf("ray[1023]: %f, hit[1023]: (%f, %f)\n", game->ray[1023].ray_angle,
 			game->ray[1023].hit_x, game->ray[1023].hit_y);
 	printf("looking at: %d\n", game->ray[1023].ray_at);
