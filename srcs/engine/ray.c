@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 09:39:19 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/13 13:40:48 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/13 15:47:45 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,28 +76,40 @@ void	ray_hit(t_game *game)
 		{
 			new_hit_xh = game->player.x + 0.5;
 			new_hit_yh = game->player.y;
+			x_step = 1;
+			y_step = 0;
 		}
-		else if (game->ray[r].ray_angle == M_PI)
+		else if (game->ray[r].ray_angle == M_PI || game->ray[r].ray_angle == 3.141593)
 		{
+			printf("entro\n");
 			new_hit_xh = game->player.x  - 0.5;
 			new_hit_yh = game->player.y;
+			x_step = 1;
+			y_step = 0;
 		}
 		else
+		{
+			printf("NOentro\n");
+			printf("pi:%f\n", M_PI);
 			new_hit_xh = game->player.x + (0.5 / tan(game->ray[r].ray_angle));
+			y_step = 1;
+			x_step = y_step / tan(game->ray[r].ray_angle);
+		}
 		if (game->ray[r].ray_at == 4)
 			new_hit_xh--;
 		else if (game->ray[r].ray_at == 1)
 			new_hit_xh++;
-		y_step = 1;
-		x_step = y_step / tan(game->ray[r].ray_angle);
+	//	y_step = 1;
+	//	x_step = y_step / tan(game->ray[r].ray_angle);
 	//	printf("hit[%d](%f, %f)\n", r, new_hit_xh, new_hit_yh);
-		
+	/*	
 		while (!pos_is_wall(new_hit_xh, new_hit_yh, game))
 		{
 			new_hit_yh += y_step;
 			new_hit_xh += x_step;
 			pos_is_wall(new_hit_xh, new_hit_yh, game);
 		}
+	*/
 		printf("hit[%d](%f, %f)\n", r, new_hit_xh, new_hit_yh);
 //		r++;
 //	}
@@ -190,9 +202,12 @@ void    ray(t_game *game)
 	printf("point: %f\n", game->ray[0].point);
 	printf("wall size: %f\n", game->ray[0].wall);
 */
-	printf("ray[512]: %f, hit[512]: (%f, %f)\n", game->ray[512].ray_angle,
+	if (game->player.advance == 0 && game->player.turn == 0)
+	{
+		printf("ray[512]: %f, hit[512]: (%f, %f)\n", game->ray[512].ray_angle,
 			game->ray[512].hit_x, game->ray[512].hit_y);
-	printf("looking at: %d\n", game->ray[512].ray_at);
+		printf("looking at: %d\n", game->ray[512].ray_at);
+	}
 //	printf("distance to hit: %f\n", game->ray[512].distance);
 //	printf("point: %f\n", game->ray[512].point);
 //	printf("wall size: %f\n", game->ray[512].wall);
