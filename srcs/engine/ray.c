@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 09:39:19 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/13 15:47:45 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/14 13:36:16 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,66 +53,157 @@ void	ray_angle(t_game *game)
 		i++;
 	}
 }
+int is_wall( int x_pixel, int y_pixel, t_game *game)
+{
+	int x;
+	int y;
+
+	x = x_pixel;
+	y = y_pixel;
+	//printf("pos in matrix -> x : %i , y : %i\n", x, y);
+	//printf("matrix[%i][%i]:%c\n", x, y, game->matrix[x][y].value);
+//	if (x < 0 || y < 0 || x > game->size_x || y > game->size_y)
+//		return (1);
+	if (game->matrix[x][y].value == '1')
+		return (1);
+	return (0);
+}
 
 void	ray_hit(t_game *game)
 {
-	int	r;
+	int		aux;
+	int		r;
 	double	new_hit_yh;
 	double	new_hit_xh;
 	double	y_step;
 	double	x_step;
 
-//	double	new_hit_yv;
+//	double	new_hit_xv;
 //	double	new_hit_yv;
 
-	r  = 512;
-//	r = 0;
-//	while(r < game->width)
-//	{
+//	r  = 512;
+	r = 0;
+	while(r < game->width)
+	{
+		aux = 0;
+	//	printf("START\n");
+	//	printf("anlge[%d]:%f\n", r, game->ray[r].ray_angle);
 		new_hit_yh = game->player.y - 0.5;
 		if (game->ray[r].ray_at == 2 || game->ray[r].ray_at == 3)
 			new_hit_yh++;
-		if (game->ray[r].ray_angle == 0 || game->ray[r].ray_angle == 2 * M_PI)
-		{
-			new_hit_xh = game->player.x + 0.5;
-			new_hit_yh = game->player.y;
-			x_step = 1;
-			y_step = 0;
-		}
-		else if (game->ray[r].ray_angle == M_PI || game->ray[r].ray_angle == 3.141593)
-		{
-			printf("entro\n");
-			new_hit_xh = game->player.x  - 0.5;
-			new_hit_yh = game->player.y;
-			x_step = 1;
-			y_step = 0;
-		}
-		else
-		{
-			printf("NOentro\n");
-			printf("pi:%f\n", M_PI);
-			new_hit_xh = game->player.x + (0.5 / tan(game->ray[r].ray_angle));
-			y_step = 1;
-			x_step = y_step / tan(game->ray[r].ray_angle);
-		}
+		new_hit_xh = game->player.x + (0.5 / tan(game->ray[r].ray_angle));
 		if (game->ray[r].ray_at == 4)
 			new_hit_xh--;
 		else if (game->ray[r].ray_at == 1)
 			new_hit_xh++;
-	//	y_step = 1;
-	//	x_step = y_step / tan(game->ray[r].ray_angle);
-	//	printf("hit[%d](%f, %f)\n", r, new_hit_xh, new_hit_yh);
-	/*	
-		while (!pos_is_wall(new_hit_xh, new_hit_yh, game))
+		y_step = 1;
+		x_step = y_step / tan(game->ray[r].ray_angle);
+		if (game->ray[r].ray_angle == (3 * M_PI) / 2 || game->ray[r].ray_angle == M_PI / 2)
 		{
-			new_hit_yh += y_step;
-			new_hit_xh += x_step;
-			pos_is_wall(new_hit_xh, new_hit_yh, game);
+			x_step = y_step;
+			y_step = 0;
+			new_hit_yh = game->player.y;
 		}
-	*/
-		printf("hit[%d](%f, %f)\n", r, new_hit_xh, new_hit_yh);
+		else if (game->ray[r].ray_angle == M_PI || game->ray[r].ray_angle == 0)
+		{
+			new_hit_xh = game->player.x;
+			new_hit_yh = game->player.y;
+			aux = 1;
+		}
+		if (new_hit_xh < 0 || new_hit_yh < 0
+			|| new_hit_xh > game->size_x || new_hit_yh > game->size_y)
+		{
+			new_hit_xh = game->player.x;
+			new_hit_yh = game->player.y;
+			aux = 1;
+		}
+	//	printf("hit[%d](%f, %f)\n", r, new_hit_xh, new_hit_yh);
+	//	printf("step[%d](%f, %f)\n", r, x_step, y_step);
+		while (!is_wall(new_hit_xh, new_hit_yh, game) && aux != 1)
+		{
+			if (new_hit_xh < 0 || new_hit_yh < 0
+				|| new_hit_xh > game->size_x || new_hit_yh > game->size_y)
+			{
+				new_hit_xh = game->player.x;
+				new_hit_yh = game->player.y;
+				aux = 1;
+			}
+	//		printf("hit[%d](%f, %f)\n", r, new_hit_xh, new_hit_yh);
+			if (game->ray[r].ray_at == 4 || game->ray[r].ray_at == 3)
+			{
+				new_hit_yh -= y_step;
+				new_hit_xh -= x_step;
+			}
+			else if (game->ray[r].ray_at == 1 || game->ray[r].ray_at == 2)
+			{
+				new_hit_yh += y_step;
+				new_hit_xh += x_step;
+			}
+			is_wall(new_hit_xh, new_hit_yh, game);
+		}
+		if (r == 512)
+			printf("hit[%d](%f, %f)\n", r, new_hit_xh, new_hit_yh);
+		game->ray[r].hit_xh = new_hit_xh;
+		game->ray[r].hit_yh = new_hit_yh;
+		r++;
+	}
+/*
+	r = 512;
+//	r = 0;
+//	while(r < game->width)
+//	{
+		aux = 0;
+		new_hit_xv = game->player.x - 0.5;
+		if (game->ray[r].ray_at == 1 || game->ray[r].ray_at == 1)
+			new_hit_xv++;
+		new_hit_yv = game->player.y + (0.5 * tan(game->ray[r].ray_angle));
+//		if (game->ray[r].ray_at == 4)
+//			new_hit_xh--;
+//		else if (game->ray[r].ray_at == 1)
+//			new_hit_xh++;
+		x_step = 1;
+		y_step = tan(game->ray[r].ray_angle);
+		if (game->ray[r].ray_angle == (3 * M_PI) / 2 || game->ray[r].ray_angle == M_PI / 2)
+		{
+			new_hit_xv = game->player.x;
+			new_hit_yv = game->player.y;
+			aux = 1;
+		}
+		if (new_hit_xv < 0 || new_hit_yv < 0
+			|| new_hit_xv > game->size_x || new_hit_yv > game->size_y)
+		{
+			new_hit_xv = game->player.x;
+			new_hit_yv = game->player.y;
+			aux = 1;
+		}
+		while (!is_wall(new_hit_xv, new_hit_yv, game) && aux != 1)
+		{
+			if (new_hit_xv < 0 || new_hit_yv < 0
+				|| new_hit_xv > game->size_x || new_hit_yv > game->size_y)
+			{
+				new_hit_xv = game->player.x;
+				new_hit_yv = game->player.y;
+				aux = 1;
+			}
+			if (game->ray[r].ray_at == 4 || game->ray[r].ray_at == 3)
+			{
+				new_hit_yv -= y_step;
+				new_hit_xv -= x_step;
+			}
+			else if (game->ray[r].ray_at == 1 || game->ray[r].ray_at == 2)
+			{
+				new_hit_yv += y_step;
+				new_hit_xv += x_step;
+			}
+			is_wall(new_hit_xv, new_hit_yv, game);
+		}
+		printf("hit[%d](%f, %f)\n", r, new_hit_xv, new_hit_yv);
+*/
+//		if (r == 0 || r == 1023)
+//			printf("hit[%d](%f, %f)\n", r, new_hit_xv, new_hit_yv);
 //		r++;
 //	}
+
 
 }
 

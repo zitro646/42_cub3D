@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:15:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/13 13:40:51 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/14 12:43:50 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@ typedef struct s_ray
 	double	ray_angle;
 	double	hit_x;
 	double	hit_y;
+	double	hit_xh;
+	double	hit_yh;
+	double	hit_xv;
+	double	hit_yv;
 	double	distance;
 	double	point;
 	double	wall;
