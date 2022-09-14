@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:15:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/14 12:43:50 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/14 16:39:34 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ typedef struct s_ray
 	double	point;
 	double	wall;
 	int		ray_at;
+	int		hor;
+	int		ver;
 }	t_ray;
 
 typedef struct s_game
