@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 12:52:30 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/12 14:23:01 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/13 19:31:59 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,56 +30,55 @@ int	pos_is_wall( int x_pixel, int y_pixel, t_game *game)
 	return (0);
 }
 
-void	draw_vision_line(t_game *game, int color, double angle)
+void	ray_vision(t_game *game, int color, double angle)
 {
 	double	line;
 	int		i;
 	int		j;
 
 	line = 0;
-	j = (game->player.y * 15) + (cos(angle) * line);
-	i = (game->player.x * 15) + (sin(angle) * line);
-	while (line < 15)
+	j = ((game->player.y - 0.5) * 15) + (cos(game->player.angle) * line) + 7;
+	i = ((game->player.x - 0.5) * 15) + (sin(game->player.angle) * line) + 7;
+	while (!pos_is_wall(j, i, game))
 	{
-		j = (game->player.y * 15) + (cos(angle) * line);
-		i = (game->player.x * 15) + (sin(angle) * line);
+		j = ((game->player.y - 0.5) * 15) + (cos(game->player.angle + angle) * line) + 7;
+		i = ((game->player.x - 0.5) * 15) + (sin(game->player.angle + angle) * line) + 7;
+		pos_is_wall(j, i, game);
 		mlx_pixel_put(game->mlx.mlx, game->mlx.window,
 			j, i, color);
-		line += 0.3;
+		line += 0.1;
 	}
 }
 
 void	player_vision_cone(t_game *game, int color)
 {
-	// ray_vision(game, 0x0000FF, 0);
-	ray_vision_dda(game, color, 0);
-	// //ray_vision(game, 0x0000FF, 0);
-	// // ray_vision(game, color, M_PI / 4);
-	// // ray_vision(game, color, - M_PI / 4);
+	(void)color;
+	ray_vision(game, color, 0);
+	// ray_vision(game, color, M_PI / 4);
+	// ray_vision(game, color, - M_PI / 4);
+	ray_vision_dda(game, 0xFF0FF0, game->player.angle);
+	// ray_vision_dda(game, 0xFF0FF0, M_PI / 4);
+	// ray_vision_dda(game, 0xFF0FF0, - M_PI / 4);
 	return ;
 }
 
-	
 void	player_pixel(t_game *game, int color)
 {
 	int		i;
 	int		j;
 
-	i = -2;
-	while (i < 3)
+	i = 5;
+	while (i < 10)
 	{
-		j = -2;
-		while (j < 3)
+		j = 5;
+		while (j < 10)
 		{
 			mlx_pixel_put(game->mlx.mlx, game->mlx.window,
-				(game->player.y * 15) + j, (game->player.x * 15) + i, color);
+				((game->player.y - 0.5) * 15) + j, ((game->player.x - 0.5) * 15) + i, color);
 			j++;
 		}
 		i++;
 	}
-	draw_vision_line(game,0xF00F0F,game->player.angle);
-	// printf("%f - %f\n",game->player.pdx *15,game->player.pdy*15);
-	// draw_new_line(game,game->player.x * 15,game->player.y* 15,game->player.pdx* 15 ,game->player.pdy * 15,0xF00F0F);
 	player_vision_cone(game, color);
 }	
 //i = sin(game->player.angle) * line;
@@ -105,38 +104,41 @@ void	wall_floor_pixel(t_game *game, int pos_x, int pos_y, int color)
 
 void	image_aux(t_game *game, int pos_x, int pos_y)
 {
+	double	aux;
+
+	aux = 0.5;
 	wall_floor_pixel(game, pos_x, pos_y, 0x8C8C8C);
 	if (game->matrix[pos_x][pos_y].value == 'N')
 	{
-		game->player.x = pos_x + 0.5;
-		game->player.y = pos_y + 0.5;
-		player_pixel(game, 0X0000FF);
+		game->player.x = pos_x + aux;
+		game->player.y = pos_y + aux;
 		game->player.angle = 3 * M_PI / 2;
+		player_pixel(game, 0X0000FF);
 		game->matrix[pos_x][pos_y].value = '0';
 	}
 
 	else if (game->matrix[pos_x][pos_y].value == 'S')
 	{
-		game->player.x = pos_x + 0.5;
-		game->player.y = pos_y + 0.5;
-		player_pixel(game, 0X0000FF);
+		game->player.x = pos_x + aux;
+		game->player.y = pos_y + aux;
 		game->player.angle = (M_PI / 2);
+		player_pixel(game, 0X0000FF);
 		game->matrix[pos_x][pos_y].value = '0';
 	}
 	else if (game->matrix[pos_x][pos_y].value == 'O')
 	{
-		game->player.x = pos_x + 0.5;
-		game->player.y = pos_y + 0.5;
-		player_pixel(game, 0X0000FF);
+		game->player.x = pos_x  + aux ;
+		game->player.y = pos_y + aux;
 		game->player.angle = M_PI;
+		player_pixel(game, 0X0000FF);
 		game->matrix[pos_x][pos_y].value = '0';
 	}
 	else if (game->matrix[pos_x][pos_y].value == 'E')
 	{
-		game->player.x = pos_x + 0.5;
-		game->player.y = pos_y + 0.5;
-		player_pixel(game, 0X0000FF);
+		game->player.x = pos_x + aux;
+		game->player.y = pos_y + aux;
 		game->player.angle = 0;
+		player_pixel(game, 0X0000FF);
 		game->matrix[pos_x][pos_y].value = '0';
 	}
 }
@@ -145,12 +147,16 @@ void	image(t_game *game)
 {
 	int	pos_x;
 	int	pos_y;
+	int max_y;
+	int max_x;
 
 	pos_x = 0;
-	while (pos_x < game->size_x)
+	max_y = game->size_x;
+	max_x = game->size_y;
+	while (pos_x < game->size_y)
 	{
 		pos_y = 0;
-		while (pos_y < game->size_y)
+		while (pos_y < game->size_x)
 		{
 			if (game->matrix[pos_x][pos_y].value == '1')
 				wall_floor_pixel(game, pos_x, pos_y, 0x4B0082);

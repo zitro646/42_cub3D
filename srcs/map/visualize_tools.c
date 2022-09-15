@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 16:25:22 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/08/31 13:51:26 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/13 17:02:26 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	see_matrix(char **map)
 	int	y;
 
 	y = 0;
-	printf ("Matrix %p\n", &map);
+	printf ("Matrix %p --- Width :%i\n", &map, ft_strlen(map[y]));
 	while (map[y])
 	{
 		if (y < 10)

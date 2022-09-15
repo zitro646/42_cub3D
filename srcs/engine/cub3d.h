@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:17:49 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/12 14:16:34 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/13 12:52:17 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	player_vision_cone(t_game *game, int color);
 
 /*Screen*/
 void	screen_game(t_game *game);
+void	start_game(t_game *game);
 
 /*Key hook*/
 int		advance(int key_code, t_game *game);
@@ -52,15 +53,13 @@ void	hook(t_game *game, int key_code);
 void	angle(t_game *game);
 void	looking_at(t_game *game);
 double	new_angle(double angle);
+void	ray_at(t_game *game);
 
 /*Ray*/
-int		pos_is_wall( int x_pixel, int y_pixel, t_game *game);
-void	ray_vision_dda(t_game *game, int color, double angle);
 void	init_ray(t_game *game);
 void	ray(t_game *game);
 
 /*RayDDA*/
-void	draw_vision_line(t_game *game, int color, double angle);
-int		draw_new_line(t_game *game, int beginX, int beginY, int endX, int endY, int color);//El bueno
-int		inside_matrix(t_game *game, int y, int x);
+char	*make_linear_array(t_game *game);
+void	ray_vision_dda(t_game *game, int color, double angle);
 #endif

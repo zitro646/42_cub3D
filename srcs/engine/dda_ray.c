@@ -6,11 +6,35 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 12:45:51 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/09/12 14:45:09 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/15 13:08:25 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+char *make_linear_array(t_game *game)
+{
+	char *aux1;
+	//char *aux2;
+	int y;
+	int x;
+
+	aux1 = "";
+	y = 0;
+	
+	while (game->matrix[y])
+	{
+		x = 0;
+		while (x < game->size_x)
+		{
+			
+			x++;
+		}
+		y++;
+	}
+	return (aux1);
+	return ("aaaa");
+}
 
 int draw_new_line(t_game *game, int beginX, int beginY, int endX, int endY, int color)
 {
@@ -39,64 +63,11 @@ int draw_new_line(t_game *game, int beginX, int beginY, int endX, int endY, int 
 
 int	inside_matrix(t_game *game, int y, int x)
 {
-	// printf(" y -> %i   (%i - %i)\n", y,  game->matrix_height * 15 , 0);
-	// printf(" x -> %i   (%i - %i)\n", x,  game->matrix_width * 15 , 0);
-	if (y > game->matrix_height * 15 || y < 0)
+	if (y < game->size_y && y >= 0 && x < game->size_x && x >= 0)
 	{
-		// printf("Salta y\n");
-		return (0);
+		return (1);
 	}
-	else if (x > game->matrix_width * 15 || x < 0)
-	{
-		// printf("Salta x\n");
-		return (0);
-	}
-	// printf("punto dentro de matrix\n");
-	return (1);
-}
-
-void	destination_point(t_game *game, int *hit_x, int *hit_y)
-{
-	double	line;
-	double	test_x;
-	double	test_y;
-
-	if (game->matrix_height > game->matrix_width)
-		line = game->matrix_height * 15;
-	else
-		line = game->matrix_width * 15;
-	// printf("player pos : [%f][%f]  distance added --> %f\n", game->player.y * 15 + 7, game->player.x * 15 + 7, line);
-	*hit_y = (game->player.y * 15) + (cos(game->player.angle) * line);
-	*hit_x = (game->player.x * 15) + (sin(game->player.angle) * line);
-	test_x = (*hit_x);
-	test_y = (*hit_y);
-	// printf("Resultados del punto de destino [%f][%f]\n", test_y, test_x );
-	return ;
-}
-
-void	ray_vision_inside_matrix(t_game *game, int color, double angle)
-{
-	double	line;
-	int		i;
-	int		j;
-	int		test_x;
-	int		test_y;
-
-	line = 0;
-	j = (game->player.y * 15) + (cos(game->player.angle) * line);
-	i = (game->player.x * 15) + (sin(game->player.angle) * line);
-	test_x = 0;
-	test_y = 0;
-	//destination_point(game, &test_x, &test_y);
-	while (inside_matrix(game, i, j))
-	{
-		j = (game->player.y * 15) + (cos(game->player.angle + angle) * line);
-		i = (game->player.x * 15) + (sin(game->player.angle + angle) * line);
-		mlx_pixel_put(game->mlx.mlx, game->mlx.window,
-			j, i, color);
-		line += 0.3;
-		//printf("Puntos de contacto : [%i][%i]\n",j,i);
-	}
+	return (0);
 }
 
 float distance(float ax, float ay, float bx, float by)
@@ -107,84 +78,128 @@ float distance(float ax, float ay, float bx, float by)
 void	ray_vision_dda(t_game *game, int color, double angle)
 {
 	(void)color;
-	(void)angle;
 	(void)game;
-	int mx,my,dof,mp;
-	float rx,ry,ra,xo,yo;
-	ra = game->player.angle;
-
+	int dof;
+	int mx,my;
+	float rx,ry,xo,yo;
+	float ra;
+	ra = new_angle( angle - (3*M_PI/2));
+	// ra = angle;
 	
 	//Checkeo horizontal
+	
 	dof = 0;
-	float aTan = -1/tan(ra);
+	float aTan = 1/tan(ra);
 	float distH;
 	float hx, hy;
 	distH = 100000;
 	hx = game->player.x;
 	hy = game->player.y;
+	// printf("- - - - - - - - - - \n");
+	// printf("Pruebas apartes\n");
+	// printf("Angle:%f\naTan:%f\n",4.683187,-1/(tan(4.683187)));
+	// printf("- - - - - - - - - - \n");
 	if (ra > M_PI)
 	{
-		ry = (((int)game->player.y / 15)*15);
-		rx = (game->player.y - ry) * aTan + game->player.x;
+		printf("Looking Up!\n");
+		ry = (((int)(game->player.y * 15) / 15 ) * 15 ) - 0.0001;
+		rx = ((int)(game->player.y * 15) - ry) * aTan + game->player.x * 15;
 		yo = -15;
 		xo = -yo * aTan;
-		//printf("ry:%f\nrx:%f\nyo:%f\nxo:%f\n",ry,rx,yo,xo);
-	}
+		}
 	if (ra < M_PI)
 	{
-		ry = (((int)game->player.y / 15)*15) + 15;
-		rx = (game->player.y - ry) * aTan + game->player.x;
+		printf("Looking Down!\n");
+		ry = (((int)(game->player.y * 15) / 15 ) * 15 ) + 15;
+		rx = ((game->player.y * 15) - ry) * aTan + game->player.x * 15;
 		yo = 15;
 		xo = -yo * aTan;
+		// printf("ry:%f\nrx:%f\nyo:%f\nxo:%f\n",ry,rx,yo,xo);
 	}
 	if (ra == 0|| ra == M_PI) //en caso de que el angulo sea perfecto hacia la izquierda o derecha
 	{ 
-		rx = game->player.x;
-		ry = game->player.y ;
-		dof = 8;
+		rx = game->player.x * 15;
+		ry = game->player.y * 15;
+		dof = game->size_x * game->size_y;
 	}
-	printf ("checkeo Horizontal - Condiciones \n");
-	// printf ("%i - %i \n", (int)rx/15 , (int)ry / 15);
-	while (dof < 8)
+	// printf("Angle:%f\naTan:%f\n",ra,aTan);
+	// printf("Test\nry:%f\nrx:%f\nyo:%f\nxo:%f\n",ry,rx,yo,xo);
+	//draw_new_line(game, (int)(game->player.x * 15), (int)(game->player.y * 15), (int)rx , (int)ry ,0xFFFFFF);
+	// printf ("En pixeles : RX:%f - RY:%f - \n", rx , ry);
+	// printf ("En flotante : RX:%f - RY:%f \n", rx/15 , ry / 15);
+	// printf ("En Matrix : RX:%i - RY:%i \n", (int)rx/15 , (int)ry / 15);
+	// printf ("checkeo Horizontal - Condiciones \n");
+	while (dof < (game->size_x * game->size_y))
 	{
-		mx = (int) rx / 15;
-		my = (int) ry / 15;
-		mp=my*game->matrix_width+mx;
-		printf ("%d - %d - %d\n", mx , my , mp);
-		if (mp > 0 && mp < game->matrix_width * game->matrix_height && game->matrix[my][mx].value == '1') // 
+		my = ((int)rx) / 15;
+		mx = ((int)ry) / 15;
+		// printf("my:%imx:%i\n",my,mx);
+		if (inside_matrix(game,my,mx))
 		{
-			dof = 8;
-			hx = rx;
-			hy = ry;
-			distH = distance(game->player.x,game->player.y,hx,hy);
+			// printf("Inside matrix my:%imx:%i\n",my,mx);
+			if (pos_is_wall(mx * 15,my * 15, game)) // 
+			{
+				printf("Finds an Horizontal WALL! at!!!\n");
+				printf("ry:%frx:%f\n",ry,rx);
+				// printf("my:%imx:%i\n",my,mx);
+				// printf("xo:%fyo:%f\n",xo,yo);
+				dof = game->size_x * game->size_y;
+				hx = rx;
+				hy = ry;
+				distH = distance(game->player.x,game->player.y,hx,hy);
+				// draw_new_line(game, game->player.x * 15, game->player.y * 15, hx  , hy ,0xFFFFFF);
+			}
+			else
+			{
+				// draw_new_line(game, game->player.x * 15, game->player.y * 15, rx, ry,0xFF000F);
+				rx += xo;
+				ry += yo;
+				dof++;
+			}
 		}
 		else
 		{
-			rx += xo;
-			ry += yo;
-			dof++;
+			// printf("Salio del loop!\n");
+			dof = game->size_x * game->size_y;
 		}
+		
 	}
-	// printf ("Termino checkeo Horizontal  \n");
-	 //Checkeo vertical // Sin modificar aun
+	//draw_new_line(game, (int)(game->player.x * 15), (int)(game->player.y * 15), (int)rx , (int)ry ,0xF0F0F0);
+	
+	// if (inside_matrix(game, ry,rx))
+	// 	draw_new_line(game, game->player.x * 15, game->player.y * 15, rx * 15, ry * 15,color);
+	//draw_new_line(game, game->player.x * 15, game->player.y * 15, game->player.x * 15 + sin(ra) * 5, game->player.y * 15 + cos(ra) * 5,0xFFFF00); // Muestra la direccion del angulo
+	
+	printf ("Termino checkeo Horizontal  \n");
+	//  //Checkeo vertical // Sin modificar aun
 	dof = 0;
-	float nTan = -tan(ra);
+	// ra = 1.983189;
+	ra = new_angle( angle + (3*M_PI/2));
+	float nTan = 1 * tan(ra);
 	float distV;
 	float vx, vy;
 	distV = 100000;
 	vx = game->player.x;
 	vy = game->player.y;
+	// printf("- - - - - - - - - - \n");
+	// printf("Pruebas apartes\n");
+	// printf("Angle:%f\naTan:%f\n",3.083188,-1 * tan(3.083188));
+	// printf("- - - - - - - - - - \n");
 	if (ra > M_PI / 2 && ra < (3 * M_PI) / 2)
 	{
-		rx = (((int)game->player.x / 15)*15) - 0.0001;
-		ry = (game->player.x - rx) * nTan + game->player.y;
+		printf ("Look Left\n");
+			
+		rx = (((int)(game->player.x * 15) / 15 ) * 15 ) - 0.0001;
+		ry = ((int)(game->player.x * 15) - rx) * nTan + game->player.y * 15;
 		xo = -15;
 		yo = -xo * nTan;
 	}
 	if (ra < M_PI/2 || ra > 3*M_PI/2) // ----
 	{
-		rx = (((int)game->player.x / 15)*15) + 15;
-		ry = (game->player.x - rx) * nTan + game->player.y;
+		printf ("Look Right\n");
+		
+		rx = (((int)(game->player.x * 15) / 15 ) * 15 ) + 15;
+		ry = ((int)(game->player.x * 15) - rx) * nTan + game->player.y * 15;
 		xo = 15;
 		yo = -xo * nTan;
 	}
@@ -194,26 +209,44 @@ void	ray_vision_dda(t_game *game, int color, double angle)
 		ry = game->player.y;
 		dof = 8;
 	}
+	// printf("Player pos :[%f][%f] -- [%f][%f]\n",game->player.x,game->player.y,game->player.x * 15,game->player.y * 15);
+	// printf("Angle:%f\naTan:%f\n",ra,nTan);
+	// printf("Test\nry:%f\nrx:%f\nyo:%f\nxo:%f\n",ry,rx,yo,xo);
 	while (dof < 8)
 	{
-		mx = (int) rx / 15;
-		my = (int) ry / 15;
-		mp=my*game->matrix_width+mx;
-		if (mp > 0 && mp < game->matrix_width * game->matrix_height && game->matrix[my][mx].value == '1') // && game->matrix[my][mx].value == '1'
+		my = ((int)rx) / 15;
+		mx = ((int)ry) / 15;
+		// printf("my:%imx:%i\n",my,mx);
+		if (inside_matrix(game,my,mx))
 		{
-			dof = 8;
-			vx = rx;
-			vy = ry;
-			distV = distance(game->player.x,game->player.y,hx,hy);
+			// printf("Inside matrix my:%imx:%i\n",my,mx);
+			if (pos_is_wall(mx * 15,my * 15, game)) // 
+			{
+				printf("Finds a WALL! at!!!\n");
+				printf("ry:%frx:%f\n",ry,rx);
+				printf("my:%imx:%i\n",my,mx);
+				printf("xo:%fyo:%f\n",xo,yo);
+				dof = game->size_x * game->size_y;
+				vx = rx;
+				vy = ry;
+				distV = distance(game->player.x,game->player.y,vx,vy);
+				// draw_new_line(game, game->player.x * 15, game->player.y * 15, hx  , hy ,0xFFFFFF);
+			}
+			else
+			{
+				// draw_new_line(game, game->player.x * 15, game->player.y * 15, rx, ry,0xFF000F);
+				rx += xo;
+				ry += yo;
+				dof++;
+			}
 		}
 		else
 		{
-			rx += xo;
-			ry += yo;
-			dof++;
+			printf("Salio del loop!\n");
+			dof = game->size_x * game->size_y;
 		}
 	}
-	// printf ("Termino checkeo Vertical  \n");
+	// // printf ("Termino checkeo Vertical  \n");
 
 	if (distV < distH)
 	{
@@ -226,57 +259,16 @@ void	ray_vision_dda(t_game *game, int color, double angle)
 		ry = hy;
 	}
 	
+	draw_new_line(game, game->player.x * 15, game->player.y * 15, rx, ry ,0x00FFFF);
+
 	printf ("Resultados DDA -_- \n");
 	//printf ("Horizontal :[%f] - [%f] -> distancia de golpe : %f\n", hy, hx, distH);
 	// printf ("Vertical :[%f] - [%f] -> distancia de golpe : %f\n", vy, vx, distV);
-	draw_new_line(game, game->player.x * 15, game->player.y * 15, vx * 15, vy * 15,0xFF00FF);
-	draw_new_line(game, game->player.x * 15, game->player.y * 15, hx * 15, hy * 15,0xFFFF00);
+	// draw_new_line(game, game->player.x * 15, game->player.y * 15, vx * 15, vy * 15,0xFF00FF);
+	//draw_new_line(game, game->player.x * 15, game->player.y * 15, hx * 15, hy * 15,0xFFFF00);
 	// draw_new_line(game,game->player.x * 15,game->player.y * 15 ,rx * 15 ,ry * 15,0x00FF00);
 	// draw_new_line(game,0,0,150,150,color);
 	// draw_new_line(game,150,150,200,115,color);
 
 }
 
-
-
-
-// void	ray_vision_dda(t_game *game, int color, double angle)
-// {
-// 	(void)color;
-// 	(void)angle;
-// 	int		aux_y;
-// 	int		aux_x;
-// 	double	x;
-// 	double	y;
-// 	double	length;
-// 	double	x2;
-// 	double	y2;
-// 	double	dx;
-// 	double	dy;
-// 	double	aux_dx;
-// 	double	aux_dy;
-
-// 	//ray_vision_inside_matrix(game,color,angle);
-// 	destination_point(game, &aux_x, &aux_y);
-// 	x2 = aux_x / 15;
-// 	y2 = aux_y / 15;
-// 	aux_dx = fabs(x2 - game->player.x);
-// 	aux_dy = fabs(y2 - game->player.y);
-// 	if (aux_dx <= aux_dy)
-// 		length = aux_dy;
-// 	else
-// 		length = aux_dx;
-// 	dx = (x2 - game->player.x)/length;
-// 	dy = (y2 - game->player.y)/length;
-// 	x = game->player.x + 0.5;
-// 	y = game->player.y + 0.5;
-// 	mlx_pixel_put(game->mlx.mlx, game->mlx.window,
-// 			y * 15, x * 15, 0x00FF00);
-// 	while (inside_matrix(game, y, x))
-// 	{
-// 		x += dx;
-// 		y += dy;
-// 		mlx_pixel_put(game->mlx.mlx, game->mlx.window,
-// 			y * 15, x * 15, 0x00FF00);
-// 	}
-// }

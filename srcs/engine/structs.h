@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:15:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/12 13:43:59 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/13 12:25:42 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ typedef struct s_ray
 	double	hit_y;
 	double	distance;
 	double	point;
-//	double	step_x;
-//	double	step_y;
+	double	wall;
+	int		ray_at;
 }	t_ray;
 
 typedef struct s_game
@@ -66,8 +66,6 @@ typedef struct s_game
 	int			width;
 	int			size_x;
 	int			size_y;
-	int			matrix_height;
-	int			matrix_width;
 }	t_game;
 
 #endif

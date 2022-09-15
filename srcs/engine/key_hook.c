@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 10:36:49 by potero            #+#    #+#             */
-/*   Updated: 2022/09/12 14:15:38 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/13 16:26:05 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,17 @@ int	stop(int key_code, t_game *game)
 		printf("stop advance\n");
 	}
 	else if (key_code == 123 || key_code == 124)
-	{	
-		printf("El personaje gira\n");
 		game->player.turn = 0;
-	}
 	hook(game, key_code);
 	return (0);
 }
 
 int	movement(t_game *game, double x, double y)
 {
+	if (x - (int)x >= 0.5)
+		x = x + 1;
+	if (y - (int)y >= 0.5)
+		y = y + 1;
 	if (game->matrix[(int)x][(int)y].value == '1')
 	{
 		printf("Impossible movement\n");
@@ -65,9 +66,10 @@ void	hook(t_game *game, int key_code)
 
 	if (key_code == 13 || key_code == 1)
 	{
-		new_y = (game->player.advance * (cos(game->player.angle) * game->player.speed_m)) + game->player.y;
-		new_x = (game->player.advance * (sin(game->player.angle) * game->player.speed_m)) 
-			+ game->player.x;
+		new_y = (game->player.advance * (cos(game->player.angle)
+					* game->player.speed_m)) + game->player.y;
+		new_x = (game->player.advance * (sin(game->player.angle)
+					* game->player.speed_m)) + game->player.x;
 	}
 	else if (key_code == 2 ||key_code == 0)
 	{
@@ -81,22 +83,26 @@ void	hook(t_game *game, int key_code)
 		new_x = game->player.x;
 		new_y = game->player.y;
 	}
+	new_x = (int)new_x + 0.5;
+	new_y = (int)new_y + 0.5;
 	game->player.angle += game->player.turn * game->player.speed_t;
-	angle(game);
-	printf("Angulo -> %f\n",game->player.angle);
-	// printf("________________________\n");
-	// printf("Pos : [%f][%f]\n", new_x, new_y);
-	// printf("angle: %f\n", game->player.angle);
-	// looking_at(game);
-	// printf("looking at: %d\n", game->player.looking_at);
+	if (game->player.angle > (2 * M_PI) || game->player.angle < 0)
+		angle(game);
 	printf("________________________\n");
-	//ray(game);
-	screen_game(game);
-	if (movement(game, new_x, new_y) == 0)
+	printf("Pos : [%f][%f]\n", new_x, new_y);
+	printf("Player angle: %f\n", game->player.angle);
+	looking_at(game);
+	// printf("looking at: %d\n", game->player.looking_at);
+	
+
+	ray(game);
+	if (movement(game, new_x - 0.5, new_y - 0.5) == 0)
 	{
 		image(game);
+		//screen_game(game);
 		game->player.x = new_x;
 		game->player.y = new_y;
 		player_pixel(game, 0xFF0000);
 	}
+	printf("________________________\n");
 }
