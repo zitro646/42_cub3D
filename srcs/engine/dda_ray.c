@@ -6,34 +6,38 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 12:45:51 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/09/15 13:08:25 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/16 16:15:43 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char *make_linear_array(t_game *game)
+int	pos_is_wall_angled( float angle ,int x, int y, t_game *game)
 {
-	char *aux1;
-	//char *aux2;
-	int y;
-	int x;
-
-	aux1 = "";
-	y = 0;
-	
-	while (game->matrix[y])
+	printf ("Angle checked %f\n",angle);
+	if (angle > M_PI && angle > 3 * (M_PI / 2) && game->matrix[y][x - 1].value == '1')
+		return (1);
+	if (angle < M_PI && angle > (M_PI / 2) && game->matrix[y][x + 1].value == '1')
+		return (1);
+	// if (angle < M_PI && angle > (M_PI / 2) && game->matrix[y][x - 1].value == '1')
+	// 	return (1);
+	//printf("pos in matrix -> x : %i , y : %i\n", x, y);
+	if (game->matrix[y][x].value == '1')
 	{
-		x = 0;
-		while (x < game->size_x)
-		{
-			
-			x++;
-		}
-		y++;
+		return (1);
 	}
-	return (aux1);
-	return ("aaaa");
+	//printf("No toque un muro :(\n");
+	// printf("pos in matrix pixel -> x : %i , y : %i\n", x_pixel, y_pixel);
+	// printf("pos in matrix -> x : %i , y : %i\n", x, y);
+	return (0);
+}
+
+void show_ray_data(double angle,double ry,double rx, double yo,double xo )
+{
+	printf("Angle:%f\n",angle);
+	printf ("Checking -> ry:%i,rx:%i\n",(int)ry,(int)rx);
+	printf("ry:%f\nrx:%f\nyo:%f\nxo:%f\n",ry,rx,yo,xo);
+	return ;
 }
 
 int draw_new_line(t_game *game, int beginX, int beginY, int endX, int endY, int color)
@@ -84,7 +88,7 @@ void	ray_vision_dda(t_game *game, int color, double angle)
 	float rx,ry,xo,yo;
 	float ra;
 	ra = new_angle( angle - (3*M_PI/2));
-	// ra = angle;
+	//ra = angle;
 	
 	//Checkeo horizontal
 	
@@ -92,13 +96,9 @@ void	ray_vision_dda(t_game *game, int color, double angle)
 	float aTan = 1/tan(ra);
 	float distH;
 	float hx, hy;
-	distH = 100000;
+	distH = (game->size_x * 15) * (game->size_y * 15);
 	hx = game->player.x;
 	hy = game->player.y;
-	// printf("- - - - - - - - - - \n");
-	// printf("Pruebas apartes\n");
-	// printf("Angle:%f\naTan:%f\n",4.683187,-1/(tan(4.683187)));
-	// printf("- - - - - - - - - - \n");
 	if (ra > M_PI)
 	{
 		printf("Looking Up!\n");
@@ -111,10 +111,9 @@ void	ray_vision_dda(t_game *game, int color, double angle)
 	{
 		printf("Looking Down!\n");
 		ry = (((int)(game->player.y * 15) / 15 ) * 15 ) + 15;
-		rx = ((game->player.y * 15) - ry) * aTan + game->player.x * 15;
+		rx = ((int)(game->player.y * 15) - ry) * aTan + game->player.x * 15;
 		yo = 15;
 		xo = -yo * aTan;
-		// printf("ry:%f\nrx:%f\nyo:%f\nxo:%f\n",ry,rx,yo,xo);
 	}
 	if (ra == 0|| ra == M_PI) //en caso de que el angulo sea perfecto hacia la izquierda o derecha
 	{ 
@@ -122,13 +121,6 @@ void	ray_vision_dda(t_game *game, int color, double angle)
 		ry = game->player.y * 15;
 		dof = game->size_x * game->size_y;
 	}
-	// printf("Angle:%f\naTan:%f\n",ra,aTan);
-	// printf("Test\nry:%f\nrx:%f\nyo:%f\nxo:%f\n",ry,rx,yo,xo);
-	//draw_new_line(game, (int)(game->player.x * 15), (int)(game->player.y * 15), (int)rx , (int)ry ,0xFFFFFF);
-	// printf ("En pixeles : RX:%f - RY:%f - \n", rx , ry);
-	// printf ("En flotante : RX:%f - RY:%f \n", rx/15 , ry / 15);
-	// printf ("En Matrix : RX:%i - RY:%i \n", (int)rx/15 , (int)ry / 15);
-	// printf ("checkeo Horizontal - Condiciones \n");
 	while (dof < (game->size_x * game->size_y))
 	{
 		my = ((int)rx) / 15;
@@ -136,25 +128,42 @@ void	ray_vision_dda(t_game *game, int color, double angle)
 		// printf("my:%imx:%i\n",my,mx);
 		if (inside_matrix(game,my,mx))
 		{
-			// printf("Inside matrix my:%imx:%i\n",my,mx);
-			if (pos_is_wall(mx * 15,my * 15, game)) // 
+			if (angle > M_PI / 2 && angle < (3 * M_PI) / 2)
 			{
-				printf("Finds an Horizontal WALL! at!!!\n");
-				printf("ry:%frx:%f\n",ry,rx);
-				// printf("my:%imx:%i\n",my,mx);
-				// printf("xo:%fyo:%f\n",xo,yo);
-				dof = game->size_x * game->size_y;
-				hx = rx;
-				hy = ry;
-				distH = distance(game->player.x,game->player.y,hx,hy);
-				// draw_new_line(game, game->player.x * 15, game->player.y * 15, hx  , hy ,0xFFFFFF);
+				if (pos_is_wall(mx * 15,my * 15, game) || pos_is_wall((mx + 1) * 15,my * 15, game)) // 
+				{
+					printf("Finds an Horizontal WALL! at!!!\n");
+					dof = game->size_x * game->size_y;
+					hx = rx;
+					hy = ry;
+					distH = distance(game->player.x,game->player.y,hx,hy);
+				}
+				else
+				{
+					rx += xo;
+					ry += yo;
+					dof++;
+				}
 			}
-			else
+			else if (angle < M_PI/2 || angle > 3*M_PI/2)
 			{
-				// draw_new_line(game, game->player.x * 15, game->player.y * 15, rx, ry,0xFF000F);
-				rx += xo;
-				ry += yo;
-				dof++;
+				if (pos_is_wall(mx * 15,my * 15, game) || pos_is_wall((mx - 1) * 15,my * 15, game)) // 
+				{
+					dof = game->size_x * game->size_y;
+					hx = rx;
+					hy = ry;
+					distH = distance(game->player.x,game->player.y,hx,hy);
+				}
+				else
+				{
+					// draw_new_line(game, rx , ry, rx + xo, ry + yo, 0xF0FFFF);
+					printf("Da una vuelta por que el resultado es %i!!\n",pos_is_wall(mx * 15,my * 15, game));
+					printf("- - - - - - - \n");
+					// draw_new_line(game, (int)rx, (int)ry, rx + xo, ry + yo ,0xFF000F);
+					rx += xo;
+					ry += yo;
+					dof++;
+				}
 			}
 		}
 		else
@@ -164,27 +173,18 @@ void	ray_vision_dda(t_game *game, int color, double angle)
 		}
 		
 	}
-	//draw_new_line(game, (int)(game->player.x * 15), (int)(game->player.y * 15), (int)rx , (int)ry ,0xF0F0F0);
-	
-	// if (inside_matrix(game, ry,rx))
-	// 	draw_new_line(game, game->player.x * 15, game->player.y * 15, rx * 15, ry * 15,color);
-	//draw_new_line(game, game->player.x * 15, game->player.y * 15, game->player.x * 15 + sin(ra) * 5, game->player.y * 15 + cos(ra) * 5,0xFFFF00); // Muestra la direccion del angulo
+	// draw_new_line(game, game->player.x * 15, game->player.y * 15, rx, ry ,0x00FFFF);
 	
 	printf ("Termino checkeo Horizontal  \n");
 	//  //Checkeo vertical // Sin modificar aun
 	dof = 0;
-	// ra = 1.983189;
 	ra = new_angle( angle + (3*M_PI/2));
 	float nTan = 1 * tan(ra);
 	float distV;
 	float vx, vy;
-	distV = 100000;
+	distV = (game->size_x * 15) * (game->size_y * 15);;
 	vx = game->player.x;
 	vy = game->player.y;
-	// printf("- - - - - - - - - - \n");
-	// printf("Pruebas apartes\n");
-	// printf("Angle:%f\naTan:%f\n",3.083188,-1 * tan(3.083188));
-	// printf("- - - - - - - - - - \n");
 	if (ra > M_PI / 2 && ra < (3 * M_PI) / 2)
 	{
 		printf ("Look Left\n");
@@ -209,9 +209,6 @@ void	ray_vision_dda(t_game *game, int color, double angle)
 		ry = game->player.y;
 		dof = 8;
 	}
-	// printf("Player pos :[%f][%f] -- [%f][%f]\n",game->player.x,game->player.y,game->player.x * 15,game->player.y * 15);
-	// printf("Angle:%f\naTan:%f\n",ra,nTan);
-	// printf("Test\nry:%f\nrx:%f\nyo:%f\nxo:%f\n",ry,rx,yo,xo);
 	while (dof < 8)
 	{
 		my = ((int)rx) / 15;
@@ -219,25 +216,37 @@ void	ray_vision_dda(t_game *game, int color, double angle)
 		// printf("my:%imx:%i\n",my,mx);
 		if (inside_matrix(game,my,mx))
 		{
-			// printf("Inside matrix my:%imx:%i\n",my,mx);
-			if (pos_is_wall(mx * 15,my * 15, game)) // 
+			if (angle > M_PI)
 			{
-				printf("Finds a WALL! at!!!\n");
-				printf("ry:%frx:%f\n",ry,rx);
-				printf("my:%imx:%i\n",my,mx);
-				printf("xo:%fyo:%f\n",xo,yo);
-				dof = game->size_x * game->size_y;
-				vx = rx;
-				vy = ry;
-				distV = distance(game->player.x,game->player.y,vx,vy);
-				// draw_new_line(game, game->player.x * 15, game->player.y * 15, hx  , hy ,0xFFFFFF);
+				if (pos_is_wall(mx * 15,my * 15, game) || pos_is_wall(mx * 15,(my + 1) * 15, game)) // 
+				{
+					dof = game->size_x * game->size_y;
+					vx = rx;
+					vy = ry;
+					distV = distance(game->player.x,game->player.y,vx,vy);
+				}
+				else
+				{
+					rx += xo;
+					ry += yo;
+					dof++;
+				}
 			}
-			else
+			else if (angle < M_PI)
 			{
-				// draw_new_line(game, game->player.x * 15, game->player.y * 15, rx, ry,0xFF000F);
-				rx += xo;
-				ry += yo;
-				dof++;
+				if (pos_is_wall(mx * 15,my * 15, game) || pos_is_wall(mx * 15,(my  - 1)* 15, game)) // 
+				{
+					dof = game->size_x * game->size_y;
+					vx = rx;
+					vy = ry;
+					distV = distance(game->player.x,game->player.y,vx,vy);
+				}
+				else
+				{
+					rx += xo;
+					ry += yo;
+					dof++;
+				}
 			}
 		}
 		else
@@ -246,29 +255,26 @@ void	ray_vision_dda(t_game *game, int color, double angle)
 			dof = game->size_x * game->size_y;
 		}
 	}
-	// // printf ("Termino checkeo Vertical  \n");
+	draw_new_line(game, game->player.x * 15 , game->player.y * 15 , rx  , ry  ,0xFFFFFF);
+	draw_new_line(game, game->player.x * 15 + 1 , game->player.y * 15 + 1 , hx  +1  , hy + 1 ,0xFF00FF);
+	printf ("distH : %f - distV : %f \n", distH, distV);
+	printf("Rayo Rosa es Horizontal -> 0xFF00FF\n");
+	printf("Rayo Blanco es Vertical -> 0xFFFFFF\n");
 
 	if (distV < distH)
 	{
+		printf("Escogemos la distancia V\n");
 		rx = vx;
 		ry = vy;
 	}
 	else
 	{
+		printf("Escogemos la distancia H\n");
 		rx = hx;
 		ry = hy;
 	}
 	
-	draw_new_line(game, game->player.x * 15, game->player.y * 15, rx, ry ,0x00FFFF);
+	
 
 	printf ("Resultados DDA -_- \n");
-	//printf ("Horizontal :[%f] - [%f] -> distancia de golpe : %f\n", hy, hx, distH);
-	// printf ("Vertical :[%f] - [%f] -> distancia de golpe : %f\n", vy, vx, distV);
-	// draw_new_line(game, game->player.x * 15, game->player.y * 15, vx * 15, vy * 15,0xFF00FF);
-	//draw_new_line(game, game->player.x * 15, game->player.y * 15, hx * 15, hy * 15,0xFFFF00);
-	// draw_new_line(game,game->player.x * 15,game->player.y * 15 ,rx * 15 ,ry * 15,0x00FF00);
-	// draw_new_line(game,0,0,150,150,color);
-	// draw_new_line(game,150,150,200,115,color);
-
 }
-
