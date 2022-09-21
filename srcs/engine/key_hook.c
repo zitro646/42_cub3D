@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 10:36:49 by potero            #+#    #+#             */
-/*   Updated: 2022/09/14 17:32:10 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/21 12:48:39 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	hook(t_game *game, int key_code)
 	game->player.angle += game->player.turn * game->player.speed_t;
 	if (game->player.angle > (2 * M_PI) || game->player.angle < 0)
 		angle(game);
+
 	printf("________________________\n");
 	printf("Pos : [%f][%f]\n", new_x, new_y);
 	printf("angle: %f\n", game->player.angle);

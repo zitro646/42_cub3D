@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 12:52:30 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/14 17:21:52 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/21 12:47:55 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	player_pixel(t_game *game, int color)
 		}
 		i++;
 	}
-	player_vision_cone(game, color);
+//	player_vision_cone(game, color);
 }	
 //i = sin(game->player.angle) * line;
 //j = cos(game->player.angle) * line;

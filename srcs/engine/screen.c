@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 12:07:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/13 12:08:21 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/21 12:28:07 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	screen_game(t_game *game)
 	double	middle;
 
 	middle = game->height / 2;
-	x = -1;
-	while (++x < game->width)
+	x = 0;
+	while ( x < game->width)
 	{
 		y = -1;
 		start = middle - (game->ray[x].wall / 2);
@@ -35,6 +35,7 @@ void	screen_game(t_game *game)
 		y--;
 		while (y++ < game->height)
 			mlx_pixel_put(game->mlx.mlx, game->mlx.screen, x, y, 0x4B0082);
+		x += 2;
 	}
 }
 

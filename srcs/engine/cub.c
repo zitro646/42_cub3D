@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:20:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/13 15:47:50 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/21 12:18:41 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,10 @@ void	init(t_game *game, int x, int y, char **map)
 	create_matrix(map, x, y, game->matrix);
 	game->player.speed_m = 1;
 	game->player.speed_t = (M_PI * 2) / 8;
-	game->width = 1024;
-	game->height = 1024;
+//	game->width = 1024;
+//	game->height = 1024;
+	game->width = 500;
+	game->height = 500;
 	game->diff_angle = (M_PI / 2) / game->width;
 	game->ray = calloc(sizeof(t_ray) * game->width, 1);
 	init_ray(game);
