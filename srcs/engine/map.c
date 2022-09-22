@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 12:52:30 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/16 12:38:01 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/22 03:02:54 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,30 @@ void	ray_vision(t_game *game, int color, double angle)
 	}
 }
 
+
 void	player_vision_cone(t_game *game, int color)
 {
-	(void)color;
-	// ray_vision(game, color, 0);
-	// ray_vision(game, color, M_PI / 4);
-	// ray_vision(game, color, - M_PI / 4);
-	ray_vision_dda(game, 0xFF0FF0, game->player.angle);
-	// ray_vision_dda(game, 0xFF0FF0, M_PI / 4);
-	// ray_vision_dda(game, 0xFF0FF0, - M_PI / 4);
+	int i;
+	double angle;
+
+	i = 0;
+	angle = new_angle (game->player.angle);
+	while (i < 240)
+	{
+		ray_vision_dda(game, WHITE, angle);
+		angle = new_angle (angle + game->diff_angle);
+		i++;
+	}
+	i = 0;
+	angle = new_angle (game->player.angle);
+	while (i < 240)
+	{
+		ray_vision_dda(game, WHITE, angle);
+		angle = new_angle (angle - game->diff_angle);
+		i++;
+	}
+	ray_vision_dda (game,color,game->player.angle);
+	// ray_vision(game,BLUE,game->player.angle);
 	return ;
 }
 

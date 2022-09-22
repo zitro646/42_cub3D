@@ -6,13 +6,23 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:17:49 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/13 12:52:17 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/22 03:03:25 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# define RED 0xFF0000
+# define PINK 0xFF00FF
+# define GREEN 0x00FF00
+# define BLUE 0x0000FF
+# define LIGHT_BLUE 0x00FFFF
+# define WHITE 0xFFFFFF
+# define ORANGE 0xFF6600
+# define CUB3D_H
+# define CUB3D_H
+# define CUB3D_H
 # include<unistd.h>
 # include<stdlib.h>
 # include<stdio.h>
@@ -60,6 +70,11 @@ void	init_ray(t_game *game);
 void	ray(t_game *game);
 
 /*RayDDA*/
-char	*make_linear_array(t_game *game);
+int		new_pos_is_wall( int y, int x, t_game *game);
+int		horizontal_check(int my, int mx, float  angle, t_game *game);
+void	correct_horizontal_hit(float *pixel_y, float *pixel_x, float angle,t_game *game);
+int		vertical_check(int my, int mx, float  angle, t_game *game);
+void	correct_vertical_hit(float *pixel_y, float *pixel_x, float angle,t_game *game);
+void 	centralize_hit_point(float *pixel_y, float *pixel_x, float angle,t_game *game);
 void	ray_vision_dda(t_game *game, int color, double angle);
 #endif
