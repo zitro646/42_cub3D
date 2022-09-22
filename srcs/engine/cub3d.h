@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:17:49 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/22 12:56:07 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/22 13:27:18 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,14 @@ void	ray_at(t_game *game);
 
 /*Ray*/
 void	ray(t_game *game);
+
+/*RayDDA*/
+int     new_pos_is_wall( int y, int x, t_game *game);
+int     horizontal_check(int my, int mx, float  angle, t_game *game);
+void    correct_horizontal_hit(float *pixel_y, float *pixel_x, float angle,t_game *game);
+int     vertical_check(int my, int mx, float  angle, t_game *game);
+void    correct_vertical_hit(float *pixel_y, float *pixel_x, float angle,t_game *game);
+void    centralize_hit_point(float *pixel_y, float *pixel_x, float angle,t_game *game);
+double  ray_vision_dda(t_game *game, int color, double angle);
 
 #endif
