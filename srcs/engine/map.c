@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 12:52:30 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/22 13:18:21 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/22 19:08:11 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,14 +173,16 @@ void	minimap(t_game *game)
 	int	y;
 
 	x = 0;
-	i = game->player.x - 5;
-	j = game->player.y - 5;
+	i = game->player.x;
+	i -= 5;
+	j = game->player.y;
+	j -= 5;
 	while (x < 11)
 	{
 		y = 0;
 		while (y < 11)
 		{
-			if ((i + x) < 0 || (i + x) > game->size_x || (j + y) < 0 || (j + y) > game->size_y)
+			if ((i + x) < 0 || (i + x) >= game->size_x || (j + y) < 0 || (j + y) >= game->size_y)
 				wall_floor_pixel(game, 835 + 15 * x, 835 + 15 * y, 0x000000);
 			else if (game->matrix[i + x][j + y].value == '1')
 				wall_floor_pixel(game, 835 + 15 * x, 835 + 15 * y, 0x27AE60);
