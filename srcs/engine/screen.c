@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 12:07:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/21 12:28:07 by potero           ###   ########.fr       */
+/*   Updated: 2022/09/22 10:06:48 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	screen_game(t_game *game)
 		y--;
 		while (y++ < game->height)
 			mlx_pixel_put(game->mlx.mlx, game->mlx.screen, x, y, 0x4B0082);
-		x += 2;
+		x++;
 	}
 }
 

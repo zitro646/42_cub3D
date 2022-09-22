@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:17:49 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/13 10:53:36 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/22 12:56:07 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	wall_floor_pixel(t_game *game, int pos_x, int pos_y, int color);
 int		pos_is_wall( int x_pixel, int y_pixel, t_game *game);
 void	ray_vision(t_game *game, int color, double angle);
 void	player_vision_cone(t_game *game, int color);
+void	minimap(t_game *game);
 
 /*Screen*/
 void	screen_game(t_game *game);
@@ -56,7 +57,6 @@ double	new_angle(double angle);
 void	ray_at(t_game *game);
 
 /*Ray*/
-void	init_ray(t_game *game);
 void	ray(t_game *game);
 
 #endif
