@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 12:45:51 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/09/22 19:19:38 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/24 18:51:15 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,10 +110,10 @@ void bring_hit_to_closest_wall_point(float *pixel_y, float *pixel_x, float angle
 }
 
 
-double	ray_vision_dda(t_game *game, int color, double angle)
+double	vision_dda(t_game *game, double angle)
 {
 	(void)game;
-	(void)color;
+//	(void)color;
 	int dof;
 	int mx,my;
 	float rx,ry,xo,yo;
@@ -151,7 +151,7 @@ double	ray_vision_dda(t_game *game, int color, double angle)
 	{
 		my = ((int)rx) / 15;
 		mx = ((int)ry) / 15;
-		mlx_pixel_put(game->mlx.mlx, game->mlx.window,ry, rx, PINK); // Para ver los puntos de choque horizontales
+	//	mlx_pixel_put(game->mlx.mlx, game->mlx.window,ry, rx, PINK); // Para ver los puntos de choque horizontales
 		if (inside_matrix(game,my,mx))
 		{
 			if (horizontal_check(my, mx, angle, game))
@@ -210,14 +210,14 @@ double	ray_vision_dda(t_game *game, int color, double angle)
 		mx = ((int)ry) / 15;
 		if (inside_matrix(game,my,mx))
 		{
-			mlx_pixel_put(game->mlx.mlx, game->mlx.window,ry, rx, GREEN); // Para ver los puntos de choque verticales
+	//		mlx_pixel_put(game->mlx.mlx, game->mlx.window,ry, rx, GREEN); // Para ver los puntos de choque verticales
 			if (vertical_check(my, mx, angle, game))
 			{
 				dof = game->size_x * game->size_y;
 				correct_vertical_hit(&ry,&rx,angle,game);
 				vx = rx;
 				vy = ry;
-				distV = distance(game->player.x * 15,game->player.y * 15,vx,vy);
+				distV = distance(game->player.x * 15, game->player.y * 15, vx, vy);
 			}
 			else
 			{
@@ -241,5 +241,5 @@ double	ray_vision_dda(t_game *game, int color, double angle)
 	}
 	bring_hit_to_closest_wall_point(&ry, &rx , angle ,game);
 	// draw_new_line(game, game->player.x * 15,game->player.y * 15,rx,ry,color);
-	return (distance(game->player.x * 15,game->player.y * 15,rx,ry) / 15);
+	return (distance(game->player.x * 15, game->player.y * 15, rx, ry) / 15);
 }
