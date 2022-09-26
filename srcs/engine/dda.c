@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 09:47:50 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/26 16:59:10 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/26 18:00:54 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ double	dda(t_game *game, int r)
 
 	double	tangle;
 	double	aux;
+	int		valid;
 
 	tangle = tan(game->ray[r].ray_angle);
+	valid = 0;
 
 	pos_xv = game->player.x - 0.5;
 	if (game->ray[r].ray_angle > (3 * M_PI / 2) || game->ray[r].ray_angle < (M_PI / 2))
@@ -42,14 +44,30 @@ double	dda(t_game *game, int r)
 		pos_yv--;
 	printf("%i(xv, yv): %f, %f\n", r, pos_xv, pos_yv);
 
+	if (pos_xv < 0 || pos_xv >= game->size_y || pos_yv < 0 || pos_yv >= game->size_x)
+		valid = 1;
+/*
+	while (!is_wall((int)pos_xv, (int)pos_yv, game) && valid != 1) 
+	{
+		pos_xv -= 1;
+		pos_yv += tangle;
+		if (pos_xv < 0 || pos_xv >= game->size_y || pos_yv < 0 || pos_yv >= game->size_x)
+			valid = 1;
+	}
+*/
+	printf("%i(xv, yv): %f, %f\n", r, pos_xv, pos_yv);
 
 	pos_yh = game->player.y - 0.5;
 	if (game->ray[r].ray_angle > 0 && game->ray[r].ray_angle < M_PI)
 		pos_yh++;
 	pos_xh = game->player.x - (0.5 / tangle);
 
-	if (game->ray[r].ray_at == 2) 
+	if (game->ray[r].ray_at == 2)
+	{
+		aux = round(pos_xh) - pos_xh;
+		pos_xh = round(pos_xh) + aux;
 		pos_xh++;
+	}
 	if (game->ray[r].ray_at == 3) 
 		pos_xh--;
 

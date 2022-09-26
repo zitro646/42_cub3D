@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 09:39:19 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/26 16:59:12 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/26 18:00:56 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ void    ray(t_game *game)
 		game->ray[r].wall = wall /(wall / proportion * game->ray[r].point);
 		r++;
 	}
+	printf("SIzE: %d, %d\n", game->size_x, game->size_y);
 /*
 	printf("ray[0]: %f, hit[0]: (%f, %f)\n", game->ray[0].ray_angle,
 			game->ray[0].hit_x, game->ray[0].hit_y);

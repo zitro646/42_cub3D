@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:17:49 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/26 10:46:16 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/26 17:56:47 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	ray_at(t_game *game, int r);
 
 /*Ray*/
 void	ray(t_game *game);
+int		is_wall( int x, int y, t_game *game);
 
 /*RayDDA*/
 int		new_pos_is_wall( int y, int x, t_game *game);
