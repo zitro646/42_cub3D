@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:17:49 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/24 18:48:37 by potero           ###   ########.fr       */
+/*   Updated: 2022/09/26 10:46:16 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	hook(t_game *game, int key_code);
 void	angle(t_game *game);
 void	looking_at(t_game *game);
 double	new_angle(double angle);
-void	ray_at(t_game *game);
+void	ray_at(t_game *game, int r);
 
 /*Ray*/
 void	ray(t_game *game);
@@ -68,4 +68,6 @@ void	correct_vertical_hit(float *pixel_y, float *pixel_x, float angle,t_game *ga
 void	centralize_hit_point(float *pixel_y, float *pixel_x, float angle,t_game *game);
 double	vision_dda(t_game *game, double angle);
 
+/*DDA*/
+double	dda(t_game *game, int r);
 #endif

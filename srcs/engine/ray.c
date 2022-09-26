@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 09:39:19 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/24 19:40:47 by potero           ###   ########.fr       */
+/*   Updated: 2022/09/26 13:56:32 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	ray_hit(t_game *game, int r)
 	//		printf("hit: (%f, %f)\n", new_hit_x, new_hit_y);
 	//	new_hit_x = (game->player.y * 15) + (cos(game->ray[r].ray_angle) * cont); 
 	//	new_hit_y = (game->player.x * 15) + (sin(game->ray[r].ray_angle) * cont);
-		cont += 0.25;
+		cont += 0.01;
 	}
 
 //	game->ray[r].hit_y = new_hit_x / 15;
@@ -101,12 +101,17 @@ void    ray(t_game *game)
 	while (r < game->width)
 	{
 		ray_angle(game, r);
+		ray_at(game, r);
 		
 		ray_hit(game, r);
+
 		game->ray[r].distance = sqrt(pow(game->ray[r].hit_x - game->player.x, 2)
 			+ pow(game->ray[r].hit_y - game->player.y, 2));
 
-		//game->ray[r].distance = vision_dda(game, game->ray[r].ray_angle);
+	//	game->ray[r].distance = vision_dda(game, game->ray[r].ray_angle);
+
+		if (r == 260 || r == 250 || r == 240)
+			dda(game, r);
 
 		angle = - M_PI / 4 + (game->diff_angle * r);
 		game->ray[r].point = cos(angle) * game->ray[r].distance;

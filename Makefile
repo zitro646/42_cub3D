@@ -30,7 +30,7 @@ SRC =   main.c
 SRC_MAP = data_reader.c data_check.c data_check_aux.c get_file_height.c free_data.c map_work.c visualize_tools.c path_variables.c
 
 SRC_ENGINE = cub.c map.c matrix.c screen.c key_hook.c angle.c ray.c\
-			 dda_ray.c dda_horizontal_check.c dda_vertical_check.c
+			 dda_ray.c dda_horizontal_check.c dda_vertical_check.c dda.c
 
 SRC_LIBFT = ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_memchr.c \
 ft_memcmp.c ft_strlen.c ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c  \
