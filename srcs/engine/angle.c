@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:33:35 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/26 13:56:36 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/26 15:45:21 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void    angle(t_game *game)
 		new = num + (2 * M_PI);
 	else
 		new = num;
-	if (new ==  2 * M_PI)
+	if (new == 6.283185)
 		new = 0;
  	game->player.angle = new;
 }
@@ -41,7 +41,7 @@ double	new_angle(double num)
 		aux -= (2 * M_PI);
 	aux += (2 * M_PI);
 	new = aux;
-	if (new ==  2 * M_PI)
+	if (new == 6.23185)
 		new = 0;
 	return (new);
 }
