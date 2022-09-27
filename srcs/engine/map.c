@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 12:52:30 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/27 14:09:11 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/27 15:16:12 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,15 @@ int	pos_is_wall( int x_pixel, int y_pixel, t_game *game)
 	// printf("pos in matrix -> x : %i , y : %i\n", x, y);
 	return (0);
 }
-/*
-void	ray_vision(t_game *game, int color, double angle)
+
+void	ray_vision(t_game *game, int color)
 {
 	double	line;
 	int		i;
 	int		j;
 
-	line = 0;
+	line = 5;
+	/*
 	j = ((game->player.y - 0.5) * 15) + (cos(game->player.angle) * line) + 7;
 	i = ((game->player.x - 0.5) * 15) + (sin(game->player.angle) * line) + 7;
 	while (!pos_is_wall(j, i, game))
@@ -49,8 +50,19 @@ void	ray_vision(t_game *game, int color, double angle)
 			j, i, color);
 		line += 0.1;
 	}
+	*/
+	j = (game->player.c - 0.5) * 30 + 15;
+	i = (game->player.f - 0.5) * 30 + 15;
+	while (line < 10)
+	{
+		mlx_pixel_put(game->mlx.mlx, game->mlx.window,
+				j + (cos(game->player.angle) * line),
+				i + (sin(game->player.angle) * line), color);
+		line += 0.2;
+	}
+	hit_pixel(game, 375);
 }
-*/
+
 /*
 void	player_vision_cone(t_game *game, int color)
 {
@@ -78,22 +90,26 @@ void	player_pixel(t_game *game, int color)
 		}
 		i++;
 	}
+	ray_vision(game, color);
 //	player_vision_cone(game, color);
 }	
-//i = sin(game->player.angle) * line;
-//j = cos(game->player.angle) * line;
+
 void	wall_floor_pixel(t_game *game, int pos_f, int pos_c, int color)
 {
 	int	i;
 	int	j;
 
-	i = 1;
+	i = 0;
 	while (i < 30)
 	{
-		j = 1;
+		j = 0;
 		while (j < 30)
 		{
-			mlx_pixel_put(game->mlx.mlx, game->mlx.window,
+			if (i == 0 || j == 0)
+				mlx_pixel_put(game->mlx.mlx, game->mlx.window,
+					((pos_c * 30) + j), ((pos_f * 30 ) + i), 0x000000);
+			else
+				mlx_pixel_put(game->mlx.mlx, game->mlx.window,
 					((pos_c * 30) + j), ((pos_f * 30 ) + i), color);
 			j++;
 		}

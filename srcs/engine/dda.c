@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 09:47:50 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/27 13:50:36 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/27 15:17:30 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,11 @@ double	dda(t_game *game, int r)
 		pos_ch++;
 	if (game->ray[r].ray_at == 4) 
 		pos_ch--;
+
+	game->ray[r].hit_fh = pos_fh;
+	game->ray[r].hit_ch = pos_ch;
 	printf("START%i(fh, ch): %f, %f\n", r, pos_fh, pos_ch);
+
 	if (pos_fh < 0 || pos_fh >= game->size_f || pos_ch < 0 || pos_ch >= game->size_c)
 		valid = 1;
 	//printf("tangle->%f\n", tangle);
@@ -82,6 +86,8 @@ double	dda(t_game *game, int r)
 	if (pos_fv < 0 || pos_fv >= game->size_f || pos_cv < 0 || pos_cv >= game->size_c)
 		valid = 1;
 //	printf("valid->%i\n", valid);
+	game->ray[r].hit_fv = pos_fv;
+	game->ray[r].hit_cv = pos_cv;
 	printf("START%i(fv, cv): %f, %f\n", r, pos_fv, pos_cv);
 	
 //	printf("tangle->%f\n", tangle);
@@ -111,3 +117,10 @@ double	dda(t_game *game, int r)
 	return (0);
 }
 
+void	hit_pixel(t_game *game, int r)
+{
+	mlx_pixel_put(game->mlx.mlx, game->mlx.window, game->ray[r].hit_cv* 30,
+			game->ray[r].hit_fv * 30, 0xF4D03F);//yello
+	mlx_pixel_put(game->mlx.mlx, game->mlx.window, game->ray[r].hit_ch * 30,
+			game->ray[r].hit_fh * 30, 0x2ECC71);//gree
+}

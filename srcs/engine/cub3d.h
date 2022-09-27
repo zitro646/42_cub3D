@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:17:49 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/27 13:53:24 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/27 15:16:40 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	image(t_game *game);
 void	player_pixel(t_game *game, int color);
 void	wall_floor_pixel(t_game *game, int pos_f, int pos_c, int color);
 int		pos_is_wall( int x_pixel, int y_pixel, t_game *game);
-void	ray_vision(t_game *game, int color, double angle);
+void	ray_vision(t_game *game, int color);
 void	player_vision_cone(t_game *game, int color);
 void	minimap(t_game *game);
 
@@ -71,4 +71,6 @@ double	vision_dda(t_game *game, double angle);
 
 /*DDA*/
 double	dda(t_game *game, int r);
+void	hit_pixel(t_game *game, int r);
+
 #endif
