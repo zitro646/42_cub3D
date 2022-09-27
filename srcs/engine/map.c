@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 12:52:30 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/27 15:16:12 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/27 16:27:44 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,11 @@ void	ray_vision(t_game *game, int color)
 				i + (sin(game->player.angle) * line), color);
 		line += 0.2;
 	}
-	hit_pixel(game, 375);
+//	hit_pixel(game, 0);
+	hit_pixel(game, 275, 0xF4D03F, 0xFFEB3B); // yellow
+	hit_pixel(game, 375, 0x1D8348, 0x1D8348); //green
+	hit_pixel(game, 475, 0xE74C3C, 0xE74C3C); //red
+//	hit_pixel(game, 749);
 }
 
 /*

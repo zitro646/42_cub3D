@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:17:49 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/27 15:16:40 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/27 16:11:38 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,6 @@ double	vision_dda(t_game *game, double angle);
 
 /*DDA*/
 double	dda(t_game *game, int r);
-void	hit_pixel(t_game *game, int r);
+void	hit_pixel(t_game *game, int r, int color_one, int colot_two);
 
 #endif
