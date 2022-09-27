@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 10:36:49 by potero            #+#    #+#             */
-/*   Updated: 2022/09/27 12:12:06 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/27 14:09:09 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	hook(t_game *game, int key_code)
 	ray(game);
 	if (movement(game, new_f - 0.5, new_c - 0.5) == 0)
 	{
-	//	image(game);
+		image(game);
 	//	screen_game(game);
 		game->player.f = new_f;
 		game->player.c = new_c;

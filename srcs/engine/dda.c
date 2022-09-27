@@ -6,103 +6,108 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 09:47:50 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/27 12:12:23 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/27 13:50:36 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/*
+
 double	dda(t_game *game, int r)
 {
-	double	pos_xh;
-	double	pos_yh;
+	double	pos_fh;
+	double	pos_ch;
 
-	double	pos_xv;
-	double	pos_yv;
+	double	pos_fv;
+	double	pos_cv;
 
 	double	tangle;
 	double	aux;
 	int		valid;
 
 	tangle = tan(game->ray[r].ray_angle);
+//	printf("angle->%f\n", game->ray[r].ray_angle);
+//	printf("tangle->%f\n", tangle);
 	valid = 0;
 
-	pos_xv = game->player.x - 0.5;
-	if (game->ray[r].ray_angle > (3 * M_PI / 2) || game->ray[r].ray_angle < (M_PI / 2))
-		pos_xv++;
-	pos_yv = game->player.y + (0.5 * tangle);
+	pos_fh = game->player.f - 0.5;
+	if (game->ray[r].ray_angle > 0 && game->ray[r].ray_angle < M_PI)
+		pos_fh++;
+	pos_ch = game->player.c + (0.5 * tangle);
 
 	if (game->ray[r].ray_at == 3 || game->ray[r].ray_at == 4) 
 	{
-		aux = round(pos_yv) - pos_yv;
-		pos_yv = round(pos_yv) + aux;
+		aux = round(pos_ch) - pos_ch;
+		pos_ch = round(pos_ch) + aux;
 	}
 	if (game->ray[r].ray_at == 3) 
-		pos_yv++;
+		pos_ch++;
 	if (game->ray[r].ray_at == 4) 
-		pos_yv--;
-	printf("%i(xv, yv): %f, %f\n", r, pos_xv, pos_yv);
-	printf("tangle->%f\n", tangle);
-	if (pos_xv < 0 || pos_xv >= game->size_x || pos_yv < 0 || pos_yv >= game->size_y)
+		pos_ch--;
+	printf("START%i(fh, ch): %f, %f\n", r, pos_fh, pos_ch);
+	if (pos_fh < 0 || pos_fh >= game->size_f || pos_ch < 0 || pos_ch >= game->size_c)
 		valid = 1;
-	printf("valid->%i\n", valid);
-	while (!is_wall((int)pos_yv, (int)pos_xv, game) && valid != 1) 
+	//printf("tangle->%f\n", tangle);
+	//printf("valid->%i\n", valid);
+	while (valid != 1 && !is_wall((int)pos_fh, (int)pos_ch, game)) 
 	{
-		if (game->ray[r].ray_angle < 2 * M_PI || game->ray[r].ray_angle > M_PI)
-			pos_xv -= 1;
+		if (game->ray[r].ray_angle > M_PI)
+			pos_fh -= 1;
 		else
-			pos_xv += 1;
+			pos_fh += 1;
 		if (game->ray[r].ray_angle > M_PI / 2 || game->ray[r].ray_angle < (3 * M_PI / 2)) 
-			pos_yv -= tangle;
+			pos_ch -= tangle;
 		else
-			pos_yv += tangle;
-		if (pos_xv < 0 || pos_xv >= game->size_x || pos_yv < 0 || pos_yv >= game->size_y)
+			pos_ch += tangle;
+		if (pos_fh < 0 || pos_fh >= game->size_f|| pos_ch < 0 || pos_ch >= game->size_c)
 			valid = 1;
 	}
 
-	printf("%i(xv, yv): %f, %f\n", r, pos_xv, pos_yv);
-
-	pos_yh = game->player.y - 0.5;
-	if (game->ray[r].ray_angle > 0 && game->ray[r].ray_angle < M_PI)
-		pos_yh++;
-	pos_xh = game->player.x - (0.5 / tangle);
-
+	printf("HIT%i(fh, ch): %f, %f\n", r, pos_fh, pos_ch);
+	
+	pos_cv = game->player.c - 0.5;
+	if (game->ray[r].ray_angle > (3 * M_PI / 2) || game->ray[r].ray_angle < (M_PI / 2))
+		pos_cv++;
+	pos_fv = game->player.f - (0.5 / tangle);
 	if (game->ray[r].ray_at == 2)
 	{
-		aux = round(pos_xh) - pos_xh;
-		pos_xh = round(pos_xh) + aux;
-		pos_xh++;
+		aux = round(pos_fv) - pos_fv;
+		pos_fv = round(pos_fv) + aux;
+		pos_fv++;
 	}
 	if (game->ray[r].ray_at == 3) 
-		pos_xh--;
+		pos_fv--;
 
 	valid = 0;
-	if (pos_xh < 0 || pos_xh >= game->size_x || pos_yh < 0 || pos_yh >= game->size_y)
+	if (pos_fv < 0 || pos_fv >= game->size_f || pos_cv < 0 || pos_cv >= game->size_c)
 		valid = 1;
 //	printf("valid->%i\n", valid);
-	while (!is_wall((int)pos_yh, (int)pos_xh, game) && valid != 1) 
+	printf("START%i(fv, cv): %f, %f\n", r, pos_fv, pos_cv);
+	
+//	printf("tangle->%f\n", tangle);
+	while (valid != 1 && !is_wall((int)pos_fv, (int)pos_cv, game)) 
 	{
-		if (game->ray[r].ray_angle < 2 * M_PI || game->ray[r].ray_angle > M_PI)
-			pos_xh -= 1 / tangle;
+		if (tangle == 0)
+			;
+		else if (game->ray[r].ray_angle > M_PI)
+			pos_fv -= 1 / tangle;
 		else
-			pos_xh += 1 / tangle;
+			pos_fv += 1 / tangle;
 		if (game->ray[r].ray_angle > M_PI / 2 || game->ray[r].ray_angle < (3 * M_PI / 2)) 
-			pos_yh -= 1;
+			pos_cv -= 1;
 		else
-			pos_yh += 1;
-		if (pos_xh < 0 || pos_xh >= game->size_x || pos_yh < 0 || pos_yh >= game->size_y)
+			pos_cv += 1;
+		if (pos_fv < 0 || pos_fv >= game->size_f || pos_cv < 0 || pos_cv >= game->size_c)
 			valid = 1;
 	}
-	printf("%i(xh, yh): %f, %f\n", r, pos_xh, pos_yh);
-*/
+	printf("HIT%i(fv, cv): %f, %f\n", r, pos_fv, pos_cv);
 /*
 	printf("M_PI / 2 = %f\n", (M_PI/2));
 	printf("M_PI  = %f\n", (M_PI));
 	printf("3M_PI / 2  = %f\n", (3 * M_PI/2));
 	printf("2M_PI  = %f\n", (2 * M_PI));
 */
-/*
+
 	return (0);
 }
-*/
+

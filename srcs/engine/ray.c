@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 09:39:19 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/27 12:12:26 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/27 14:00:27 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,9 @@ void    ray(t_game *game)
 			+ pow(game->ray[r].hit_c - game->player.c, 2));
 
 	//	game->ray[r].distance = vision_dda(game, game->ray[r].ray_angle);
-
-//		if (r == 260 || r == 250 || r == 240 || r == 0 || r == 499)
-//			dda(game, r);
+		if (r == 375)
+	//	if (r == 360 || r == 375 || r == 380 || r == 0 || r == 749)
+			dda(game, r);
 
 		angle = - M_PI / 4 + (game->diff_angle * r);
 		game->ray[r].point = cos(angle) * game->ray[r].distance;

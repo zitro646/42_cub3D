@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 12:52:30 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/27 11:29:10 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/27 14:09:11 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,15 @@ void	player_pixel(t_game *game, int color)
 	int		i;
 	int		j;
 
-	i = 5;
-	while (i < 10)
+	i = 10;
+	while (i < 20)
 	{
-		j = 5;
-		while (j < 10)
+		j = 10;
+		while (j < 20)
 		{
-			mlx_pixel_put(game->mlx.mlx, game->mlx.screen, 910 + j, 910 + i, color);
-		//	mlx_pixel_put(game->mlx.mlx, game->mlx.window,
-		//		((game->player.y - 0.5) * 15) + j, ((game->player.x - 0.5) * 15) + i, color);
+		//	mlx_pixel_put(game->mlx.mlx, game->mlx.screen, 910 + j, 910 + i, color);
+			mlx_pixel_put(game->mlx.mlx, game->mlx.window,
+				((game->player.c - 0.5) * 30) + j, ((game->player.f - 0.5) * 30) + i, color);
 			j++;
 		}
 		i++;
@@ -82,19 +82,19 @@ void	player_pixel(t_game *game, int color)
 }	
 //i = sin(game->player.angle) * line;
 //j = cos(game->player.angle) * line;
-void	wall_floor_pixel(t_game *game, int pos_x, int pos_y, int color)
+void	wall_floor_pixel(t_game *game, int pos_f, int pos_c, int color)
 {
 	int	i;
 	int	j;
 
-	i = 0;
-	while (i < 15)
+	i = 1;
+	while (i < 30)
 	{
-		j = 0;
-		while (j < 15)
+		j = 1;
+		while (j < 30)
 		{
-			mlx_pixel_put(game->mlx.mlx, game->mlx.screen,
-				(pos_y) + j, (pos_x) + i, color);
+			mlx_pixel_put(game->mlx.mlx, game->mlx.window,
+					((pos_c * 30) + j), ((pos_f * 30 ) + i), color);
 			j++;
 		}
 		i++;
@@ -106,13 +106,13 @@ void	image_aux(t_game *game, int pos_f, int pos_c)
 	double	aux;
 
 	aux = 0.5;
-//	wall_floor_pixel(game, pos_x, pos_y, 0x8C8C8C);
+	wall_floor_pixel(game, pos_f, pos_c, 0x8C8C8C);
 	if (game->matrix[pos_f][pos_c].value == 'N')
 	{
 		game->player.f = pos_f + aux;
 		game->player.c = pos_c + aux;
 		game->player.angle = 3 * M_PI / 2;
-	//	player_pixel(game, 0X0000FF);
+		player_pixel(game, 0X0000FF);
 		game->matrix[pos_f][pos_c].value = '0';
 	}
 
@@ -121,7 +121,7 @@ void	image_aux(t_game *game, int pos_f, int pos_c)
 		game->player.f = pos_f + aux;
 		game->player.c = pos_c + aux;
 		game->player.angle = (M_PI / 2);
-	//	player_pixel(game, 0X0000FF);
+		player_pixel(game, 0X0000FF);
 		game->matrix[pos_f][pos_c].value = '0';
 	}
 	else if (game->matrix[pos_f][pos_c].value == 'O')
@@ -129,7 +129,7 @@ void	image_aux(t_game *game, int pos_f, int pos_c)
 		game->player.f = pos_f  + aux ;
 		game->player.c = pos_c + aux;
 		game->player.angle = M_PI;
-	//	player_pixel(game, 0X0000FF);
+		player_pixel(game, 0X0000FF);
 		game->matrix[pos_f][pos_c].value = '0';
 	}
 	else if (game->matrix[pos_f][pos_c].value == 'E')
@@ -137,7 +137,7 @@ void	image_aux(t_game *game, int pos_f, int pos_c)
 		game->player.f = pos_f + aux;
 		game->player.c = pos_c + aux;
 		game->player.angle = 0;
-	//	player_pixel(game, 0X0000FF);
+		player_pixel(game, 0X0000FF);
 		game->matrix[pos_f][pos_c].value = '0';
 	}
 }
@@ -153,10 +153,10 @@ void	image(t_game *game)
 		pos_c = 0;
 		while (pos_c < game->size_c)
 		{
-			//if (game->matrix[pos_x][pos_y].value == '1')
-			//	wall_floor_pixel(game, pos_x, pos_y, 0x4B0082);
+			if (game->matrix[pos_f][pos_c].value == '1')
+				wall_floor_pixel(game, pos_f, pos_c, 0x4B0082);
 			// else if (game->matrix[pos_x][pos_y].value != '1')
-			if (game->matrix[pos_f][pos_c].value != '1')
+			else if (game->matrix[pos_f][pos_c].value != '1')
 			{
 				image_aux(game, pos_f, pos_c);
 			}
