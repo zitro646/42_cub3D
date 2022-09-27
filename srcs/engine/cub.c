@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:20:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/24 18:21:26 by potero           ###   ########.fr       */
+/*   Updated: 2022/09/27 12:12:28 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,32 @@
 
 int	cube(t_data_map *data)
 {
-	int		x;
-	int		y;
+	int		f;
+	int		c;
 	t_game	game;
 
-	x = data->height;
-	y = data->max_width;
-	game.size_x = x;
-	game.size_y = y;
-	game.matrix = calloc(sizeof(t_matrix *) * x , 1);
+	f = data->height;
+	c = data->max_width;
+	game.size_f = f;
+	game.size_c = c;
+//	printf("(f,c)->%i, %i\n", f, c);
+	game.matrix = calloc(sizeof(t_matrix *) * f , 1);
 	if (!game.matrix)
 		return (0);
-	init(&game, x, y, data->showmap);
+	init(&game, f, c, data->showmap);
 	start_game(&game);
 	image(&game);
 	hook_loop(&game);
 	return (0);
 }
 
-void	init(t_game *game, int x, int y, char **map)
+void	init(t_game *game, int f, int c, char **map)
 {
-	create_matrix(map, x, y, game->matrix);
+	create_matrix(map, f, c, game->matrix);
 	game->player.speed_m = 1;
 	game->player.speed_t = (M_PI * 2) / 8;
-	game->width = 500;
-	game->height = 500;
+	game->width = 750;
+	game->height = 750;
 	game->diff_angle = (M_PI / 2) / game->width;
 	game->ray = calloc(sizeof(t_ray) * game->width, 1);
 	game->mlx.mlx = mlx_init();	

@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:17:49 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/26 17:56:47 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/27 11:56:29 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@
 
 /*Cub*/
 int		cube(t_data_map *data);
-void	init(t_game *game, int x, int y, char **map);
+void	init(t_game *game, int f, int c, char **map);
 int		hook_loop(t_game *game);
 int		close_esc(t_mlx *mlx);
 
 /*Matrix*/
-void	create_matrix(char **file, int x, int y, t_matrix **matrix);
+void	create_matrix(char **file, int f, int c, t_matrix **matrix);
 
 /*Map*/
 void	image(t_game *game);
@@ -58,7 +58,7 @@ void	ray_at(t_game *game, int r);
 
 /*Ray*/
 void	ray(t_game *game);
-int		is_wall( int x, int y, t_game *game);
+int		is_wall( int f, int c, t_game *game);
 
 /*RayDDA*/
 int		new_pos_is_wall( int y, int x, t_game *game);

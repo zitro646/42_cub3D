@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 12:52:30 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/26 16:59:15 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/27 11:29:10 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	pos_is_wall( int x_pixel, int y_pixel, t_game *game)
 	// printf("pos in matrix -> x : %i , y : %i\n", x, y);
 	return (0);
 }
-
+/*
 void	ray_vision(t_game *game, int color, double angle)
 {
 	double	line;
@@ -50,7 +50,8 @@ void	ray_vision(t_game *game, int color, double angle)
 		line += 0.1;
 	}
 }
-
+*/
+/*
 void	player_vision_cone(t_game *game, int color)
 {
 	ray_vision(game, color, 0);
@@ -58,7 +59,7 @@ void	player_vision_cone(t_game *game, int color)
 	ray_vision(game, color, - M_PI / 4);
 	return ;
 }
-
+*/
 void	player_pixel(t_game *game, int color)
 {
 	int		i;
@@ -100,71 +101,71 @@ void	wall_floor_pixel(t_game *game, int pos_x, int pos_y, int color)
 	}
 }
 
-void	image_aux(t_game *game, int pos_x, int pos_y)
+void	image_aux(t_game *game, int pos_f, int pos_c)
 {
 	double	aux;
 
 	aux = 0.5;
 //	wall_floor_pixel(game, pos_x, pos_y, 0x8C8C8C);
-	if (game->matrix[pos_x][pos_y].value == 'N')
+	if (game->matrix[pos_f][pos_c].value == 'N')
 	{
-		game->player.x = pos_x + aux;
-		game->player.y = pos_y + aux;
+		game->player.f = pos_f + aux;
+		game->player.c = pos_c + aux;
 		game->player.angle = 3 * M_PI / 2;
 	//	player_pixel(game, 0X0000FF);
-		game->matrix[pos_x][pos_y].value = '0';
+		game->matrix[pos_f][pos_c].value = '0';
 	}
 
-	else if (game->matrix[pos_x][pos_y].value == 'S')
+	else if (game->matrix[pos_f][pos_c].value == 'S')
 	{
-		game->player.x = pos_x + aux;
-		game->player.y = pos_y + aux;
+		game->player.f = pos_f + aux;
+		game->player.c = pos_c + aux;
 		game->player.angle = (M_PI / 2);
 	//	player_pixel(game, 0X0000FF);
-		game->matrix[pos_x][pos_y].value = '0';
+		game->matrix[pos_f][pos_c].value = '0';
 	}
-	else if (game->matrix[pos_x][pos_y].value == 'O')
+	else if (game->matrix[pos_f][pos_c].value == 'O')
 	{
-		game->player.x = pos_x  + aux ;
-		game->player.y = pos_y + aux;
+		game->player.f = pos_f  + aux ;
+		game->player.c = pos_c + aux;
 		game->player.angle = M_PI;
 	//	player_pixel(game, 0X0000FF);
-		game->matrix[pos_x][pos_y].value = '0';
+		game->matrix[pos_f][pos_c].value = '0';
 	}
-	else if (game->matrix[pos_x][pos_y].value == 'E')
+	else if (game->matrix[pos_f][pos_c].value == 'E')
 	{
-		game->player.x = pos_x + aux;
-		game->player.y = pos_y + aux;
+		game->player.f = pos_f + aux;
+		game->player.c = pos_c + aux;
 		game->player.angle = 0;
 	//	player_pixel(game, 0X0000FF);
-		game->matrix[pos_x][pos_y].value = '0';
+		game->matrix[pos_f][pos_c].value = '0';
 	}
 }
 
 void	image(t_game *game)
 {
-	int	pos_x;
-	int	pos_y;
+	int	pos_f;
+	int	pos_c;
 
-	pos_x = 0;
-	while (pos_x < game->size_x)
+	pos_f = 0;
+	while (pos_f < game->size_f)
 	{
-		pos_y = 0;
-		while (pos_y < game->size_y)
+		pos_c = 0;
+		while (pos_c < game->size_c)
 		{
 			//if (game->matrix[pos_x][pos_y].value == '1')
 			//	wall_floor_pixel(game, pos_x, pos_y, 0x4B0082);
 			// else if (game->matrix[pos_x][pos_y].value != '1')
-			if (game->matrix[pos_x][pos_y].value != '1')
+			if (game->matrix[pos_f][pos_c].value != '1')
 			{
-				image_aux(game, pos_x, pos_y);
+				image_aux(game, pos_f, pos_c);
 			}
-			pos_y++;
+			pos_c++;
 		}
-		pos_x++;
+		pos_f++;
 	}
 }
-
+/*
 void	minimap(t_game *game)
 {
 	int	i;
@@ -194,7 +195,7 @@ void	minimap(t_game *game)
 	}
 //	player_pixel(game, 0X0000FF);
 }
-
+*/
 
 
 

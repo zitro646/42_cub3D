@@ -6,13 +6,13 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 09:39:19 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/26 18:00:56 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/27 12:12:26 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int is_wall( int x, int y, t_game *game)
+int is_wall( int f, int c, t_game *game)
 {
 //	int x;
 //	int y;
@@ -20,7 +20,7 @@ int is_wall( int x, int y, t_game *game)
 //	x = x_pixel;
 //	y = y_pixel;
 //	printf("(x,y): %d,%d\n", x, y);
-	if (game->matrix[y][x].value == '1')
+	if (game->matrix[f][c].value == '1')
 		return (1);
 	return (0);
 }
@@ -50,8 +50,8 @@ void	ray_angle(t_game *game, int r)
 
 void	ray_hit(t_game *game, int r)
 {
-	double	new_hit_x;
-	double	new_hit_y;
+	double	new_hit_f;
+	double	new_hit_c;
 	double	cont;
 	double	cos_const;
 	double	sin_const;
@@ -59,33 +59,18 @@ void	ray_hit(t_game *game, int r)
 	cont = 0;
 	cos_const = cos(game->ray[r].ray_angle);
 	sin_const = sin(game->ray[r].ray_angle);
-//	new_hit_y = (game->player.x * 15) + (sin_const * cont);
-//	new_hit_x = (game->player.y * 15) + (cos_const * cont);
-	new_hit_x = (game->player.y) + (cos_const * cont);
-	new_hit_y = (game->player.x) + (sin_const * cont);
-//	if (r == 250)
-//		printf("hit: (%f, %f)\n", new_hit_x, new_hit_y);
-//	new_hit_y = (game->player.x * 15) + (sin(game->ray[r].ray_angle) * cont);
-//	new_hit_x = (game->player.y * 15) + (cos(game->ray[r].ray_angle) * cont); 
-//	while (!pos_is_wall(new_hit_x, new_hit_y, game))
-	while (!is_wall((int)new_hit_x,(int) new_hit_y, game))
-	{
-	//	new_hit_y = (game->player.x * 15) + (sin_const * cont);
-	//	new_hit_x = (game->player.y * 15) + (cos_const * cont);
-		new_hit_x = (game->player.y) + (cos_const * cont);
-		new_hit_y = (game->player.x) + (sin_const * cont);
 
-	//	if (r == 250)
-	//		printf("hit: (%f, %f)\n", new_hit_x, new_hit_y);
-	//	new_hit_x = (game->player.y * 15) + (cos(game->ray[r].ray_angle) * cont); 
-	//	new_hit_y = (game->player.x * 15) + (sin(game->ray[r].ray_angle) * cont);
+	new_hit_c = (game->player.c) + (cos_const * cont);
+	new_hit_f = (game->player.f) + (sin_const * cont);
+
+	while (!is_wall((int)new_hit_f,(int) new_hit_c, game))
+	{
+		new_hit_c = (game->player.c) + (cos_const * cont);
+		new_hit_f = (game->player.f) + (sin_const * cont);
 		cont += 0.01;
 	}
-
-//	game->ray[r].hit_y = new_hit_x / 15;
-//	game->ray[r].hit_x = new_hit_y / 15;
-	game->ray[r].hit_y = new_hit_x;
-	game->ray[r].hit_x = new_hit_y;
+	game->ray[r].hit_f = new_hit_f;
+	game->ray[r].hit_c = new_hit_c;
 }
 
 void    ray(t_game *game)
@@ -105,20 +90,20 @@ void    ray(t_game *game)
 		
 		ray_hit(game, r);
 
-		game->ray[r].distance = sqrt(pow(game->ray[r].hit_x - game->player.x, 2)
-			+ pow(game->ray[r].hit_y - game->player.y, 2));
+		game->ray[r].distance = sqrt(pow(game->ray[r].hit_f - game->player.f, 2)
+			+ pow(game->ray[r].hit_c - game->player.c, 2));
 
 	//	game->ray[r].distance = vision_dda(game, game->ray[r].ray_angle);
 
-		if (r == 260 || r == 250 || r == 240 || r == 0 || r == 499)
-			dda(game, r);
+//		if (r == 260 || r == 250 || r == 240 || r == 0 || r == 499)
+//			dda(game, r);
 
 		angle = - M_PI / 4 + (game->diff_angle * r);
 		game->ray[r].point = cos(angle) * game->ray[r].distance;
 		game->ray[r].wall = wall /(wall / proportion * game->ray[r].point);
 		r++;
 	}
-	printf("SIzE: %d, %d\n", game->size_x, game->size_y);
+	printf("SIzE: %d, %d\n", game->size_f, game->size_c);
 /*
 	printf("ray[0]: %f, hit[0]: (%f, %f)\n", game->ray[0].ray_angle,
 			game->ray[0].hit_x, game->ray[0].hit_y);
