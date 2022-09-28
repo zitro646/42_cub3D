@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 12:52:30 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/28 11:05:13 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/28 12:12:02 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	pos_is_wall( int x_pixel, int y_pixel, t_game *game)
 	// printf("pos in matrix -> x : %i , y : %i\n", x, y);
 	return (0);
 }
-
+/*
 void	ray_vision(t_game *game, int color)
 {
 	double	line;
@@ -38,19 +38,6 @@ void	ray_vision(t_game *game, int color)
 	int		j;
 
 	line = 5;
-	/*
-	j = ((game->player.y - 0.5) * 15) + (cos(game->player.angle) * line) + 7;
-	i = ((game->player.x - 0.5) * 15) + (sin(game->player.angle) * line) + 7;
-	while (!pos_is_wall(j, i, game))
-	{
-		j = ((game->player.y - 0.5) * 15) + (cos(game->player.angle + angle) * line) + 7;
-		i = ((game->player.x - 0.5) * 15) + (sin(game->player.angle + angle) * line) + 7;
-		pos_is_wall(j, i, game);
-		mlx_pixel_put(game->mlx.mlx, game->mlx.window,
-			j, i, color);
-		line += 0.1;
-	}
-	*/
 	j = (game->player.c - 0.5) * 30 + 15;
 	i = (game->player.f - 0.5) * 30 + 15;
 	while (line < 10)
@@ -66,6 +53,32 @@ void	ray_vision(t_game *game, int color)
 	hit_pixel(game, 475, 0xE74C3C, 0xE74C3C); //red
 //	hit_pixel(game, 749);
 }
+*/
+void	ray_vision_minimap(t_game *game, int color)
+{
+	double	line;
+	int		i;
+	int		j;
+
+	line = 5;
+//	j = (game->player.c - 0.5) * 30 + 15;
+	j = 717;
+//	i = (game->player.f - 0.5) * 30 + 15;
+	i = 717;
+	while (line < 10)
+	{
+		mlx_pixel_put(game->mlx.mlx, game->mlx.screen,
+				j + (cos(game->player.angle) * line),
+				i + (sin(game->player.angle) * line), color);
+		line += 0.2;
+	}
+//	hit_pixel(game, 0);
+//	hit_pixel(game, 275, 0xF4D03F, 0xFFEB3B); // yellow
+//	hit_pixel(game, 375, 0x1D8348, 0x1D8348); //green
+//	hit_pixel(game, 475, 0xE74C3C, 0xE74C3C); //red
+//	hit_pixel(game, 749);
+}
+
 
 /*
 void	player_vision_cone(t_game *game, int color)
@@ -76,6 +89,7 @@ void	player_vision_cone(t_game *game, int color)
 	return ;
 }
 */
+/*
 void	player_pixel(t_game *game, int color)
 {
 	int		i;
@@ -96,8 +110,29 @@ void	player_pixel(t_game *game, int color)
 	}
 	ray_vision(game, color);
 //	player_vision_cone(game, color);
-}	
+}
+*/
 
+void	player_minimap(t_game *game, int color)
+{
+	int		i;
+	int		j;
+
+	i = 5;
+	while (i < 11)
+	{
+		j = 5;
+		while (j < 11)
+		{
+			mlx_pixel_put(game->mlx.mlx, game->mlx.screen, 710 + j, 710 + i, color);
+			j++;
+		}
+		i++;
+	}
+	ray_vision_minimap(game, color);
+//	player_vision_cone(game, color);
+}	
+/*
 void	wall_floor_pixel(t_game *game, int pos_f, int pos_c, int color)
 {
 	int	i;
@@ -115,6 +150,30 @@ void	wall_floor_pixel(t_game *game, int pos_f, int pos_c, int color)
 			else
 				mlx_pixel_put(game->mlx.mlx, game->mlx.window,
 					((pos_c * 30) + j), ((pos_f * 30 ) + i), color);
+			j++;
+		}
+		i++;
+	}
+}
+*/
+void	wall_floor_minimap(t_game *game, int pos_f, int pos_c, int color)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	printf("(f, c)->%i, %i\n", pos_f, pos_c);
+	while (i < 15)
+	{
+		j = 0;
+		while (j < 15)
+		{
+			if (i == 0 || j == 0)
+				mlx_pixel_put(game->mlx.mlx, game->mlx.screen,
+					(pos_c + j), (pos_f + i), 0x000000);
+			else
+				mlx_pixel_put(game->mlx.mlx, game->mlx.screen,
+					(pos_c + j), (pos_f + i), color);
 			j++;
 		}
 		i++;
@@ -185,7 +244,7 @@ void	image(t_game *game)
 		pos_f++;
 	}
 }
-/*
+
 void	minimap(t_game *game)
 {
 	int	i;
@@ -194,28 +253,28 @@ void	minimap(t_game *game)
 	int	y;
 
 	x = 0;
-	i = game->player.f;
-	i -= 5;
-	j = game->player.c;
-	j -= 5;
+	i = game->player.f - 5;
+	j = game->player.c - 5;
 	while (x < 11)
 	{
 		y = 0;
 		while (y < 11)
 		{
-			if ((i + x) < 0 || (i + x) >= game->size_f || (j + y) < 0 || (j + y) >= game->size_c)
-			//	wall_floor_pixel(game, 835 + 15 * x, 835 + 15 * y, 0x000000);
+			printf("(f, c)->%i, %i\n", i, j);
+			if ((i + x) < 0 || (i + x) >= game->size_f || (j + y) < 0
+					|| (j + y) >= game->size_c)
+				wall_floor_minimap(game, 635 + 15 * x, 635 + 15 * y, 0x000000);
 			else if (game->matrix[i + x][j + y].value == '1')
-			//	wall_floor_pixel(game, 835 + 15 * x, 835 + 15 * y, 0x27AE60);
+				wall_floor_minimap(game, 635 + 15 * x, 635 + 15 * y, 0x27AE60);
 			else if (game->matrix[i + x][j + y].value != '1')
-			//	wall_floor_pixel(game, 835 + 15 * x, 835 + 15 * y, 0xDC7633);
+				wall_floor_minimap(game, 635 + 15 * x, 635 + 15 * y, 0xDC7633);
 			y++;
 		}
 		x++;
 	}
-	player_pixel(game, 0X0000FF);
+	player_minimap(game, 0X0000FF);
 }
-*/
+
 
 
 

@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:17:49 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/28 09:50:55 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/28 11:43:33 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	minimap(t_game *game);
 
 /*Screen*/
 void	screen_game(t_game *game);
+void	screen_game_r(t_game *game, int r);
 void	start_game(t_game *game);
 
 /*Key hook*/
