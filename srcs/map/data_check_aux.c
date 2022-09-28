@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:39:36 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/09/08 15:55:05 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/28 13:14:47 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,32 +25,7 @@ int	path_exist(char *str)
 	return (0);
 }
 
-int	colour_is_valid(char *str)
-{
-	char	**aux_str;
-	int		num;
-	int		i;
-	int		tam;
-	int		check;
 
-	check = 1;
-	i = 0;
-	aux_str = ft_split(str, ',');
-	tam = get_matrix_height(aux_str);
-	while (i < tam)
-	{
-		num = ft_atoi(aux_str[i]);
-		if (num == 0 && ft_strncmp(aux_str[i], "0", ft_strlen(aux_str[i])))
-			check = 0;
-		if (num < 0 || num > 255)
-			check = 0;
-		i++;
-	}
-	if (tam != 3)
-		check = 0;
-	free_matrix(aux_str, 0);
-	return (check);
-}
 // int	check_value_paths(t_data_map *data)
 // {
 // 	char **aux;

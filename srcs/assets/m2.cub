@@ -2,7 +2,7 @@ SO ./srcs/assets/s.xpm
 NO ./srcs/assets/n.xpm
 
 
-C 225,30,0
+C 140,140,140
 
 WE ./srcs/assets/o.xpm
 
@@ -10,7 +10,7 @@ WE ./srcs/assets/o.xpm
 
 EA ./srcs/assets/e.xpm
 
-F 220,100,0
+F 140,140,140
 
 
 1111111111111111111111111111111111

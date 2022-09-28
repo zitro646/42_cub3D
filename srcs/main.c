@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 10:38:08 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/09/13 12:47:20 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/28 13:12:07 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int	main(int argc, char **argv)
 	dir = get_dir(argv[1]);
 	printf("%s\n", dir);
 	data = mapreader(dir);
-	see_matrix(data->showmap);
-	//show_data(data);
+	// see_matrix(data->showmap);
+	show_data(data);
 	if (data_check(data))
 	{
 		printf("Iniciamos cube\n");
