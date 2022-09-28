@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:20:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/28 13:29:19 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/28 14:17:11 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,24 +53,24 @@ int	hook_loop(t_game *game)
 	
 	mlx_hook(game->mlx.window, 2, (1L << 0), advance, game);
 	mlx_hook(game->mlx.window, 3, (1L << 1), stop, game);
-	mlx_hook(game->mlx.window, 17, (1L << 17), close_esc, &game->mlx);
+	mlx_hook(game->mlx.window, 17, (1L << 17), close_esc, game);
 
 	mlx_hook(game->mlx.screen, 2, (1L << 0), advance, game);
 	mlx_hook(game->mlx.screen, 3, (1L << 1), stop, game);
-	mlx_hook(game->mlx.screen, 17, (1L << 17), close_esc, &game->mlx);
+	mlx_hook(game->mlx.screen, 17, (1L << 17), close_esc, game);
 	mlx_loop(game->mlx.mlx);
 
 	return (0);
 }
 
-int	close_esc(t_mlx *mlx)
+int	close_esc(t_game *game)
 {
-	/*
-	mlx_clear_window(mlx->mlx, mlx->window);
-	mlx_destroy_window(mlx->mlx, mlx->window);
-	*/
-	mlx_clear_window(mlx->mlx, mlx->screen);
-	mlx_destroy_window(mlx->mlx, mlx->screen);
+	mlx_clear_window(game->mlx.mlx, game->mlx.window);
+	mlx_destroy_window(game->mlx.mlx, game->mlx.window);
+	
+	mlx_clear_window(game->mlx.mlx, game->mlx.screen);
+	mlx_destroy_window(game->mlx.mlx, game->mlx.screen);
+//	free_my_matrix(*game->matrix);
 	exit(0);
 	return (0);
 }

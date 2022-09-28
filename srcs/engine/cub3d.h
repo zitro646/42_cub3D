@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:17:49 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/28 13:35:34 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/28 14:21:28 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@
 int		cube(t_data_map *data);
 void	init(t_game *game, int f, int c, char **map);
 int		hook_loop(t_game *game);
-int		close_esc(t_mlx *mlx);
+int		close_esc(t_game *game);
 
 /*Matrix*/
 void	create_matrix(char **file, int f, int c, t_matrix **matrix);
+void	free_my_matrix(t_matrix *matrix);
 
 /*Player Data*/
 void	player_data(t_game *game);

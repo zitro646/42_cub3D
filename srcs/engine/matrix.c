@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 12:26:44 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/27 11:27:41 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/28 14:19:24 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,23 @@ void	create_matrix(char **file, int f, int c, t_matrix **matrix)
 		while (j < c)
 		{
 			matrix[i][j].value = str[j];
-			printf("%c", matrix[i][j].value);
 			j++;
 		}
-		printf(".\n");
 		free(str);
 		i++;
 	}
 }
+/*
+void	free_my_matrix(t_matrix *matrix)
+{
+	int		i;
+
+	i = 0;
+	while (matrix[i])
+	{
+		free(matrix[i]);
+		i++;
+	}
+	free(matrix);
+}
+*/

@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 10:36:49 by potero            #+#    #+#             */
-/*   Updated: 2022/09/28 13:35:14 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/28 14:33:47 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	advance(int key_code, t_game *game)
 {
 	if (key_code == 53)
-		close_esc(&game->mlx);
+		close_esc(game);
 	else if (key_code == 13)
 		game->player.advance = 1;
 	else if (key_code == 1)
@@ -57,6 +57,30 @@ int	movement(t_game *game, double f, double c)
 		printf("Impossible movement\n");
 		return (1);
 	}
+	if (game->player.looking_at == 1)
+	{
+		if ((game->matrix[(int)f][(int)c - 1].value == '1')
+				||(game->matrix[(int)f + 1][(int)c].value == '1'))
+			return (1);
+	}
+  	if (game->player.looking_at == 2)
+	{
+		if ((game->matrix[(int)f - 1][(int)c].value == '1')
+				||(game->matrix[(int)f][(int)c - 1].value == '1'))
+			return (1);
+	}
+	if (game->player.looking_at == 3)
+	{
+		if ((game->matrix[(int)f - 1][(int)c].value == '1')
+				||(game->matrix[(int)f][(int)c + 1].value == '1'))
+			return (1);
+	}
+	if (game->player.looking_at == 4)
+	{
+		if ((game->matrix[(int)f + 1][(int)c].value == '1')
+				||(game->matrix[(int)f][(int)c + 1].value == '1'))
+			return (1);
+	}
 	return (0);
 }
 
@@ -93,7 +117,7 @@ void	hook(t_game *game, int key_code)
 	printf("________________________\n");
 	printf("Pos : [%f][%f]\n", new_f, new_c);
 	printf("angle: %f\n", game->player.angle);
-//	looking_at(game);
+	looking_at(game);
 //	printf("looking at: %d\n", game->player.looking_at);
 	printf("________________________\n");
 
