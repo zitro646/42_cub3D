@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 09:39:19 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/27 16:08:11 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/28 11:07:20 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,24 +86,23 @@ void    ray(t_game *game)
 	while (r < game->width)
 	{
 		ray_angle(game, r);
-		ray_at(game, r);
+//		ray_at(game, r);
 		
 		ray_hit(game, r);
 
-		game->ray[r].distance = sqrt(pow(game->ray[r].hit_f - game->player.f, 2)
-			+ pow(game->ray[r].hit_c - game->player.c, 2));
+//		game->ray[r].distance = sqrt(pow(game->ray[r].hit_f - game->player.f, 2)
+//			+ pow(game->ray[r].hit_c - game->player.c, 2));
 
-	//	game->ray[r].distance = vision_dda(game, game->ray[r].ray_angle);
+		game->ray[r].distance = ray_vision_dda(game, game->ray[r].ray_angle);
 	//	if (r == 375)
-		if (r == 275 || r == 375 || r == 475 || r == 0 || r == 749)
-			dda(game, r);
+	//	if (r == 275 || r == 375 || r == 475 || r == 0 || r == 749)
+	//		dda(game, r);
 
 		angle = - M_PI / 4 + (game->diff_angle * r);
 		game->ray[r].point = cos(angle) * game->ray[r].distance;
 		game->ray[r].wall = wall /(wall / proportion * game->ray[r].point);
 		r++;
 	}
-	printf("SIzE: %d, %d\n", game->size_f, game->size_c);
 /*
 	printf("ray[0]: %f, hit[0]: (%f, %f)\n", game->ray[0].ray_angle,
 			game->ray[0].hit_x, game->ray[0].hit_y);

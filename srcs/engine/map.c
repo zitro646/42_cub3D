@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 12:52:30 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/27 16:27:44 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/28 11:05:13 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,13 +126,13 @@ void	image_aux(t_game *game, int pos_f, int pos_c)
 	double	aux;
 
 	aux = 0.5;
-	wall_floor_pixel(game, pos_f, pos_c, 0x8C8C8C);
+//	wall_floor_pixel(game, pos_f, pos_c, 0x8C8C8C);
 	if (game->matrix[pos_f][pos_c].value == 'N')
 	{
 		game->player.f = pos_f + aux;
 		game->player.c = pos_c + aux;
 		game->player.angle = 3 * M_PI / 2;
-		player_pixel(game, 0X0000FF);
+	//	player_pixel(game, 0X0000FF);
 		game->matrix[pos_f][pos_c].value = '0';
 	}
 
@@ -141,7 +141,7 @@ void	image_aux(t_game *game, int pos_f, int pos_c)
 		game->player.f = pos_f + aux;
 		game->player.c = pos_c + aux;
 		game->player.angle = (M_PI / 2);
-		player_pixel(game, 0X0000FF);
+	//	player_pixel(game, 0X0000FF);
 		game->matrix[pos_f][pos_c].value = '0';
 	}
 	else if (game->matrix[pos_f][pos_c].value == 'O')
@@ -149,7 +149,7 @@ void	image_aux(t_game *game, int pos_f, int pos_c)
 		game->player.f = pos_f  + aux ;
 		game->player.c = pos_c + aux;
 		game->player.angle = M_PI;
-		player_pixel(game, 0X0000FF);
+	//	player_pixel(game, 0X0000FF);
 		game->matrix[pos_f][pos_c].value = '0';
 	}
 	else if (game->matrix[pos_f][pos_c].value == 'E')
@@ -157,7 +157,7 @@ void	image_aux(t_game *game, int pos_f, int pos_c)
 		game->player.f = pos_f + aux;
 		game->player.c = pos_c + aux;
 		game->player.angle = 0;
-		player_pixel(game, 0X0000FF);
+	//	player_pixel(game, 0X0000FF);
 		game->matrix[pos_f][pos_c].value = '0';
 	}
 }
@@ -173,10 +173,10 @@ void	image(t_game *game)
 		pos_c = 0;
 		while (pos_c < game->size_c)
 		{
-			if (game->matrix[pos_f][pos_c].value == '1')
-				wall_floor_pixel(game, pos_f, pos_c, 0x4B0082);
+		//	if (game->matrix[pos_f][pos_c].value == '1')
+		//		wall_floor_pixel(game, pos_f, pos_c, 0x4B0082);
 			// else if (game->matrix[pos_x][pos_y].value != '1')
-			else if (game->matrix[pos_f][pos_c].value != '1')
+			if (game->matrix[pos_f][pos_c].value != '1')
 			{
 				image_aux(game, pos_f, pos_c);
 			}
@@ -194,26 +194,26 @@ void	minimap(t_game *game)
 	int	y;
 
 	x = 0;
-	i = game->player.x;
+	i = game->player.f;
 	i -= 5;
-	j = game->player.y;
+	j = game->player.c;
 	j -= 5;
 	while (x < 11)
 	{
 		y = 0;
 		while (y < 11)
 		{
-			if ((i + x) < 0 || (i + x) >= game->size_x || (j + y) < 0 || (j + y) >= game->size_y)
-				wall_floor_pixel(game, 835 + 15 * x, 835 + 15 * y, 0x000000);
+			if ((i + x) < 0 || (i + x) >= game->size_f || (j + y) < 0 || (j + y) >= game->size_c)
+			//	wall_floor_pixel(game, 835 + 15 * x, 835 + 15 * y, 0x000000);
 			else if (game->matrix[i + x][j + y].value == '1')
-				wall_floor_pixel(game, 835 + 15 * x, 835 + 15 * y, 0x27AE60);
+			//	wall_floor_pixel(game, 835 + 15 * x, 835 + 15 * y, 0x27AE60);
 			else if (game->matrix[i + x][j + y].value != '1')
-				wall_floor_pixel(game, 835 + 15 * x, 835 + 15 * y, 0xDC7633);
+			//	wall_floor_pixel(game, 835 + 15 * x, 835 + 15 * y, 0xDC7633);
 			y++;
 		}
 		x++;
 	}
-//	player_pixel(game, 0X0000FF);
+	player_pixel(game, 0X0000FF);
 }
 */
 

@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:20:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/27 14:09:07 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/28 11:07:17 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,16 @@ void	init(t_game *game, int f, int c, char **map)
 	game->ray = calloc(sizeof(t_ray) * game->width, 1);
 	game->mlx.mlx = mlx_init();	
 	game->mlx.screen = mlx_new_window(game->mlx.mlx, game->height, game->width, "cub3D"); 
-	game->mlx.window = mlx_new_window(game->mlx.mlx, (c * 30), (f * 30), "minimap");
+//	game->mlx.window = mlx_new_window(game->mlx.mlx, (c * 30), (f * 30), "minimap");
 }
 
 int	hook_loop(t_game *game)
 {
-	
+/*	
 	mlx_hook(game->mlx.window, 2, (1L << 0), advance, game);
 	mlx_hook(game->mlx.window, 3, (1L << 1), stop, game);
 	mlx_hook(game->mlx.window, 17, (1L << 17), close_esc, &game->mlx);
-	
+*/	
 	mlx_hook(game->mlx.screen, 2, (1L << 0), advance, game);
 	mlx_hook(game->mlx.screen, 3, (1L << 1), stop, game);
 	mlx_hook(game->mlx.screen, 17, (1L << 17), close_esc, &game->mlx);

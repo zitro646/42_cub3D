@@ -6,12 +6,13 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 12:45:51 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/09/26 10:08:21 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/28 10:39:50 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+// y - f = height || x - c = width
 int draw_new_line(t_game *game, int beginX, int beginY, int endX, int endY, int color)
 {
 	double	deltaX; // 10
@@ -19,7 +20,7 @@ int draw_new_line(t_game *game, int beginX, int beginY, int endX, int endY, int 
 	double	pixelX;
 	double	pixelY;
 	int		pixels;
-	
+
 	deltaX = endX - beginX;
 	deltaY = endY - beginY;
 	pixels = sqrt((deltaX * deltaX) + (deltaY * deltaY));;
@@ -37,9 +38,9 @@ int draw_new_line(t_game *game, int beginX, int beginY, int endX, int endY, int 
 	return (0);
 }
 
-int	inside_matrix(t_game *game, int y, int x)
+int	inside_matrix(t_game *game, int f, int c)
 {
-	if (y < game->size_y && y >= 0 && x < game->size_x && x >= 0)
+	if (f < game->size_f && f >= 0 && c < game->size_c && c >= 0)
 	{
 		return (1);
 	}
@@ -60,175 +61,170 @@ int	new_pos_is_wall( int y, int x, t_game *game)
 	return (0);
 }
 
-void centralize_hit_point(float *pixel_y, float *pixel_x, float angle,t_game *game)
+// y - c = height || x - f = width
+double	ray_vision_dda(t_game *game, double angle)
 {
-	double	line;
-	int		i;
-	int		j;
-
-	line = 0;
-	angle = new_angle(angle + M_PI);
-	j = (int)(*pixel_y) + (cos(angle) * line) ;
-	i = (int)(*pixel_x) + (sin(angle) * line) ;
-	// printf("pos in matrix -> x : %i , y : %i\n", j/15, i/15);
-	while (!new_pos_is_wall(i / 15, j / 15, game))
-	{
-		j = (int)(*pixel_y) + (cos(angle) * line) ;
-		i = (int)(*pixel_x) + (sin(angle) * line) ;
-		if ( line >= 10)
-			break;
-		line += 0.1;
-	}
-	if (line < 10)
-	{
-		*pixel_x = (int)(*pixel_x) + (sin(angle) * line);
-		*pixel_y = (int)(*pixel_y) + (cos(angle) * line);
-	}
-}
-
-void bring_hit_to_closest_wall_point(float *pixel_y, float *pixel_x, float angle,t_game *game)
-{
-	double	line;
-	int		i;
-	int		j;
-
-	line = 3;
-	angle = new_angle(angle - M_PI);
-	j = (int)(*pixel_y) + (cos(angle) * line) ;
-	i = (int)(*pixel_x) + (sin(angle) * line) ;
-	if (!new_pos_is_wall(i / 15, j / 15, game))
-		return;
-	while (new_pos_is_wall(i / 15, j / 15, game))
-	{
-		j = (int)(*pixel_y) + (cos(angle) * line) ;
-		i = (int)(*pixel_x) + (sin(angle) * line) ;
-		line += 0.25;
-		
-	}
-	*pixel_x = (int)(*pixel_x) + (sin(angle) * line - 0.25);
-	*pixel_y = (int)(*pixel_y) + (cos(angle) * line - 0.25);
-}
-
-
-double	vision_dda(t_game *game, double angle)
-{
-	(void)game;
-//	(void)color;
 	int dof;
 	int mx,my;
 	float rx,ry,xo,yo;
-	float ra;
-	ra = new_angle( angle - (3*M_PI/2));
+//	float ra;
+//	ra = angle;
+
 	//Checkeo horizontal
 	dof = 0;
-	float aTan = 1/tan(ra);
+//	float aTan = -1/tan(ra);
+	float aTan = -1/tan(angle);
 	float distH;
 	float hx, hy;
-	distH = (game->size_x * 15) * (game->size_y * 15);
-	hx = game->player.x;
-	hy = game->player.y;
-	if (ra > M_PI)
+	distH = (game->size_c * 30) * (game->size_f * 30);
+//	distH = (game->size_c) * (game->size_f);
+	hx = game->player.c;
+	hy = game->player.f;
+	//if (ra == 0|| ra == M_PI) //en caso de que el angulo sea perfecto hacia la izquierda o derecha
+	if (angle == 0 || angle == M_PI)
 	{
-		ry = (((int)(game->player.y * 15) / 15 ) * 15 ) - 0.0001;
-		rx = ((int)(game->player.y * 15) - ry) * aTan + game->player.x * 15;
-		yo = -15;
-		xo = -yo * aTan;
-		}
-	if (ra < M_PI)
-	{
-		ry = (((int)(game->player.y * 15) / 15 ) * 15 ) + 15;
-		rx = ((int)(game->player.y * 15) - ry) * aTan + game->player.x * 15;
-		yo = 15;
-		xo = -yo * aTan;
+		hx = game->player.c * 30;
+	//	hx = game->player.c;
+		hy = game->player.f * 30;
+	//	hy = game->player.f;
+		dof = game->size_c * game->size_f;
 	}
-	if (ra == 0|| ra == M_PI) //en caso de que el angulo sea perfecto hacia la izquierda o derecha
-	{ 
-		hx = game->player.x * 15;
-		hy = game->player.y * 15;
-		dof = game->size_x * game->size_y;
-	}
-	while (dof < (game->size_x * game->size_y))
+//	else if (ra > M_PI)
+	else if (angle > M_PI)
 	{
-		my = ((int)rx) / 15;
-		mx = ((int)ry) / 15;
-	//	mlx_pixel_put(game->mlx.mlx, game->mlx.window,ry, rx, PINK); // Para ver los puntos de choque horizontales
+		ry = (((int)(game->player.f * 30) / 30 ) * 30 ) - 0.0001;
+	//	ry = (int)(game->player.f) - 0.0001;
+		rx = ((int)(game->player.f * 30) - ry) * aTan + game->player.c * 30;
+	//	rx = ((int)(game->player.f - ry)) * aTan + game->player.c;
+		yo = -30;
+	//	yo = - 1;
+		xo = -yo * aTan;
+	//	xo = aTan;
+	}
+	//else if (ra < M_PI)
+	else if (angle < M_PI)
+	{
+		ry = (((int)(game->player.f * 30) / 30 ) * 30 ) + 30;
+	//	ry = (int)(game->player.f) + 1;
+		rx = ((int)(game->player.f * 30) - ry) * aTan + game->player.c * 30;
+	//	rx = ((int)(game->player.f) - ry) * aTan + game->player.c;
+		yo = 30;
+	//	yo = 1;
+		xo = -yo * aTan;
+	//	xo = -aTan;
+	}
+
+	while (dof < (game->size_c * game->size_f))
+	{
+		my = ((int)ry) / 30;
+	//	my = ((int)ry);
+		mx = ((int)rx) / 30;
+	//	mx = ((int)rx);
+		// mlx_pixel_put(game->mlx.mlx, game->mlx.window,rx, ry, CYAN); // Para ver los puntos de choque horizontales
 		if (inside_matrix(game,my,mx))
 		{
-			if (horizontal_check(my, mx, angle, game))
+			if (new_pos_is_wall(my, mx, game))
 			{
-				correct_horizontal_hit(&ry,&rx,angle,game);
-				dof = game->size_x * game->size_y;
+				dof = game->size_c * game->size_f;
 				hx = rx;
 				hy = ry;
-				distH = distance(game->player.x * 15,game->player.y * 15,hx,hy);
+				distH = distance(game->player.c * 30,game->player.f * 30,hx,hy);
+				//distH = distance(game->player.c, game->player.f, hx, hy);
 			}
 			else
 			{
 				rx += xo;
 			 	ry += yo;
 			 	dof++;
+			 	//dof += 0.01;
 			}
 		}
 		else
-			dof = game->size_x * game->size_y;
-		
-	}
-	
+		{
+			dof = game->size_c * game->size_f;
+		}
 
-	//  //Checkeo vertical 
+	}
+	//__________________________________
+
+	//Checkeo vertical
 	dof = 0;
-	ra = new_angle( angle + (3*M_PI/2));
-	float nTan = 1 * tan(ra);
+//	float nTan = -tan(ra);
+	float nTan = -tan(angle);
 	float distV;
 	float vx, vy;
-	distV = (game->size_x * 15) * (game->size_y * 15);;
-	vx = game->player.x;
-	vy = game->player.y;
-	if (ra > M_PI / 2 && ra < (3 * M_PI) / 2)
+
+	distV = (game->size_c * 30) * (game->size_f * 30);
+//	distV = (game->size_c) * (game->size_f);
+	vx = game->player.c;
+	vy = game->player.f;
+//	if (ra == M_PI/2 || ra == 3*M_PI/2) //en caso de que el angulo sea perfecto hacia la arriba o abajo
+	if (angle == M_PI/2 || angle == 3*M_PI/2)
 	{
-		rx = (((int)(game->player.x * 15) / 15 ) * 15 ) - 0.0001;
-		ry = ((int)(game->player.x * 15) - rx) * nTan + game->player.y * 15;
-		xo = -15;
+		vx = game->player.c * 30;
+	//	vx = game->player.c;
+		vy = game->player.f * 30;
+	//	vy = game->player.f;
+		dof = game->size_c * game->size_f;
+	//	dof = game->size_c * game->size_f;
+	}
+//	else if (ra > M_PI / 2 && ra < (3 * M_PI) / 2)
+	else if (angle > M_PI / 2 && angle < (3 * M_PI) / 2)
+	{
+		rx = (((int)(game->player.c * 30) / 30 ) * 30 ) - 0.0001;
+	//	rx = (int)(game->player.c);
+		ry = ((int)(game->player.c * 30) - rx) * nTan + game->player.f * 30;
+	//	ry = (int)(game->player.c - rx) * nTan + game->player.f;
+		xo = -30;
+	//	xo = -1;
 		yo = -xo * nTan;
+	//	yo = nTan;
 	}
-	if (ra < M_PI/2 || ra > 3*M_PI/2) // ----
+//	else if (ra < M_PI/2 || ra > 3*M_PI/2)
+	else if (angle < M_PI/2 || angle > 3*M_PI/2)
 	{
-		rx = (((int)(game->player.x * 15) / 15 ) * 15 ) + 15;
-		ry = ((int)(game->player.x * 15) - rx) * nTan + game->player.y * 15;
-		xo = 15;
+		rx = (((int)(game->player.c * 30) / 30 ) * 30 ) + 30;
+	//	rx = (int)(game->player.c) + 1;
+		ry = ((int)(game->player.c * 30) - rx) * nTan + game->player.f * 30;
+	//	ry = ((int)(game->player.c) - rx) * nTan + game->player.f;
+		xo = 30;
+	//	xo = 1;
 		yo = -xo * nTan;
+	//	yo = -nTan;
 	}
-	if (ra == M_PI/2 || ra == 3*M_PI/2) //en caso de que el angulo sea perfecto hacia arriba o abajo
-	{ 
-		vx = game->player.x * 15;
-		vy = game->player.y * 15;
-		dof = game->size_x * game->size_y;
-	}
-	while (dof < (game->size_x * game->size_y))
+
+	while (dof < (game->size_c * game->size_f))
 	{
-		my = ((int)rx) / 15;
-		mx = ((int)ry) / 15;
+		my = ((int)ry) / 30;
+	//	my = ((int)ry);
+		mx = ((int)rx) / 30;
+	//	mx = ((int)rx);
+		// mlx_pixel_put(game->mlx.mlx, game->mlx.window,rx, ry, GREEN); // Para ver los puntos de choque horizontales
 		if (inside_matrix(game,my,mx))
 		{
-	//		mlx_pixel_put(game->mlx.mlx, game->mlx.window,ry, rx, GREEN); // Para ver los puntos de choque verticales
-			if (vertical_check(my, mx, angle, game))
+			if (new_pos_is_wall(my, mx, game))
 			{
-				dof = game->size_x * game->size_y;
-				correct_vertical_hit(&ry,&rx,angle,game);
+				dof = game->size_c * game->size_f;
 				vx = rx;
 				vy = ry;
-				distV = distance(game->player.x * 15, game->player.y * 15, vx, vy);
+				distV = distance(game->player.c * 30,game->player.f * 30,vx,vy);
+				//distV = distance(game->player.c, game->player.f, vx, vy);
 			}
 			else
 			{
 				rx += xo;
 			 	ry += yo;
 			 	dof++;
+			 //	dof += 0.01;
 			}
 		}
 		else
-			dof = game->size_x * game->size_y;
+		{
+			dof = game->size_c * game->size_f;
+		}
+
 	}
+
 	if (distV < distH)
 	{
 		rx = vx;
@@ -239,7 +235,8 @@ double	vision_dda(t_game *game, double angle)
 		rx = hx;
 		ry = hy;
 	}
-	bring_hit_to_closest_wall_point(&ry, &rx , angle ,game);
-	// draw_new_line(game, game->player.x * 15,game->player.y * 15,rx,ry,color);
-	return (distance(game->player.x * 15, game->player.y * 15, rx, ry) / 15);
+
+	// draw_new_line(game, game->player.f * 30,game->player.c * 30,ry,rx,WHITE);
+	return (distance(game->player.c * 30,game->player.f * 30,rx,ry) / 30);
+	//return (distance(game->player.c, game->player.f, rx, ry));
 }
