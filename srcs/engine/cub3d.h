@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:17:49 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/28 11:43:33 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/28 13:35:34 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,26 @@ int		close_esc(t_mlx *mlx);
 /*Matrix*/
 void	create_matrix(char **file, int f, int c, t_matrix **matrix);
 
-/*Map*/
-void	image(t_game *game);
-void	player_pixel(t_game *game, int color);
-void	wall_floor_pixel(t_game *game, int pos_f, int pos_c, int color);
-int		pos_is_wall( int x_pixel, int y_pixel, t_game *game);
-void	ray_vision(t_game *game, int color);
-void	player_vision_cone(t_game *game, int color);
-void	minimap(t_game *game);
+/*Player Data*/
+void	player_data(t_game *game);
+
+//void	player_pixel(t_game *game, int color);
+//void	wall_floor_pixel(t_game *game, int pos_f, int pos_c, int color);
+//int		pos_is_wall( int x_pixel, int y_pixel, t_game *game);
+//void	ray_vision(t_game *game, int color);
+//void	player_vision_cone(t_game *game, int color);
+//void	minimap(t_game *game);
 
 /*Screen*/
 void	screen_game(t_game *game);
 void	screen_game_r(t_game *game, int r);
 void	start_game(t_game *game);
+
+/*Window*/
+void	ray_vision(t_game *game, int color);
+void	player_pixel(t_game *game, int color, double f, double c);
+void	wall_floor_pixel(t_game *game, int pos_f, int pos_c, int color);
+void	window(t_game *game, int start);
 
 /*Key hook*/
 int		advance(int key_code, t_game *game);
@@ -67,5 +74,11 @@ double  ray_vision_dda(t_game *game, double angle);
 /*DDA*/
 double	dda(t_game *game, int r);
 void	hit_pixel(t_game *game, int r, int color_one, int colot_two);
+
+/*Minimap*/
+void	minimap(t_game *game);
+void	ray_vision_minimap(t_game *game, int color);
+void	player_minimap(t_game *game, int color);
+void	wall_floor_minimap(t_game *game, int pos_f, int pos_c, int color);
 
 #endif
