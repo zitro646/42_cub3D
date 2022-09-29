@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:17:49 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/28 15:33:41 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/29 15:06:50 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ray(t_game *game);
 int		is_wall( int f, int c, t_game *game);
 
 /*RayDDA*/
-double  ray_vision_dda(t_game *game, double angle);
+double  ray_vision_dda(t_game *game, t_ray *ray);
 
 /*DDA*/
 double	dda(t_game *game, int r);

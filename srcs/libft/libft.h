@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 12:51:39 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/09/28 16:14:47 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/29 15:14:49 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define WHITE 0xFFFFFF
 # define ORANGE 0xFF6600
 # define PURPLE 0x4B0082
+# define DARK_PURPLE 0x3C0068
 # define GREY 0x8C8C8C
 
 

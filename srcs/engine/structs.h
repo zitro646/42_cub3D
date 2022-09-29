@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:15:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/28 15:26:31 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/29 15:02:18 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_ray
 	int		ray_at;
 	int		hor;
 	int		ver;
+	char	side_hit;
 }	t_ray;
 
 typedef struct s_game

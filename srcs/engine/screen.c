@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 12:07:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/28 16:12:16 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/29 15:16:56 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,16 @@ void	screen_game_r(t_game *game, int r)
 	while (y++ <= start)
 		mlx_pixel_put(game->mlx.mlx, game->mlx.screen, r, y, game->roof_colour);
 	y--;
-	while (y++ < end)
-		mlx_pixel_put(game->mlx.mlx, game->mlx.screen, r, y, PURPLE);
+	if (game->ray[r].side_hit == 'H')
+	{
+		while (y++ < end)
+			mlx_pixel_put(game->mlx.mlx, game->mlx.screen, r, y, PURPLE);
+	}
+	else
+	{
+		while (y++ < end)
+			mlx_pixel_put(game->mlx.mlx, game->mlx.screen, r, y, DARK_PURPLE);
+	}
 	y--;
 	while (y++ < game->height)
 		mlx_pixel_put(game->mlx.mlx, game->mlx.screen, r, y, game->floor_colour);

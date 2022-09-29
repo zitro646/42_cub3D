@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 09:39:19 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/28 14:31:14 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/29 15:06:42 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void    ray(t_game *game)
 		
 //		game->ray[r].distance = sqrt(pow(game->ray[r].hit_f - game->player.f, 2)
 //			+ pow(game->ray[r].hit_c - game->player.c, 2));
-		game->ray[r].distance = ray_vision_dda(game, game->ray[r].ray_angle);
+		game->ray[r].distance = ray_vision_dda(game, &game->ray[r]);
 		angle = - M_PI / 4 + (game->diff_angle * r);
 		game->ray[r].point = cos(angle) * game->ray[r].distance;
 		game->ray[r].wall = wall /(wall / proportion * game->ray[r].point);
