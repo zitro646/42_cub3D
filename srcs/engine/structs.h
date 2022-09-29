@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:15:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/29 10:13:04 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/29 14:04:37 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ typedef struct s_ray
 	double	ray_angle;
 	double	hit_f;
 	double	hit_c;
-	double	hit_fh;
-	double	hit_ch;
-	double	hit_fv;
-	double	hit_cv;
+//	double	hit_fh;
+//	double	hit_ch;
+//	double	hit_fv;
+//	double	hit_cv;
 	double	distance;
 	double	point;
 	double	wall;
@@ -61,12 +61,24 @@ typedef struct s_ray
 	int		ver;
 }	t_ray;
 
+typedef struct s_texture
+{
+	void	*image;
+	char	*add;
+	int		width;
+	int		height;
+	int		endiani;
+	int		bpp;
+	int		length;
+}	s_texture;
+
 typedef struct s_game
 {
 	t_matrix	**matrix;
 	t_ray		*ray;
 	t_mlx		mlx;
 	t_player	player;
+	t_texture	texture;
 	double		diff_angle;
 	int			height;
 	int			width;
@@ -74,6 +86,8 @@ typedef struct s_game
 	int			size_c;
 	int			floor_color;
 	int			roof_color;
+	char		*north_texture;
+
 }	t_game;
 
 #endif

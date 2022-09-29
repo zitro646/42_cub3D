@@ -6,12 +6,12 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 12:07:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/28 11:47:42 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/29 11:10:41 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
+/*
 void	screen_game(t_game *game)
 {
 	int		x;
@@ -28,16 +28,17 @@ void	screen_game(t_game *game)
 		start = middle - (game->ray[x].wall / 2);
 		end = start + (int) game->ray[x].wall;
 		while (y++ <= start)
-			mlx_pixel_put(game->mlx.mlx, game->mlx.screen, x, y, 0xFF0000);
+			mlx_pixel_put(game->mlx.mlx, game->mlx.screen, x, y, game->roof_color);
 		y--;
 		while (y++ < end)
 			mlx_pixel_put(game->mlx.mlx, game->mlx.screen, x, y, 0xFFFF00);
 		y--;
 		while (y++ < game->height)
-			mlx_pixel_put(game->mlx.mlx, game->mlx.screen, x, y, 0x4B0082);
+			mlx_pixel_put(game->mlx.mlx, game->mlx.screen, x, y, game->floor_color);
 		x++;
 	}
 }
+*/
 
 void	screen_game_r(t_game *game, int r)
 {
@@ -51,13 +52,13 @@ void	screen_game_r(t_game *game, int r)
 	start = middle - (game->ray[r].wall / 2);
 	end = start + (int)game->ray[r].wall;
 	while (y++ <= start)
-		mlx_pixel_put(game->mlx.mlx, game->mlx.screen, r, y, 0xFF0000);
+		mlx_pixel_put(game->mlx.mlx, game->mlx.screen, r, y, game->roof_color);
 	y--;
 	while (y++ < end)
 		mlx_pixel_put(game->mlx.mlx, game->mlx.screen, r, y, 0xFFFF00);
 	y--;
 	while (y++ < game->height)
-		mlx_pixel_put(game->mlx.mlx, game->mlx.screen, r, y, 0x4B0082);
+		mlx_pixel_put(game->mlx.mlx, game->mlx.screen, r, y, game->floor_color);
 }
 
 void	start_game(t_game *game)
@@ -75,11 +76,11 @@ void	start_game(t_game *game)
 	{
 		y = -1;
 		while (++y < middle)
-			mlx_pixel_put(game->mlx.mlx, game->mlx.screen, x, y, 0xFF0000);
+			mlx_pixel_put(game->mlx.mlx, game->mlx.screen, x, y, game->roof_color);
 		y--;
 		while (y++ < game->height)
-			mlx_pixel_put(game->mlx.mlx, game->mlx.screen, x, y, 0x4B0082);
+			mlx_pixel_put(game->mlx.mlx, game->mlx.screen, x, y, game->floor_color);
 	}
 	mlx_string_put(game->mlx.mlx, game->mlx.screen, (game->width / 2) - 50,
-			(game->height / 2) - 30, 0xFFFF00, string);
+			(game->height / 2) - 30, 0x00FF00, string);
 }	

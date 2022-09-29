@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 12:16:17 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/28 13:35:31 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/29 10:42:54 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ void	window(t_game *game, int start)
 		while (pos_c < game->size_c)
 		{
 			if (game->matrix[pos_f][pos_c].value == '1')
-				wall_floor_pixel(game, pos_f, pos_c, 0x4B0082);
+				wall_floor_pixel(game, pos_f, pos_c, game->roof_color);
 			else if (game->matrix[pos_f][pos_c].value != '1')
-				wall_floor_pixel(game, pos_f, pos_c, 0x8C8C8C);
+				wall_floor_pixel(game, pos_f, pos_c, game->floor_color);
 			pos_c++;
 		}
 		pos_f++;

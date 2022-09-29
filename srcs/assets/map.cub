@@ -1,10 +1,15 @@
-SO ./ruta_a_la_textura_sur
-NO ./ruta_a_la_textura_norte
-EA ./ruta_a_la_textura_este
-WE ./ruta_a_la_textura_oeste
+SO ./srcs/assets/wall_texture.png
+NO ./srcs/assets/wall_texture.png
+WE ./srcs/assets/wall_texture.png
+EA ./srcs/assets/wall_texture.png
+
+
+C 75,0,130
 
 
 
+
+F 140,140,140
 
 
         1111111111111111111111111
