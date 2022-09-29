@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:20:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/28 14:46:43 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/29 10:31:34 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	cube(t_data_map *data)
 	game.matrix = calloc(sizeof(t_matrix *) * f , 1);
 	if (!game.matrix)
 		return (0);
-	init(&game, f, c, data->showmap);
+	init(&game, data);
 	start_game(&game);
 	player_data(&game);
 	window(&game, 1);
@@ -33,9 +33,48 @@ int	cube(t_data_map *data)
 	return (0);
 }
 
-void	init(t_game *game, int f, int c, char **map)
+int	colour_is_valid(char *str)
 {
-	create_matrix(map, f, c, game->matrix);
+	char	**aux_str;
+	int		num;
+	int		i;
+	int		tam;
+	int		check;
+
+	check = 1;
+	i = 0;
+	aux_str = ft_split(str, ',');
+	tam = get_matrix_height(aux_str);
+	while (i < tam)
+	{
+		num = ft_atoi(aux_str[i]);
+		if (num == 0 && ft_strncmp(aux_str[i], "0", ft_strlen(aux_str[i])))
+			check = 0;
+		if (num < 0 || num > 255)
+			check = 0;
+			i++;
+	}
+	if (tam != 3)
+		check = 0;
+	free_matrix(aux_str, 0);
+	return (check);
+}
+
+int	get_colour(char *str)
+{
+	int		colour;
+	char	**aux_str;
+	if (str == NULL || !colour_is_valid(str))
+		return(0);
+		aux_str = ft_split(str, ',');
+	colour = (ft_atoi(aux_str[0]) << 16 | ft_atoi(aux_str[1]) << 8 | ft_atoi(aux_str[2]));
+	free_matrix(aux_str, 0);
+	return (colour);
+}
+
+void	init(t_game *game, t_data_map *data)
+{
+	create_matrix(data->showmap, game->size_f, game->size_c, game->matrix);
 	game->player.speed_m = 1;
 	game->player.speed_t = (M_PI * 2) / 8;
 	game->width = 800;
@@ -44,7 +83,10 @@ void	init(t_game *game, int f, int c, char **map)
 	game->ray = calloc(sizeof(t_ray) * game->width, 1);
 	game->mlx.mlx = mlx_init();	
 	game->mlx.screen = mlx_new_window(game->mlx.mlx, game->height, game->width, "cub3D"); 
-	game->mlx.window = mlx_new_window(game->mlx.mlx, (c * 30), (f * 30), "minimap");
+	game->mlx.window = mlx_new_window(game->mlx.mlx,
+			(game->size_c * 30), (game->size_f * 30), "minimap");
+	game->floor_color = get_colour(data->_floor_colour_path);
+	game->roof_color = get_colour(data->_roof_colour_path);
 }
 
 int	hook_loop(t_game *game)

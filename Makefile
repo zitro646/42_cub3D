@@ -75,9 +75,9 @@ $(OBJ_PATH)/%.o: $(ENGINE_PATH)/%.c | $(OBJ_PATH)
 	$(CC) $(CFLAGS) -c $< -o $@
             
 $(NAME): $(OBJS) $(OBJS_LIBFT) $(OBJS_ENGINE) $(OBJS_MAPS) | $(MINILIBX_NAME)
-	$(MAKE) -sC $(MINILIBX_PATH)
+	$(MAKE) -sC $(MINILIBX_PATH) --silent
 	$(GREEN) Objects compiled $(RESET)
-	$(CC) $(CFLAGS) $(OBJS_MAPS) $(OBJS_ENGINE) $(OBJS) $(OBJS_LIBFT) $(MINILIBX_FLAGS) -o $(NAME) 
+	$(CC) $(CFLAGS) $(OBJS_MAPS) $(OBJS_ENGINE) $(OBJS) $(OBJS_LIBFT) $(MINILIBX_FLAGS) -o $(NAME)
 	clear
 	$(GREEN) Program asembled $(RESET)
 

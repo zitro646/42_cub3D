@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:17:49 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/28 14:21:28 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/29 10:26:50 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,17 @@
 # include<stdio.h>
 # include<fcntl.h>
 # include<math.h>
-# include "../libft/libft.h"
+# include "../map/data.h"
 # include "structs.h"
 # include <mlx.h>
 
 /*Cub*/
 int		cube(t_data_map *data);
-void	init(t_game *game, int f, int c, char **map);
+void	init(t_game *game, t_data_map *data);
 int		hook_loop(t_game *game);
 int		close_esc(t_game *game);
+int		get_colour(char *str);
+int		colour_is_valid(char *str);
 
 /*Matrix*/
 void	create_matrix(char **file, int f, int c, t_matrix **matrix);
