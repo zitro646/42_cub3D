@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:17:49 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/29 15:06:50 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/30 16:16:36 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ void	player_data(t_game *game);
 //void	player_vision_cone(t_game *game, int color);
 //void	minimap(t_game *game);
 
+/* Image Loading*/
+t_image *xpm_to_image(t_game *game, t_data_map *data, char *str_dir);
+
 /*Screen*/
 void	screen_game(t_game *game);
 void	screen_game_r(t_game *game, int r);
@@ -71,6 +74,7 @@ int		is_wall( int f, int c, t_game *game);
 
 /*RayDDA*/
 double  ray_vision_dda(t_game *game, t_ray *ray);
+double	ray_vision_dda_v2(t_game *game, double ray);
 
 /*DDA*/
 double	dda(t_game *game, int r);

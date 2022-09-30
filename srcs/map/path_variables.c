@@ -6,13 +6,13 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 12:42:57 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/08/31 12:51:21 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/30 13:17:48 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "data.h"
 
-static int	str_is_identificator(char *str, char **identificators)
+int	str_is_identificator(char *str, char **identificators)
 {
 	int	i;
 
@@ -26,7 +26,7 @@ static int	str_is_identificator(char *str, char **identificators)
 	return (0);
 }
 
-static	char	*get_var(char **file_data, \
+char	*get_var(char **file_data, \
 							char *id, char **identificators)
 {
 	char	*aux;

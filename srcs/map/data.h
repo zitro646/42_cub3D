@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 08:34:09 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/09/08 13:57:46 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/30 16:02:51 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 
 t_data_map	*mapreader(char *str_dir);
 
+//Read data on files
+char	**read_filedata(char *str_dir, int y_max);
 
 //Get sizes of File / Matrix
 int			get_file_height(char *str);
@@ -26,6 +28,8 @@ int			get_matrix_height(char **matrix);
 int			get_matrix_max_size(char **array);
 
 //Transform path variables
+int			str_is_identificator(char *str, char **identificators);
+char		*get_var(char **file_data, char *id, char **identificators);
 char		**get_infile_variables(char **file_data, char **identicators);
 
 //Check Data collected is valid
@@ -44,7 +48,8 @@ void		see_matrix(char **map);
 //Parse map
 void		flatten_map(t_data_map	*data, char **map, int y, int i);
 void		resize_map(t_data_map	*data, char **map, int y, int i);
-void		switch_chars_on_map(t_data_map	*data, char change, char *newchar);
+void		switch_chars_on_matrix(char **map, char change, char *newchar);
+char		*replace_str(char *oldstr, char changechar, char *newchars);
 
 //Free data
 void		free_all(t_data_map *data_map);

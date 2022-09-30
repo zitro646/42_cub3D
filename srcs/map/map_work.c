@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 12:24:32 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/09/01 16:23:56 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/29 17:39:59 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,19 +107,19 @@ char	*replace_str(char *oldstr, char changechar, char *newchars)
 	return (newstr);
 }
 
-void	switch_chars_on_map(t_data_map	*data, char change, char *newchar)
+void	switch_chars_on_matrix(char	**map, char change, char *newchar)
 {
 	int		i;
 	char	*aux;
 
 	i = 0;
-	while (data->showmap[i])
+	while (map[i])
 	{
-		if (ft_strchr(data->showmap[i], change) != NULL)
+		if (ft_strchr(map[i], change) != NULL)
 		{
-			aux = replace_str(data->showmap[i], change, newchar);
-			free (data->showmap[i]);
-			data->showmap[i] = aux;
+			aux = replace_str(map[i], change, newchar);
+			free (map[i]);
+			map[i] = aux;
 		}
 		i++;
 	}

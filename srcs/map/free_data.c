@@ -6,11 +6,12 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 12:05:07 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/09/01 16:27:34 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/30 16:02:56 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "data.h"
+
 
 void	free_matrix(char **matrix, int opt_size)
 {
@@ -28,13 +29,10 @@ void	free_matrix(char **matrix, int opt_size)
 			free(matrix[i++]);
 	}
 	free(matrix);
+	return ;
 }
 
-// void	free_str(char *str)
-// {
-// 	if (str)
-// 		free(str);
-// }
+
 
 void	free_all(t_data_map *data_map)
 {
@@ -58,6 +56,7 @@ void	free_all(t_data_map *data_map)
 	// free(data_map->enemy);
 	free(data_map);
 	printf("-> FREE ALL DONE <-\n");
+	return ;
 }
 
 

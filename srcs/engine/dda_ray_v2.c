@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dda_ray.c                                          :+:      :+:    :+:   */
+/*   dda_ray_v2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 12:45:51 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/09/29 15:19:47 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/29 15:49:51 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 // y - f = height || x - c = width
-int draw_new_line(t_game *game, int beginX, int beginY, int endX, int endY, int color)
+int draw_new_line_v2(t_game *game, int beginX, int beginY, int endX, int endY, int color)
 {
 	double	deltaX; // 10
 	double	deltaY; // 0
@@ -38,7 +38,7 @@ int draw_new_line(t_game *game, int beginX, int beginY, int endX, int endY, int 
 	return (0);
 }
 
-int	inside_matrix(t_game *game, int f, int c)
+int	inside_matrix_v2(t_game *game, int f, int c)
 {
 	if (f < game->size_f && f >= 0 && c < game->size_c && c >= 0)
 	{
@@ -47,12 +47,12 @@ int	inside_matrix(t_game *game, int f, int c)
 	return (0);
 }
 
-float distance(float ax, float ay, float bx, float by)
+float distance_v2(float ax, float ay, float bx, float by)
 {
 	return (sqrt(((bx - ax) * (bx - ax)) + ((by - ay) * (by - ay))));
 }
 
-int	new_pos_is_wall( int y, int x, t_game *game)
+int	new_pos_is_wall_v2( int y, int x, t_game *game)
 {
 	if (game->matrix[y][x].value == '1')
 	{
@@ -62,15 +62,13 @@ int	new_pos_is_wall( int y, int x, t_game *game)
 }
 
 // y - c = height || x - f = width
-double	ray_vision_dda(t_game *game, t_ray *ray)
+double	ray_vision_dda_v2(t_game *game, double angle)
 {
 	(void)ray;
 	int dof;
 	int mx,my;
 	float rx,ry,xo,yo;
-	double angle;
 
-	angle = ray->ray_angle;
 	//Checkeo horizontal
 	dof = 0;
 	float aTan = -1/tan(angle);
@@ -105,14 +103,14 @@ double	ray_vision_dda(t_game *game, t_ray *ray)
 	{
 		my = ((int)ry) / 30;
 		mx = ((int)rx) / 30;
-		if (inside_matrix(game,my,mx))
+		if (inside_matrix_v2(game,my,mx))
 		{
-			if (new_pos_is_wall(my, mx, game))
+			if (new_pos_is_wall_v2(my, mx, game))
 			{
 				dof = game->size_c * game->size_f;
 				hx = rx;
 				hy = ry;
-				distH = distance(game->player.c * 30,game->player.f * 30,hx,hy);
+				distH = distance_v2(game->player.c * 30,game->player.f * 30,hx,hy);
 			}
 			else
 			{
@@ -164,14 +162,14 @@ double	ray_vision_dda(t_game *game, t_ray *ray)
 	{
 		my = ((int)ry) / 30;
 		mx = ((int)rx) / 30;
-		if (inside_matrix(game,my,mx))
+		if (inside_matrix_v2(game,my,mx))
 		{
-			if (new_pos_is_wall(my, mx, game))
+			if (new_pos_is_wall_v2(my, mx, game))
 			{
 				dof = game->size_c * game->size_f;
 				vx = rx;
 				vy = ry;
-				distV = distance(game->player.c * 30,game->player.f * 30,vx,vy);
+				distV = distance_v2(game->player.c * 30,game->player.f * 30,vx,vy);
 			}
 			else
 			{
@@ -191,14 +189,12 @@ double	ray_vision_dda(t_game *game, t_ray *ray)
 	{
 		rx = vx;
 		ry = vy;
-		ray->side_hit = 'V';
 	}
 	else
 	{
 		rx = hx;
 		ry = hy;
-		ray->side_hit = 'H';
 	}
-	// draw_new_line(game, game->player.f * 30,game->player.c * 30,ry,rx,WHITE);
-	return (distance(game->player.c * 30,game->player.f * 30,rx,ry) / 30);
+	draw_new_line_v2(game, game->player.f * 30,game->player.c * 30,ry,rx,WHITE);
+	return (distance_v2(game->player.c * 30,game->player.f * 30,rx,ry) / 30);
 }

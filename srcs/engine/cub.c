@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:20:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/28 16:02:03 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/30 16:44:59 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ int	cube(t_data_map *data)
 	game.matrix = calloc(sizeof(t_matrix *) * f , 1);
 	if (!game.matrix)
 		return (0);
+	game.n_wall = xpm_to_image(&game, data, data->_north_texture_path);
+	game.e_wall = xpm_to_image(&game, data, data->_east_texture_path);
+	game.w_wall = xpm_to_image(&game, data, data->_west_texture_path);
+	game.s_wall = xpm_to_image(&game, data, data->_south_texture_path);
 	init(&game, data);
 	start_game(&game);
 	player_data(&game);

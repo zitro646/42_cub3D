@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:15:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/29 15:02:18 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/30 16:18:18 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,17 @@ typedef struct s_player
 	int		looking_at;
 }	t_player;
 
+typedef struct s_image
+{
+	char **img_colours;
+	char **img_chars;
+	int *color_values;
+	int n_colours;
+	int n_pixel_char;
+	int n_colums;
+	int n_files;
+}	t_image;
+
 typedef struct s_ray
 {
 	int		ray;
@@ -75,6 +86,10 @@ typedef struct s_game
 	int			size_c;
 	int			floor_colour;
 	int			roof_colour;
+	t_image		*n_wall;
+	t_image		*s_wall;
+	t_image		*e_wall;
+	t_image		*w_wall;
 }	t_game;
 
 #endif

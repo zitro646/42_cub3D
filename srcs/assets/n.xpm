@@ -51,9 +51,9 @@ static char *f862d9e878e644dd9a0a913a8254fac24twNKeYOMp3GZIjy[] = {
 "l c #F8F8F9",
 "z c #FBFBFB",
 "x c #FBFBFC",
-"c c gray99",
+"c c #FCFCFC",
 "v c #FDFCFC",
-"b c white",
+"b c #FFFFFF",
 /* pixels */
 "bbbbbbbbbbbbbbb",
 "bbzzzzbkbbzzzbb",

@@ -49,8 +49,8 @@ static char *_c092fc13cdf40d2ec6e53763fa138fe2WLXC4dqbypHmGyL[] = {
 "j c #F8F8FA",
 "k c #FBFBFB",
 "l c #FBFBFC",
-"z c gray99",
-"x c white",
+"z c #FCFCFC",
+"x c #FFFFFF",
 /* pixels */
 "xxxxxxxxxxxxxxx",
 "xxkxkxxxxxkkkxx",

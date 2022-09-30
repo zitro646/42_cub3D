@@ -6,13 +6,13 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 08:31:10 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/09/08 13:12:14 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/09/29 17:40:34 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "data.h" 
 
-static char	**read_filedata(char *str_dir, int y_max)
+char	**read_filedata(char *str_dir, int y_max)
 {
 	int			fd;
 	int			i;
@@ -106,7 +106,7 @@ t_data_map	*mapreader(char *str_dir)
 	data->height = get_matrix_height(data->showmap);
 	data->max_width = get_matrix_max_size(data->showmap);
 	flatten_map(data, data->showmap, 0, 0);
-	switch_chars_on_map(data, '\t', "    ");
+	switch_chars_on_matrix(data->showmap, '\t', "    ");
 	free_matrix(_crudedata, 0);
 	free_matrix(identificators, 0);
 	free_matrix(infile_path_var, 6);

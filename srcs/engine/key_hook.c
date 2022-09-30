@@ -6,11 +6,37 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 10:36:49 by potero            #+#    #+#             */
-/*   Updated: 2022/09/28 14:45:59 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/09/30 17:55:51 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void test(t_game *game, t_image *test, int y_dis , int x_dis)
+{
+	int f;
+	int c;
+
+	f = 0;
+	printf("Test\n");
+	while(f < test->n_files)
+	{
+		c = 0;
+		
+		while (c < test->n_colums)
+		{
+			// printf("f = %d , c = %d\n",f,c);
+			mlx_pixel_put(game->mlx.mlx, game->mlx.window, f+y_dis, c+x_dis, test->color_values[(f * 15) + c]);
+			c++;
+			
+		}
+		f++;
+	}
+	f--;
+	printf("Last value of chain is %d\n",test->color_values[(f * 15) + c]);
+	printf("Last value on chain is %d\n",test->color_values[(f * 15) + c]);
+	return;
+}
 
 int	advance(int key_code, t_game *game)
 {
@@ -123,10 +149,15 @@ void	hook(t_game *game, int key_code)
 
 	if (movement(game, new_f - 0.5, new_c - 0.5) == 0)
 	{
-//		wall_floor_pixel(game, game->player.f, game->player.c, 0x8C8C8C);
+		wall_floor_pixel(game, game->player.f, game->player.c, 0x8C8C8C);
 		game->player.f = new_f;
 		game->player.c = new_c;
 	}
 	ray(game);
-//	player_pixel(game, 0x0000FF, game->player.f, game->player.c);
+	player_pixel(game, 0x0000FF, game->player.f, game->player.c);
+	ray_vision_dda_v2(game,game->player.angle);
+	test(game, game->n_wall,0,0);
+// 	test(game, game->s_wall,15,0);
+// 	test(game, game->w_wall,0,15);
+// 	test(game, game->e_wall,15,15);
 }
