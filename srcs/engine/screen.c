@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 12:07:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/29 15:16:56 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/10/03 13:19:43 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,68 @@ void	screen_game(t_game *game)
 	}
 }
 
+int paint_line(t_game *game,t_image *image,int r, int y , int end)
+{
+	(void)image;
+	// printf("distancia -> %i - %i\n",y, end);
+	
+
+	// int new_y;
+	float ty;
+	float ty_step;
+	ty = 0;
+	ty_step = image->n_colums / (float) (end - y);
+	
+	while (y < end)
+	{
+		mlx_pixel_put(game->mlx.mlx, game->mlx.screen, r, y, image->color_values[(game->ray[r].pixel_hit * image->n_colums) + (int)ty]);
+		y++;
+		ty +=ty_step;
+	}
+	
+	return (y);
+}
+
+int draw_line(t_game *game,int r, int y, int end)
+{
+	if (game->ray[r].side_hit == HORIZONTAL_HIT)
+	{
+		if ( game->ray[r].ray_angle > M_PI / 2 && game->ray[r].ray_angle < (3 * M_PI) / 2)
+			y = paint_line(game,game->n_wall,r,y,end);
+		else
+			y = paint_line(game,game->s_wall,r,y,end);
+	}
+	else
+	{
+		if ( game->ray[r].ray_angle > M_PI / 2 && game->ray[r].ray_angle < (3 * M_PI) / 2)
+			y = paint_line(game,game->e_wall,r,y,end);
+		else
+			y = paint_line(game,game->w_wall,r,y,end);
+	}
+	
+	return (y);
+}
+
+// if (game->ray[r].side_hit == HORIZONTAL_HIT)
+// 	{
+// 		if ( game->ray[r].ray_angle > M_PI)
+// 			while (y++ < end)
+// 				mlx_pixel_put(game->mlx.mlx, game->mlx.screen, r, y, PURPLE);
+// 		else
+// 			while (y++ < end)
+// 				mlx_pixel_put(game->mlx.mlx, game->mlx.screen, r, y, BLUE);
+// 	}
+// 	else
+// 	{
+// 		if ( game->ray[r].ray_angle > M_PI / 2 && game->ray[r].ray_angle < (3 * M_PI) / 2)
+// 			while (y++ < end)
+// 				mlx_pixel_put(game->mlx.mlx, game->mlx.screen, r, y, DARK_PURPLE);
+// 		else
+// 			while (y++ < end)
+// 				mlx_pixel_put(game->mlx.mlx, game->mlx.screen, r, y, CYAN);
+// 	}
+
+
 void	screen_game_r(t_game *game, int r)
 {
 	int		y;
@@ -53,16 +115,7 @@ void	screen_game_r(t_game *game, int r)
 	while (y++ <= start)
 		mlx_pixel_put(game->mlx.mlx, game->mlx.screen, r, y, game->roof_colour);
 	y--;
-	if (game->ray[r].side_hit == 'H')
-	{
-		while (y++ < end)
-			mlx_pixel_put(game->mlx.mlx, game->mlx.screen, r, y, PURPLE);
-	}
-	else
-	{
-		while (y++ < end)
-			mlx_pixel_put(game->mlx.mlx, game->mlx.screen, r, y, DARK_PURPLE);
-	}
+	y = draw_line(game, r, y, end);
 	y--;
 	while (y++ < game->height)
 		mlx_pixel_put(game->mlx.mlx, game->mlx.screen, r, y, game->floor_colour);

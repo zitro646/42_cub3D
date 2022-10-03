@@ -6,13 +6,17 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:15:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/30 16:18:18 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/10/03 11:36:02 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
+# define VERTICAL_HIT 1
+# define HORIZONTAL_HIT 2
+
+# define STRUCTS_H
 # include "cub3d.h"
 
 typedef struct s_matrix
@@ -60,17 +64,12 @@ typedef struct s_ray
 	double	ray_angle;
 	double	hit_f;
 	double	hit_c;
-	double	hit_fh;
-	double	hit_ch;
-	double	hit_fv;
-	double	hit_cv;
 	double	distance;
 	double	point;
 	double	wall;
 	int		ray_at;
-	int		hor;
-	int		ver;
-	char	side_hit;
+	int		side_hit;
+	int		pixel_hit;
 }	t_ray;
 
 typedef struct s_game

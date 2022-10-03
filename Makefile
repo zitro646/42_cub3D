@@ -29,7 +29,7 @@ SRC =   main.c
 
 SRC_MAP = data_reader.c data_check.c data_check_aux.c get_file_height.c free_data.c map_work.c visualize_tools.c path_variables.c 
 
-SRC_ENGINE = cub.c matrix.c screen.c key_hook.c angle.c ray.c dda_ray.c player_data.c minimap.c window.c dda_ray_v2.c get_image_sources.c
+SRC_ENGINE = cub.c matrix.c screen.c key_hook.c angle.c ray.c dda_ray.c player_data.c minimap.c window.c dda_ray_v2.c get_image_sources.c test.c
 
 SRC_LIBFT = ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_memchr.c \
 ft_memcmp.c ft_strlen.c ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c  \

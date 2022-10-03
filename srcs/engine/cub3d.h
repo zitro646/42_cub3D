@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:17:49 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/30 16:16:36 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/10/03 10:32:41 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,9 @@ void	minimap(t_game *game);
 void	ray_vision_minimap(t_game *game, int color);
 void	player_minimap(t_game *game, int color);
 void	wall_floor_minimap(t_game *game, int pos_f, int pos_c, int color);
+
+
+/*TESTS*/
+int test_version_tests(char *str_dir);
 
 #endif
