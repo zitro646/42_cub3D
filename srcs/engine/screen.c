@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 12:07:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/03 13:09:40 by potero           ###   ########.fr       */
+/*   Updated: 2022/10/03 13:42:23 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,28 +19,25 @@ void	screen_game_r(t_game *game, int r)
 	int			end;
 	double		middle;
 	double		step;
-//	unsigned int	color;
-//	int				index;
-//	double			c;
+	unsigned int	color;
+	int				index;
+	double			c;
 
 	middle = game->height / 2;
 	y = -1;
 	start = middle - (game->ray[r].wall / 2);
 	end = start + (int)game->ray[r].wall;
 	step = game->texture.height / game->ray[r].wall;
-//	c = game->ray[r].hit_c;
+	c = (start - middle + game->ray[r].wall / 2) * step;
 	while (y++ <= start)
 		put_pixel(&game->scrn, r, y, game->roof_color);
 	y--;
 	while (y++ < end)
 	{
-/*
 		index = c * game->texture.width + game->ray[r].hit_f;
+		c += step;
 		color = ((unsigned int *)(game->texture.add))[index];
 		put_pixel(&game->scrn, r, y, color);
-		c += step;
-*/
-		put_pixel(&game->scrn, r, y, 0xFFFF00);
 	}
 	y--;
 	while (y++ < game->height)
