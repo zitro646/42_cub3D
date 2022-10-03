@@ -1,7 +1,7 @@
-SO ./srcs/assets/wall_texture.png
-NO ./srcs/assets/wall_texture.png
-WE ./srcs/assets/wall_texture.png
-EA ./srcs/assets/wall_texture.png
+SO ./srcs/assets/wall_texture.xpm
+NO ./srcs/assets/wall_texture.xpm
+WE ./srcs/assets/wall_texture.xpm
+EA ./srcs/assets/wall_texture.xpm
 
 
 C 75,0,130

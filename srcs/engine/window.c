@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 12:16:17 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/29 10:42:54 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/03 12:38:56 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,12 @@ void	ray_vision(t_game *game, int color)
 	i = (game->player.f - 0.5) * 30 + 15;
 	while (line < 10)
 	{
-		mlx_pixel_put(game->mlx.mlx, game->mlx.window,
+		put_pixel(&game->mnmap,
 			j + (cos(game->player.angle) * line),
-				i + (sin(game->player.angle) * line), color);
+			i + (sin(game->player.angle) * line), color);
+//		mlx_pixel_put(game->mlx.mlx, game->mlx.window,
+//			j + (cos(game->player.angle) * line),
+//				i + (sin(game->player.angle) * line), color);
 		line += 0.2;
 	}
 }
@@ -41,9 +44,12 @@ void	player_pixel(t_game *game, int color, double f, double c)
 		j = 10;
 		while (j < 20)
 		{
-			mlx_pixel_put(game->mlx.mlx, game->mlx.window,
+			put_pixel(&game->mnmap,
 				 ((c - 0.5) * 30) + j,
-				 	((f - 0.5) * 30) + i, color);
+				 ((f - 0.5) * 30) + i, color);
+//			mlx_pixel_put(game->mlx.mlx, game->mlx.window,
+//				 ((c - 0.5) * 30) + j,
+//				 	((f - 0.5) * 30) + i, color);
 			j++;
 		}
 		i++;
@@ -64,11 +70,15 @@ void	wall_floor_pixel(t_game *game, int pos_f, int pos_c, int color)
 		while (j < 30)
 		{
 			if (i == 0 || j == 0)
-				 mlx_pixel_put(game->mlx.mlx, game->mlx.window,
-					((pos_c * 30) + j), ((pos_f * 30 ) + i), 0x000000);
+				put_pixel(&game->mnmap,
+					((pos_c * 30) + i), ((pos_f * 30 ) + j), 0x000000);
+		//		mlx_pixel_put(game->mlx.mlx, game->mlx.window,
+		//			((pos_c * 30) + j), ((pos_f * 30 ) + i), 0x000000);
 			else
-				mlx_pixel_put(game->mlx.mlx, game->mlx.window,
-					((pos_c * 30) + j), ((pos_f * 30 ) + i), color);
+				put_pixel(&game->mnmap,
+					((pos_c * 30) + i), ((pos_f * 30 ) + j), color);
+		//		mlx_pixel_put(game->mlx.mlx, game->mlx.window,
+		//			((pos_c * 30) + j), ((pos_f * 30 ) + i), color);
 			j++;
 		}
 		i++;
@@ -96,4 +106,5 @@ void	window(t_game *game, int start)
 	}
 	if (start == 1)
 		player_pixel(game, 0x0000FF, game->player.f, game->player.c);
+	mlx_put_image_to_window(game->mlx.mlx, game->mlx.window, game->mnmap.image, 0, 0);
 }

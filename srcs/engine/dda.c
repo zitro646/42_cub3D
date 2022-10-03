@@ -6,13 +6,13 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 09:47:50 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/27 16:27:39 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/02 10:15:48 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-
+/*
 double	dda(t_game *game, int r)
 {
 	double	pos_fh;
@@ -54,6 +54,7 @@ double	dda(t_game *game, int r)
 	game->ray[r].hit_fh = pos_fh;
 	game->ray[r].hit_ch = pos_ch;
 	printf("%i(fh, ch): %f, %f\n", r, pos_fh, pos_ch);
+*/
 /*
 	if (pos_fh < 0 || pos_fh >= game->size_f || pos_ch < 0 || pos_ch >= game->size_c)
 		valid = 1;
@@ -76,6 +77,8 @@ double	dda(t_game *game, int r)
 	printf("HIT%i(fh, ch): %f, %f\n", r, pos_fh, pos_ch);
 */
 //	tangle = tan(game->ray[r].ray_angle);
+
+/*
 	pos_cv = game->player.c - 0.5;
 	if (game->ray[r].ray_angle > (3 * M_PI / 2) || game->ray[r].ray_angle < (M_PI / 2))
 		pos_cv++;
@@ -91,6 +94,7 @@ double	dda(t_game *game, int r)
 	game->ray[r].hit_fv = pos_fv;
 	game->ray[r].hit_cv = pos_cv;
 	printf("%i(fv, cv): %f, %f\n", r, pos_fv, pos_cv);
+*/
 /*
 	valid = 0;
 	if (pos_fv < 0 || pos_fv >= game->size_f || pos_cv < 0 || pos_cv >= game->size_c)
@@ -120,7 +124,7 @@ double	dda(t_game *game, int r)
 	printf("3M_PI / 2  = %f\n", (3 * M_PI/2));
 	printf("2M_PI  = %f\n", (2 * M_PI));
 */
-
+/*
 	return (0);
 }
 
@@ -131,3 +135,4 @@ void	hit_pixel(t_game *game, int r, int	color_one, int	color_two)
 	mlx_pixel_put(game->mlx.mlx, game->mlx.window, game->ray[r].hit_ch * 30,
 			game->ray[r].hit_fh * 30, color_two);
 }
+*/

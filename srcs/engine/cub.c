@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:20:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/29 11:32:38 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/03 13:04:13 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	cube(t_data_map *data)
 	init(&game, data);
 	start_game(&game);
 	player_data(&game);
-	window(&game, 1);
+	window(&game, 0);
 	hook_loop(&game);
 	return (0);
 }
@@ -85,9 +85,18 @@ void	init(t_game *game, t_data_map *data)
 	game->mlx.screen = mlx_new_window(game->mlx.mlx, game->height, game->width, "cub3D"); 
 	game->mlx.window = mlx_new_window(game->mlx.mlx,
 			(game->size_c * 30), (game->size_f * 30), "minimap");
+
+	game->scrn.image = mlx_new_image(game->mlx.mlx, game->width, game->height);
+	game->mnmap.image = mlx_new_image(game->mlx.mlx, (game->size_c * 30), (game->size_f * 30));
+	game->scrn.add = mlx_get_data_addr(game->scrn.image, &game->scrn.bpp,
+					&game->scrn.length, &game->scrn.endian);
+	game->mnmap.add = mlx_get_data_addr(game->mnmap.image, &game->mnmap.bpp,
+					&game->mnmap.length, &game->mnmap.endian);
+
 	game->floor_color = get_colour(data->_floor_colour_path);
 	game->roof_color = get_colour(data->_roof_colour_path);
 	game->north_texture = data->_north_texture_path;
+	load_textures(game);
 }
 
 int	hook_loop(t_game *game)

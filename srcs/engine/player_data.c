@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 12:52:30 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/28 12:58:10 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/03 12:43:01 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	player_data_aux(t_game *game, int pos_f, int pos_c, char value)
 			game->player.angle = (M_PI / 2);
 		else if (value == 'E')
 			game->matrix[pos_f][pos_c].value = '0';
+		printf("PLAYER START AT: (%f, %f)\n", game->player.c, game->player.f);
 	}
 }
 

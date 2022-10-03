@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 09:39:19 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/29 14:04:41 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/03 13:02:31 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void    ray(t_game *game)
 	double	wall;
 	double	proportion;
 
+	mlx_clear_window(game->mlx.mlx, game->mlx.screen);
 	wall = game->width / 2;
 	proportion = tan(M_PI / 4) * (game->width / 2);
 	r = 0;
@@ -59,4 +60,5 @@ void    ray(t_game *game)
 		screen_game_r(game, r);
 		r++;
 	}
+	mlx_put_image_to_window(game->mlx.mlx, game->mlx.screen, game->scrn.image, 0, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:15:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/29 14:04:37 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/03 11:23:01 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,21 @@ typedef struct s_texture
 	char	*add;
 	int		width;
 	int		height;
-	int		endiani;
+	int		endian;
 	int		bpp;
 	int		length;
-}	s_texture;
+}	t_texture;
+
+typedef struct s_image
+{
+	void	*image;
+	char	*add;
+	int		width;
+	int		height;
+	int		endian;
+	int		bpp;
+	int		length;
+}	t_image;
 
 typedef struct s_game
 {
@@ -79,6 +90,8 @@ typedef struct s_game
 	t_mlx		mlx;
 	t_player	player;
 	t_texture	texture;
+	t_image		scrn;
+	t_image		mnmap;
 	double		diff_angle;
 	int			height;
 	int			width;
