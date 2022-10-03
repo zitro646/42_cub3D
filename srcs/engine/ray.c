@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 09:39:19 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/03 13:02:31 by potero           ###   ########.fr       */
+/*   Updated: 2022/10/03 13:11:21 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,7 @@ void    ray(t_game *game)
 	while (r < game->width)
 	{
 		ray_angle(game, r);
-//		ray_at(game, r);
 		
-//		game->ray[r].distance = sqrt(pow(game->ray[r].hit_f - game->player.f, 2)
-//			+ pow(game->ray[r].hit_c - game->player.c, 2));
 		game->ray[r].distance = ray_vision_dda(game, game->ray[r].ray_angle, r);
 		angle = - M_PI / 4 + (game->diff_angle * r);
 		game->ray[r].point = cos(angle) * game->ray[r].distance;

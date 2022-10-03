@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 10:36:49 by potero            #+#    #+#             */
-/*   Updated: 2022/10/03 12:35:39 by potero           ###   ########.fr       */
+/*   Updated: 2022/10/03 13:11:00 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,18 +118,14 @@ void	hook(t_game *game, int key_code)
 	printf("Pos : [%f][%f]\n", new_f, new_c);
 	printf("angle: %f\n", game->player.angle);
 	looking_at(game);
-//	printf("looking at: %d\n", game->player.looking_at);
 	printf("________________________\n");
 
 	if (movement(game, new_f - 0.5, new_c - 0.5) == 0)
 	{
-	//	wall_floor_pixel(game, game->player.f, game->player.c, 0x8C8C8C);
 		game->player.f = new_f;
 		game->player.c = new_c;
 	}
 	ray(game);
-//	player_pixel(game, 0x0000FF, game->player.f, game->player.c);
 	mlx_clear_window(game->mlx.mlx, game->mlx.window);
 	window(game, 1);
-//	mlx_put_image_to_window(game->mlx.mlx, game->mlx.window, game->mnmap.image, 0, 0);
 }
