@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 12:45:51 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/10/03 13:36:13 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/10/03 15:48:06 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,20 +191,23 @@ double	ray_vision_dda(t_game *game, t_ray *ray)
 	{
 		ray->hit_f = vy;
 		ray->hit_c = vx;
-		ray->pixel_hit = ((ry / 30) - (int)(ry / 30)) * 10;
-		// rx = vx;
-		// ry = vy;
+		ray->pixel_hit = ((ray->hit_f / 30) - (int)(ray->hit_f / 30)) * 10  + 2  ;
+		// if (ray->pixel_hit == 10)
+		// 	ray->pixel_hit = 0;
 		ray->side_hit = VERTICAL_HIT;
 	}
 	else
 	{
 		ray->hit_f = hy;
 		ray->hit_c = hx;
-		ray->pixel_hit = ((ry / 30) - (int)(ry / 30)) * 10;
-		// printf("En el choque vertical da -> %i/15\n",ray->pixel_hit);
+		
+		ray->pixel_hit = ((ray->hit_c / 30) - (int)(ray->hit_c / 30)) * 10  + 2 ;
+		// if (ray->pixel_hit == 10)
+		// 	ray->pixel_hit = 0;
 		// ray->pixel_hit = 4;
 		// rx = hx;
 		// ry = hy;
+		// ray->pixel_hit = 0;
 		ray->side_hit = HORIZONTAL_HIT;
 	}
 	// draw_new_line(game, game->player.f * 30,game->player.c * 30,ry,rx,WHITE);

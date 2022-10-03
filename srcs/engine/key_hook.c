@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 10:36:49 by potero            #+#    #+#             */
-/*   Updated: 2022/10/03 13:41:47 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/10/03 14:25:06 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void test(t_game *game, t_image *test, int y_dis , int x_dis)
 	int c;
 
 	f = 0;
-	printf("Test\n");
+	// printf("Test\n");
 	while(f < test->n_files)
 	{
 		c = 0;

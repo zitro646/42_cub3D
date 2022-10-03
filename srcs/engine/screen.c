@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 12:07:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/03 13:19:43 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/10/03 14:35:05 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,7 @@ void	screen_game(t_game *game)
 int paint_line(t_game *game,t_image *image,int r, int y , int end)
 {
 	(void)image;
-	// printf("distancia -> %i - %i\n",y, end);
-	
 
-	// int new_y;
 	float ty;
 	float ty_step;
 	ty = 0;
@@ -65,7 +62,7 @@ int draw_line(t_game *game,int r, int y, int end)
 {
 	if (game->ray[r].side_hit == HORIZONTAL_HIT)
 	{
-		if ( game->ray[r].ray_angle > M_PI / 2 && game->ray[r].ray_angle < (3 * M_PI) / 2)
+		if ( game->ray[r].ray_angle > M_PI)
 			y = paint_line(game,game->n_wall,r,y,end);
 		else
 			y = paint_line(game,game->s_wall,r,y,end);

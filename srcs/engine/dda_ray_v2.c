@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 12:45:51 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/10/03 13:40:50 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/10/03 14:23:49 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,11 +199,11 @@ double	ray_vision_dda_v2(t_game *game, double angle)
 	int x;
 	(void)x;
 	int y;
-
-	y = ((ry / 30) - (int)(ry / 30)) * 10;
-	// x = ((rx / 30) - (int)(rx / 30)) * 10;
+	(void)y;
+	// y = ((ry / 30) - (int)(ry / 30)) * 10;
+	x = ((rx / 30) - (int)(rx / 30)) * 10;
 	// printf("Posicion en la cuadricula %d %d\n",y,x);
-	printf("Posicion en la cuadricula y %d\n",y);
+	printf("Posicion en la cuadricula y %d\n",x);
 	draw_new_line_v2(game, game->player.f * 30,game->player.c * 30,ry,rx,WHITE);
 	return (distance_v2(game->player.c * 30,game->player.f * 30,rx,ry) / 30);
 }
