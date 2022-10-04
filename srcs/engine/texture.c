@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 13:22:07 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/04 11:40:28 by potero           ###   ########.fr       */
+/*   Updated: 2022/10/04 13:25:48 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ void	load_textures(t_game *game)
 	game->texture[3].add = mlx_get_data_addr(game->texture[3].image,
 			&game->texture[3].bpp, &game->texture[3].length, &game->texture[3].endian);
 	printf("All textures load\n");
+	printf("length->%d\n", game->texture[0].length); 
+	printf("width->%d\n", game->texture[0].width); 
+	printf("height->%d\n", game->texture[0].height); 
 }
 
 void	put_pixel(t_image *image, int c, int f, int color)

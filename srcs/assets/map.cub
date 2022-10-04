@@ -1,7 +1,7 @@
-SO ./srcs/assets/south.xpm
-NO ./srcs/assets/north.xpm
-WE ./srcs/assets/west.xpm
-EA ./srcs/assets/east.xpm
+SO ./srcs/assets/test.xpm
+NO ./srcs/assets/test.xpm
+WE ./srcs/assets/test.xpm
+EA ./srcs/assets/test.xpm
 
 
 C 75,0,130

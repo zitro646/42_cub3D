@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 12:07:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/04 11:50:47 by potero           ###   ########.fr       */
+/*   Updated: 2022/10/04 13:35:53 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,19 @@ void	screen_game_r(t_game *game, int r)
 	start = middle - (game->ray[r].wall / 2);
 	end = start + (int)game->ray[r].wall;
 	step = 1.0 * game->texture[t].height / game->ray[r].wall;
-	c = (start - middle + game->ray[r].wall / 2) * step;
+//	c = (start - middle + game->ray[r].wall / 2) * step;
+//	c = (game->ray[r].hit_f - (int)game->ray[r].hit_f) / game->texture[t].length;
+//	printf("c[%i]->%f,%f\n", r,  c, step);
+	c = 0;
 	while (y++ <= start)
 		put_pixel(&game->scrn, r, y, game->roof_color);
 	y--;
 	while (y++ < end)
 	{
-		index = (int)c * game->texture[t].width + game->ray[r].hit_c;
+		index = (int)c * game->texture[t].width + game->ray[r].hit_c * r;
+	//	index = c * game->texture[t].length + game->ray[r].hit_c;
+		if (r == 300 || r == 600)
+			printf("index[%i]->%d\n", r, index);
 		c += step;
 		color = ((unsigned int *)(game->texture[t].add))[index];
 		put_pixel(&game->scrn, r, y, color);
