@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:20:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/03 13:04:13 by potero           ###   ########.fr       */
+/*   Updated: 2022/10/04 11:49:39 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,9 @@ void	init(t_game *game, t_data_map *data)
 	game->floor_color = get_colour(data->_floor_colour_path);
 	game->roof_color = get_colour(data->_roof_colour_path);
 	game->north_texture = data->_north_texture_path;
+	game->east_texture = data->_east_texture_path;
+	game->south_texture = data->_south_texture_path;
+	game->west_texture = data->_west_texture_path;
 	load_textures(game);
 }
 

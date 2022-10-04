@@ -1,7 +1,7 @@
-SO ./srcs/assets/wall_texture.xpm
-NO ./srcs/assets/wall_texture.xpm
-WE ./srcs/assets/wall_texture.xpm
-EA ./srcs/assets/wall_texture.xpm
+SO ./srcs/assets/south.xpm
+NO ./srcs/assets/north.xpm
+WE ./srcs/assets/west.xpm
+EA ./srcs/assets/east.xpm
 
 
 C 75,0,130

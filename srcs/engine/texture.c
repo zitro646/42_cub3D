@@ -6,24 +6,44 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 13:22:07 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/03 11:35:12 by potero           ###   ########.fr       */
+/*   Updated: 2022/10/04 11:40:28 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 void	load_textures(t_game *game)
-{	
-	game->texture.image = mlx_xpm_file_to_image(game->mlx.mlx, game->north_texture,
-							&game->texture.width, &game->texture.height);
-	if (!game->texture.image)
+{
+	int	i;
+	game->texture[0].image = mlx_xpm_file_to_image(game->mlx.mlx, game->north_texture,
+							&game->texture[0].width, &game->texture[0].height);
+	game->texture[1].image = mlx_xpm_file_to_image(game->mlx.mlx, game->east_texture,
+							&game->texture[1].width, &game->texture[1].height);
+	game->texture[2].image = mlx_xpm_file_to_image(game->mlx.mlx, game->south_texture,
+							&game->texture[2].width, &game->texture[2].height);
+	game->texture[3].image = mlx_xpm_file_to_image(game->mlx.mlx, game->west_texture,
+							&game->texture[3].width, &game->texture[3].height);
+	i = 0;
+	while (i < 4)
 	{
-		//Hay que hacer freez
-		ft_putstr_fd("Error loading textures\n", 2);
-		exit(1);
+		if (!game->texture[i].image)
+		{
+			//Hay que hacer freez
+			ft_putstr_fd("Error loading texture", 2);
+			write(2, "%i\n", 2);
+			exit(1);
+		}
+		i++;
 	}
-	game->texture.add = mlx_get_data_addr(game->texture.image,
-			&game->texture.bpp, &game->texture.length, &game->texture.endian);
+	game->texture[0].add = mlx_get_data_addr(game->texture[0].image,
+			&game->texture[0].bpp, &game->texture[0].length, &game->texture[0].endian);
+	game->texture[1].add = mlx_get_data_addr(game->texture[1].image,
+			&game->texture[1].bpp, &game->texture[1].length, &game->texture[1].endian);
+	game->texture[2].add = mlx_get_data_addr(game->texture[2].image,
+			&game->texture[2].bpp, &game->texture[2].length, &game->texture[2].endian);
+	game->texture[3].add = mlx_get_data_addr(game->texture[3].image,
+			&game->texture[3].bpp, &game->texture[3].length, &game->texture[3].endian);
+	printf("All textures load\n");
 }
 
 void	put_pixel(t_image *image, int c, int f, int color)

@@ -6,11 +6,30 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 12:07:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/03 13:42:23 by potero           ###   ########.fr       */
+/*   Updated: 2022/10/04 11:50:47 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	select_texture(t_game *game, int r)
+{
+	if (game->ray[r].hit_vertical == 1)
+	{
+		if (game->ray[r].ray_angle > (M_PI / 2) && game->ray[r].ray_angle < (3 * M_PI / 2))
+			return (3);
+		else
+			return (1);
+	}
+	else if (game->ray[r].hit_horizontal == 1)
+	{
+		if (game->ray[r].ray_angle > 0 && game->ray[r].ray_angle < M_PI)
+			return (2);
+		else
+			return (0);
+	}
+	return (0);
+}
 
 void	screen_game_r(t_game *game, int r)
 {
@@ -22,21 +41,23 @@ void	screen_game_r(t_game *game, int r)
 	unsigned int	color;
 	int				index;
 	double			c;
+	int				t;
 
+	t = select_texture(game, r);
 	middle = game->height / 2;
 	y = -1;
 	start = middle - (game->ray[r].wall / 2);
 	end = start + (int)game->ray[r].wall;
-	step = game->texture.height / game->ray[r].wall;
+	step = 1.0 * game->texture[t].height / game->ray[r].wall;
 	c = (start - middle + game->ray[r].wall / 2) * step;
 	while (y++ <= start)
 		put_pixel(&game->scrn, r, y, game->roof_color);
 	y--;
 	while (y++ < end)
 	{
-		index = c * game->texture.width + game->ray[r].hit_f;
+		index = (int)c * game->texture[t].width + game->ray[r].hit_c;
 		c += step;
-		color = ((unsigned int *)(game->texture.add))[index];
+		color = ((unsigned int *)(game->texture[t].add))[index];
 		put_pixel(&game->scrn, r, y, color);
 	}
 	y--;

@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 12:45:51 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/09/29 13:22:00 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/04 11:42:11 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,14 +187,18 @@ double	ray_vision_dda(t_game *game, double angle, int r)
 	{
 		rx = vx;
 		ry = vy;
+		game->ray[r].hit_vertical = 1;
+		game->ray[r].hit_horizontal = 0;
 	}
 	else
 	{
 		rx = hx;
 		ry = hy;
+		game->ray[r].hit_horizontal = 1;
+		game->ray[r].hit_vertical = 0;
 	}
-	game->ray[r].hit_f = rx;
-	game->ray[r].hit_c = ry;
+	game->ray[r].hit_f = rx / 30;
+	game->ray[r].hit_c = ry / 30;
 
 	// draw_new_line(game, game->player.f * 30,game->player.c * 30,ry,rx,WHITE);
 	return (distance(game->player.c * 30, game->player.f * 30, rx, ry) / 30);

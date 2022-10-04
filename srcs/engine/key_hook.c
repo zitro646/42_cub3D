@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 10:36:49 by potero            #+#    #+#             */
-/*   Updated: 2022/10/03 13:11:00 by potero           ###   ########.fr       */
+/*   Updated: 2022/10/04 12:07:20 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,39 +47,21 @@ int	stop(int key_code, t_game *game)
 
 int	movement(t_game *game, double f, double c)
 {
-/*	if (f - (int)f >= 0.5)
-		f = f + 1;
-	if (c - (int)c >= 0.5)
-		c = c + 1;
-*/
+	int	player_c;
+	int	player_f;
+
+	player_c = game->player.c;
+	player_f = game->player.f;
 	if (game->matrix[(int)f][(int)c].value == '1')
 	{
 		printf("Impossible movement\n");
 		return (1);
 	}
-	if (game->player.looking_at == 1)
+	else if (game->matrix[player_f][(int)c].value == '1'
+				&& game->matrix[(int)f][player_c].value == '1')
 	{
-		if ((game->matrix[(int)f][(int)c - 1].value == '1')
-				&&(game->matrix[(int)f + 1][(int)c].value == '1'))
-			return (1);
-	}
-  	if (game->player.looking_at == 2)
-	{
-		if ((game->matrix[(int)f - 1][(int)c].value == '1')
-				&&(game->matrix[(int)f][(int)c - 1].value == '1'))
-			return (1);
-	}
-	if (game->player.looking_at == 3)
-	{
-		if ((game->matrix[(int)f - 1][(int)c].value == '1')
-				&&(game->matrix[(int)f][(int)c + 1].value == '1'))
-			return (1);
-	}
-	if (game->player.looking_at == 4)
-	{
-		if ((game->matrix[(int)f + 1][(int)c].value == '1')
-				&&(game->matrix[(int)f][(int)c + 1].value == '1'))
-			return (1);
+		printf("Impossible movement\n");
+		return (1);
 	}
 	return (0);
 }
