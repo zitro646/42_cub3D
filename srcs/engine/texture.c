@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 13:22:07 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/04 16:37:05 by potero           ###   ########.fr       */
+/*   Updated: 2022/10/05 10:57:11 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	load_textures(t_game *game)
 		{
 			//Hay que hacer freez
 			ft_putstr_fd("Error loading texture", 2);
-			write(2, "%i\n", 2);
+			printf("%i\n", i);
 			exit(1);
 		}
 		i++;
@@ -44,6 +44,7 @@ void	load_textures(t_game *game)
 	game->texture[3].add = mlx_get_data_addr(game->texture[3].image,
 			&game->texture[3].bpp, &game->texture[3].length, &game->texture[3].endian);
 	printf("All textures load\n");
+/*
 	i = -1;
 	while (++i < 4)
 	{
@@ -52,6 +53,7 @@ void	load_textures(t_game *game)
 		printf("height[%i]->%d\n", i, game->texture[i].height);
 		printf("bpp[%i]->%d\n", i, game->texture[i].bpp);
 	}
+*/
 }
 
 void	put_pixel(t_image *image, int c, int f, int color)

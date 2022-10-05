@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:15:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/04 11:33:28 by potero           ###   ########.fr       */
+/*   Updated: 2022/10/05 10:53:36 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ typedef struct s_game
 	t_texture	texture[4];
 	t_image		scrn;
 	t_image		mnmap;
+	t_image		minimap;
 	double		diff_angle;
 	int			height;
 	int			width;

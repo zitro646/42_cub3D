@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 12:56:01 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/28 13:24:03 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/05 12:22:10 by potero           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,38 @@
 
 void	minimap(t_game *game)
 {
-	int	i;
-	int	j;
+	double	i;
+	double	j;
 	int	x;
 	int	y;
 
 	x = 0;
-	i = game->player.f - 5;
-	j = game->player.c - 5;
-	while (x < 11)
+	i = game->player.f - 4;
+	j = game->player.c - 4;
+	if (i <= 0)
+ 		i--;
+	if (j <= 0)
+		j--;
+	printf("(0,0)->%f, %f\n", i, j);
+	while (x < 9)
 	{
 		y = 0;
-		while (y < 11)
+		while (y < 9)
 		{
 			if ((i + x) < 0 || (i + x) >= game->size_f || (j + y) < 0
 					|| (j + y) >= game->size_c)
-				wall_floor_minimap(game, 635 + 15 * x, 635 + 15 * y, 0x000000);
-			else if (game->matrix[i + x][j + y].value == '1')
-				wall_floor_minimap(game, 635 + 15 * x, 635 + 15 * y, 0x27AE60);
-			else if (game->matrix[i + x][j + y].value != '1')
-				wall_floor_minimap(game, 635 + 15 * x, 635 + 15 * y, 0xDC7633);
+				wall_floor_minimap(game, x, y, 0x000000);
+			else if (game->matrix[(int)i + x][(int)j + y].value == '1')
+				wall_floor_minimap(game, x, y, game->roof_color);
+			else if (game->matrix[(int)i + x][(int)j + y].value != '1')
+				wall_floor_minimap(game, x, y, game->floor_color);
 			y++;
 		}
 		x++;
 	}
 	player_minimap(game, 0X0000FF);
+	mlx_put_image_to_window(game->mlx.mlx, game->mlx.screen, game->minimap.image,
+			game->height - 135, game->width - 135);
 }
 
 void	ray_vision_minimap(t_game *game, int color)
@@ -48,9 +55,9 @@ void	ray_vision_minimap(t_game *game, int color)
 	line = 5;
 	while (line < 10)
 	{
-		mlx_pixel_put(game->mlx.mlx, game->mlx.screen,
-				717 + (cos(game->player.angle) * line),
-				717 + (sin(game->player.angle) * line), color);
+		put_pixel(&game->minimap,
+			67 + (cos(game->player.angle) * line),
+			67 + (sin(game->player.angle) * line), color);
 		line += 0.2;
 	}
 }
@@ -66,7 +73,7 @@ void	player_minimap(t_game *game, int color)
 		j = 5;
 		while (j < 11)
 		{
-			mlx_pixel_put(game->mlx.mlx, game->mlx.screen, 710 + j, 710 + i, color);
+			put_pixel(&game->minimap, (60 + i), (60 + j), color);
 			j++;
 		}
 		i++;
@@ -85,12 +92,10 @@ void	wall_floor_minimap(t_game *game, int pos_f, int pos_c, int color)
 		j = 0;
 		while (j < 15)
 		{
-			if (i == 0 || j == 0)
-				mlx_pixel_put(game->mlx.mlx, game->mlx.screen,
-					(pos_c + j), (pos_f + i), 0x000000);
+			if (i == 0 || j == 0 || i == 14 || j == 14)
+				put_pixel(&game->minimap, (pos_c * 15 + i), (pos_f * 15 + j), 0x000000);
 			else
-				mlx_pixel_put(game->mlx.mlx, game->mlx.screen,
-					(pos_c + j), (pos_f + i), color);
+				put_pixel(&game->minimap, (pos_c * 15 + i), (pos_f * 15 + j), color);
 			j++;
 		}
 		i++;
