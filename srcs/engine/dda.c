@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 09:47:50 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/06 03:09:55 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/10/06 05:37:32 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,8 @@ double	ray_vision_dda_testing(t_game *game, double angle, int r)
 	int mx,my;
 	float rx,ry,xo,yo;
 
-	printf("________________\n");
-	printf("Angle -> %f\n",angle);
 	//Checkeo horizontal
+	printf("Angle :%f\n",angle);
 	dof = 0;
 	float aTan = -1/tan(angle);
 	float distH;
@@ -87,7 +86,6 @@ double	ray_vision_dda_testing(t_game *game, double angle, int r)
 	}
 	else if (angle > M_PI)
 	{
-		
 		ry = (((int)(game->player.f * M_SIZE) / M_SIZE ) * M_SIZE ) - 0.0001;
 		if ( is_angle_testing (5 * (M_PI * 2) / 8,angle))
 			rx = ((int)(game->player.f * M_SIZE) - ry) * aTan + game->player.c * M_SIZE + 0.0001;
@@ -107,10 +105,6 @@ double	ray_vision_dda_testing(t_game *game, double angle, int r)
 		yo = M_SIZE;
 		xo = -yo * aTan;
 	}
-	if (dof != (game->size_c * M_SIZE) * (game->size_f * M_SIZE))
-		printf("Eje Horizontal 1º -> %f %f\n",ry/M_SIZE, rx/M_SIZE);
-	//new_pos_is_wall(my,mx,game)
-	//horizontal_check(my,mx,angle,game)
 	while (dof < (game->size_c * game->size_f))
 	{
 		my = (ry) / M_SIZE;
@@ -142,6 +136,7 @@ double	ray_vision_dda_testing(t_game *game, double angle, int r)
 		
 	//__________________________________
 
+	
 	//Checkeo vertical
 	dof = 0;
 	float nTan = -tan(angle);
@@ -160,7 +155,10 @@ double	ray_vision_dda_testing(t_game *game, double angle, int r)
 	else if (angle > M_PI / 2 && angle < (3 * M_PI) / 2)
 	{
 		rx = (((int)(game->player.c * M_SIZE) / M_SIZE ) * M_SIZE ) - 0.0001;
-		ry = ((int)(game->player.c * M_SIZE) - rx) * nTan + game->player.f * M_SIZE;
+		if ( is_angle_testing (5 * (M_PI * 2) / 8,angle))
+			ry = ((int)(game->player.c * M_SIZE) - rx) * nTan + game->player.f * M_SIZE + 0.0001;
+		else
+			ry = ((int)(game->player.c * M_SIZE) - rx) * nTan + game->player.f * M_SIZE;
 		xo = -M_SIZE;
 		yo = -xo * nTan;
 	}
@@ -168,13 +166,15 @@ double	ray_vision_dda_testing(t_game *game, double angle, int r)
 	{
 		rx = (((int)(game->player.c * M_SIZE) / M_SIZE ) * M_SIZE ) + M_SIZE;
 		ry = ((int)(game->player.c * M_SIZE) - rx) * nTan + game->player.f * M_SIZE;
+		if ( is_angle_testing ((M_PI * 2) / 8,angle))
+			ry = ((int)(game->player.c * M_SIZE) - rx) * nTan + game->player.f * M_SIZE - 0.0001;
+		else
+			ry = ((int)(game->player.c * M_SIZE) - rx) * nTan + game->player.f * M_SIZE;
+		
+		
 		xo = M_SIZE;
 		yo = -xo * nTan;
 	}
-	if (dof != (game->size_c * M_SIZE) * (game->size_f * M_SIZE))
-		printf("Eje Vertical 1º -> %f %f\n",ry/M_SIZE, rx/M_SIZE);
-	//new_pos_is_wall(my,mx,game)
-	//vertical_check(my, mx, angle, game)
 	while (dof < (game->size_c * game->size_f))
 	{
 		my = (ry) / M_SIZE;
@@ -188,7 +188,6 @@ double	ray_vision_dda_testing(t_game *game, double angle, int r)
 				vx = rx;
 				vy = ry;
 				distV = distance(game->player.c * M_SIZE,game->player.f * M_SIZE,vx,vy);
-				// draw_new_line(game, game->player.f * M_SIZE,game->player.c * M_SIZE,ry,rx,RED);
 			}
 			else
 			{
@@ -208,14 +207,19 @@ double	ray_vision_dda_testing(t_game *game, double angle, int r)
 	{
 		rx = vx;
 		ry = vy;
+		// game->ray[r].wall_hit = VERTICAL;
 	}
 	else
 	{
 		rx = hx;
 		ry = hy;
+		// game->ray[r].wall_hit = HORIZONTAL;
 	}
 	
-	draw_new_line(game, game->player.f * M_SIZE,game->player.c * M_SIZE,ry,rx,r);
+	// game->ray[r].hit_f = rx / M_SIZE;
+	// game->ray[r].hit_c = ry / M_SIZE;
+	
+	// draw_new_line(game, game->player.f * M_SIZE,game->player.c * M_SIZE,ry,rx,r);
 	return (distance(game->player.c * M_SIZE, game->player.f * M_SIZE, rx, ry) / M_SIZE);
 }
 

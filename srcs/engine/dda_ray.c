@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 12:45:51 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/10/06 04:50:51 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/10/06 05:42:19 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,15 +138,15 @@ double	ray_vision_dda(t_game *game, double angle, int r)
 	{
 		ry = (((int)(game->player.f * M_SIZE) / M_SIZE ) * M_SIZE ) + M_SIZE;
 		if ( is_angle ((M_PI * 2) / 8,angle))
-			rx = ((int)(game->player.f * M_SIZE) - ry) * aTan + game->player.c * M_SIZE - 0.0001;
+		{
+			rx = ((int)(game->player.f * M_SIZE) - ry) * aTan + game->player.c * M_SIZE + 0.0001;
+		}
 		else
 			rx = ((int)(game->player.f * M_SIZE) - ry) * aTan + game->player.c * M_SIZE;
 		
 		yo = M_SIZE;
 		xo = -yo * aTan;
 	}
-	//horizontal_check(my,mx,angle,game)
-	//new_pos_is_wall(my,mx,game)
 	while (dof < (game->size_c * game->size_f))
 	{
 		my = (ry) / M_SIZE;
@@ -207,7 +207,6 @@ double	ray_vision_dda(t_game *game, double angle, int r)
 	else if (angle < M_PI/2 || angle > 3*M_PI/2)
 	{
 		rx = (((int)(game->player.c * M_SIZE) / M_SIZE ) * M_SIZE ) + M_SIZE;
-		ry = ((int)(game->player.c * M_SIZE) - rx) * nTan + game->player.f * M_SIZE;
 		if ( is_angle ((M_PI * 2) / 8,angle))
 			ry = ((int)(game->player.c * M_SIZE) - rx) * nTan + game->player.f * M_SIZE - 0.0001;
 		else
@@ -217,8 +216,6 @@ double	ray_vision_dda(t_game *game, double angle, int r)
 		xo = M_SIZE;
 		yo = -xo * nTan;
 	}
-	//new_pos_is_wall(my,mx,game)
-	//vertical_check(my, mx, angle, game)
 	while (dof < (game->size_c * game->size_f))
 	{
 		my = (ry) / M_SIZE;
@@ -259,22 +256,10 @@ double	ray_vision_dda(t_game *game, double angle, int r)
 		game->ray[r].wall_hit = HORIZONTAL;
 	}
 	
-	// if (hit_check(ry / M_SIZE,rx/M_SIZE,angle,game) == 2)
-	// 	game->ray[r].wall_hit = HORIZONTAL;
-	// else if (hit_check(ry / M_SIZE,rx/M_SIZE,angle,game) == 3)
-	// 	game->ray[r].wall_hit = VERTICAL;
-	// if (game->ray[r].wall_hit == VERTICAL && !new_pos_is_wall((ry) / M_SIZE,(rx) / M_SIZE,game))
-	// {
-	// 	game->ray[r].wall_hit = HORIZONTAL;
-	// }
-	// else if (game->ray[r].wall_hit == HORIZONTAL  && !new_pos_is_wall((ry) / M_SIZE,(rx) / M_SIZE,game))
-	// {
-	// 	game->ray[r].wall_hit = VERTICAL;
-	// }
 	game->ray[r].hit_f = rx / M_SIZE;
 	game->ray[r].hit_c = ry / M_SIZE;
 	
-	draw_new_line(game, game->player.f * M_SIZE,game->player.c * M_SIZE,ry,rx,r);
+	// draw_new_line(game, game->player.f * M_SIZE,game->player.c * M_SIZE,ry,rx,r);
 	return (distance(game->player.c * M_SIZE, game->player.f * M_SIZE, rx, ry) / M_SIZE);
 }
 

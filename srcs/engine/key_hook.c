@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 10:36:49 by potero            #+#    #+#             */
-/*   Updated: 2022/10/06 00:49:28 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/10/06 05:32:32 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	player_vision_cone(t_game *game)
 	// 	angle = new_angle (angle - game->diff_angle);
 	// 	i++;
 	// }
-	ray_vision_dda_testing (game,game->player.angle,RED);
+	printf("Ray distance -> %f\n",ray_vision_dda_testing (game,game->player.angle,RED));
 	return ;
 }
 
