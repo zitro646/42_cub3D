@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 12:45:51 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/10/06 03:10:15 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/10/06 04:50:51 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,7 +197,10 @@ double	ray_vision_dda(t_game *game, double angle, int r)
 	else if (angle > M_PI / 2 && angle < (3 * M_PI) / 2)
 	{
 		rx = (((int)(game->player.c * M_SIZE) / M_SIZE ) * M_SIZE ) - 0.0001;
-		ry = ((int)(game->player.c * M_SIZE) - rx) * nTan + game->player.f * M_SIZE;
+		if ( is_angle (5 * (M_PI * 2) / 8,angle))
+			ry = ((int)(game->player.c * M_SIZE) - rx) * nTan + game->player.f * M_SIZE + 0.0001;
+		else
+			ry = ((int)(game->player.c * M_SIZE) - rx) * nTan + game->player.f * M_SIZE;
 		xo = -M_SIZE;
 		yo = -xo * nTan;
 	}
@@ -205,6 +208,12 @@ double	ray_vision_dda(t_game *game, double angle, int r)
 	{
 		rx = (((int)(game->player.c * M_SIZE) / M_SIZE ) * M_SIZE ) + M_SIZE;
 		ry = ((int)(game->player.c * M_SIZE) - rx) * nTan + game->player.f * M_SIZE;
+		if ( is_angle ((M_PI * 2) / 8,angle))
+			ry = ((int)(game->player.c * M_SIZE) - rx) * nTan + game->player.f * M_SIZE - 0.0001;
+		else
+			ry = ((int)(game->player.c * M_SIZE) - rx) * nTan + game->player.f * M_SIZE;
+		
+		
 		xo = M_SIZE;
 		yo = -xo * nTan;
 	}
