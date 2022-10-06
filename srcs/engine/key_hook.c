@@ -6,11 +6,38 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 10:36:49 by potero            #+#    #+#             */
-/*   Updated: 2022/10/05 11:41:48 by potero           ###   ########.fr       */
+/*   Updated: 2022/10/06 00:49:28 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+// //TOOL TO VISUALIZE
+void	player_vision_cone(t_game *game)
+{
+	// int i;
+	// double angle;
+
+	// angle = game->player.angle;
+	// i = 0;
+	// while (i < 240)
+	// {
+	// 	ray_vision_dda_testing(game, angle, WHITE);
+	// 	angle = new_angle (angle + game->diff_angle);
+	// 	i++;
+	// }
+	// i = 0;
+	// angle = new_angle (game->player.angle);
+	// while (i < 240)
+	// {
+	// 	ray_vision_dda_testing(game, angle, WHITE);
+	// 	angle = new_angle (angle - game->diff_angle);
+	// 	i++;
+	// }
+	ray_vision_dda_testing (game,game->player.angle,RED);
+	return ;
+}
+
 
 int	advance(int key_code, t_game *game)
 {
@@ -96,11 +123,7 @@ void	hook(t_game *game, int key_code)
 	if (game->player.angle > (2 * M_PI) || game->player.angle < 0)
 		angle(game);
 
-	printf("________________________\n");
-	printf("Pos : [%f][%f]\n", new_f, new_c);
-	printf("angle: %f\n", game->player.angle);
 	looking_at(game);
-	printf("________________________\n");
 
 	if (movement(game, new_f - 0.5, new_c - 0.5) == 0)
 	{
@@ -111,4 +134,6 @@ void	hook(t_game *game, int key_code)
 	minimap(game);
 	mlx_clear_window(game->mlx.mlx, game->mlx.window);
 	window(game, 1);
+	player_vision_cone(game);
+	// ray_vision_dda_testing(game,game->player.angle,0);
 }

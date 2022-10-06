@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:20:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/05 12:04:42 by potero           ###   ########.fr       */
+/*   Updated: 2022/10/06 03:10:43 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	init(t_game *game, t_data_map *data)
 {
 	create_matrix(data->showmap, game->size_f, game->size_c, game->matrix);
 	game->player.speed_m = 1;
-	game->player.speed_t = (M_PI * 2) / 8;
+	game->player.speed_t = (M_PI * 2) / 8;//(M_PI * 2) / 360
 	game->width = 800;
 	game->height = 800;
 	game->diff_angle = (M_PI / 2) / game->width;
@@ -84,10 +84,10 @@ void	init(t_game *game, t_data_map *data)
 	game->mlx.mlx = mlx_init();	
 	game->mlx.screen = mlx_new_window(game->mlx.mlx, game->height, game->width, "cub3D"); 
 	game->mlx.window = mlx_new_window(game->mlx.mlx,
-			(game->size_c * 30), (game->size_f * 30), "minimap");
+			(game->size_c * M_SIZE), (game->size_f * M_SIZE), "minimap");
 
 	game->scrn.image = mlx_new_image(game->mlx.mlx, game->width, game->height);
-	game->mnmap.image = mlx_new_image(game->mlx.mlx, (game->size_c * 30), (game->size_f * 30));
+	game->mnmap.image = mlx_new_image(game->mlx.mlx, (game->size_c * M_SIZE), (game->size_f * M_SIZE));
 	game->scrn.add = mlx_get_data_addr(game->scrn.image, &game->scrn.bpp,
 					&game->scrn.length, &game->scrn.endian);
 	game->mnmap.add = mlx_get_data_addr(game->mnmap.image, &game->mnmap.bpp,

@@ -3,16 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:15:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/05 10:53:36 by potero           ###   ########.fr       */
+/*   Updated: 2022/10/06 02:48:01 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
-
+# define M_SIZE 64
+# define VERTICAL 1
+# define HORIZONTAL 0
+# define RED 0xFF0000
+# define PINK 0xFF00FF
+# define GREEN 0x00FF00
+# define BLUE 0x0000FF
+# define CYAN 0x00FFFF
+# define WHITE 0xFFFFFF
+# define ORANGE 0xFF6600
+# define PURPLE 0x4B0082
+# define DARK_PURPLE 0x3C0068
+# define GREY 0x8C8C8C
 # include "cub3d.h"
 
 typedef struct s_matrix
@@ -49,8 +61,7 @@ typedef struct s_ray
 	double	ray_angle;
 	double	hit_f;
 	double	hit_c;
-	int		hit_vertical;
-	int		hit_horizontal;
+	int		wall_hit;
 	double	distance;
 	double	point;
 	double	wall;

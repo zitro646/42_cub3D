@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 12:16:17 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/03 13:10:18 by potero           ###   ########.fr       */
+/*   Updated: 2022/10/05 22:52:54 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	ray_vision(t_game *game, int color)
 	int		j;
 
 	line = 5;
-	j = (game->player.c - 0.5) * 30 + 15;
-	i = (game->player.f - 0.5) * 30 + 15;
+	j = (game->player.c - 0.5) * M_SIZE + (int)(M_SIZE / 2);
+	i = (game->player.f - 0.5) * M_SIZE + (int)(M_SIZE / 2);
 	while (line < 10)
 	{
 		put_pixel(&game->mnmap,
@@ -30,25 +30,27 @@ void	ray_vision(t_game *game, int color)
 	}
 }
 
+
+
 void	player_pixel(t_game *game, int color, double f, double c)
 {
 	int	i;
 	int	j;
 
-	i = 10;
-	while (i < 20)
+	i = M_SIZE / 2 - 5;
+	while (i < M_SIZE / 2 + 5)
 	{
-		j = 10;
-		while (j < 20)
+		j = M_SIZE / 2 - 5;
+		while (j < M_SIZE / 2 + 5)
 		{
 			put_pixel(&game->mnmap,
-				 ((c - 0.5) * 30) + j,
-				 ((f - 0.5) * 30) + i, color);
+				 ((c - 0.5) * M_SIZE) + j,
+				 ((f - 0.5) * M_SIZE) + i, color);
 			j++;
 		}
 		i++;
 	}
-		ray_vision(game, color);
+	ray_vision(game, color);
 }
 
 
@@ -58,17 +60,17 @@ void	wall_floor_pixel(t_game *game, int pos_f, int pos_c, int color)
 	int	j;
  
 	i = 0;
-	while (i < 30)
+	while (i < M_SIZE)
 	{
 		j = 0;
-		while (j < 30)
+		while (j < M_SIZE)
 		{
 			if (i == 0 || j == 0)
 				put_pixel(&game->mnmap,
-					((pos_c * 30) + i), ((pos_f * 30 ) + j), 0x000000);
+					((pos_c * M_SIZE) + i), ((pos_f * M_SIZE ) + j), 0x000000);
 			else
 				put_pixel(&game->mnmap,
-					((pos_c * 30) + i), ((pos_f * 30 ) + j), color);
+					((pos_c * M_SIZE) + i), ((pos_f * M_SIZE ) + j), color);
 			j++;
 		}
 		i++;

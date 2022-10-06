@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   screen.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 12:07:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/04 18:36:18 by potero           ###   ########.fr       */
+/*   Updated: 2022/10/05 23:15:46 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int	select_texture(t_game *game, int r)
 {
-	if (game->ray[r].hit_vertical == 1)
+	if (game->ray[r].wall_hit == VERTICAL)
 	{
 		if (game->ray[r].ray_angle > (M_PI / 2) && game->ray[r].ray_angle < (3 * M_PI / 2))
 			return (3);
 		else
 			return (1);
 	}
-	else if (game->ray[r].hit_horizontal == 1)
+	else if (game->ray[r].wall_hit == HORIZONTAL)
 	{
 		if (game->ray[r].ray_angle > 0 && game->ray[r].ray_angle < M_PI)
 			return (2);
@@ -52,8 +52,8 @@ void	screen_game_r(t_game *game, int r)
 	end = start + (int)game->ray[r].wall;
 	step = game->texture[t].height / game->ray[r].wall;
 	f = 0;
-	v = 1 - (game->ray[r].hit_c - (int)game->ray[r].hit_c) * game->texture[t].width;
-	h = 1 - (game->ray[r].hit_f - (int)game->ray[r].hit_f) * game->texture[t].width;
+	v = (game->ray[r].hit_c - (int)game->ray[r].hit_c) * game->texture[t].width;
+	h = (game->ray[r].hit_f - (int)game->ray[r].hit_f) * game->texture[t].width;
 	while (y++ <= start)
 		put_pixel(&game->scrn, r, y, game->roof_color);
 	y--;
