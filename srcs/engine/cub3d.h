@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:17:49 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/10 12:55:58 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/10 17:05:13 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,6 @@ void	free_my_matrix(t_matrix *matrix);
 /*Player Data*/
 void	player_data(t_game *game);
 
-//void	player_pixel(t_game *game, int color);
-//void	wall_floor_pixel(t_game *game, int pos_f, int pos_c, int color);
-//int		pos_is_wall( int x_pixel, int y_pixel, t_game *game);
-//void	ray_vision(t_game *game, int color);
-//void	player_vision_cone(t_game *game, int color);
-//void	minimap(t_game *game);
-
 /*Screen*/
 void	screen_game(t_game *game);
 void	screen_game_r(t_game *game, int r);
@@ -53,7 +46,6 @@ void	ray_vision(t_game *game, int color);
 void	player_pixel(t_game *game, int color, double f, double c);
 void	wall_floor_pixel(t_game *game, int pos_f, int pos_c, int color);
 void	window(t_game *game, int start);
-void	player_vision_cone(t_game *game);
 
 /*Key hook*/
 int		advance(int key_code, t_game *game);
@@ -68,23 +60,24 @@ void	angle(t_game *game);
 void	looking_at(t_game *game);
 double	new_angle(double angle);
 void	ray_at(t_game *game, int r);
+int		is_angle(float angle, float angle_2);
 
 /*Ray*/
 void	ray(t_game *game);
 int		is_wall( int f, int c, t_game *game);
 
 /*RayDDA*/
-int		horizontal_check(int my, int mx, float angle, t_game *game);
-int		vertical_check(int my, int mx, float angle, t_game *game);
 int		inside_matrix(t_game *game, int f, int c);
 float	distance(float ax, float ay, float bx, float by);
 int		new_pos_is_wall( int y, int x, t_game *game);
 double	ray_vision_dda(t_game *game, double angle, int r);
-double	ray_vision_dda_testing(t_game *game, double angle, int r);
+int		hit_check(int my, int mx, float angle, t_game *game);
 
-/*DDA*/
-double	dda(t_game *game, int r);
-void	hit_pixel(t_game *game, int r, int color_one, int colot_two);
+/*DDA Horizontal*/
+float	ray_vision_horizontal(t_game *game, double angle, int r, float aTan);
+
+/*DDA Vertical*/
+float	ray_vision_vertical(t_game *game, double angle, int r, float nTan);
 
 /*Minimap*/
 void	minimap(t_game *game);

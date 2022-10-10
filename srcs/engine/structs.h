@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:15:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/10 12:51:25 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/10 16:40:49 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,19 @@ typedef struct s_ray
 	int		ray_at;
 	int		hor;
 	int		ver;
+	float	hx;
+	float	hy;
+	float	xo;
+	float	yo;
+	float	vx;
+	float	vy;
+	int		mx;
+	int		my;
+	float	rx;
+	float	ry;
+	float	dof;
+	float	distv;
+	float	disth;
 }	t_ray;
 
 typedef struct s_texture

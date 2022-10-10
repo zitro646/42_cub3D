@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 12:16:17 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/10 12:59:08 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/10 15:11:17 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,4 @@ void	window(t_game *game, int start)
 		player_pixel(game, 0x0000FF, game->player.f, game->player.c);
 	mlx_put_image_to_window(game->mlx.mlx,
 		game->mlx.window, game->mnmap.image, 0, 0);
-}
-
-void	player_vision_cone(t_game *game)
-{
-	printf("Ray distance -> %f\n",
-		ray_vision_dda_testing(game, game->player.angle, RED));
-	return ;
 }

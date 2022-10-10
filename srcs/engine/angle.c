@@ -6,7 +6,7 @@
 /*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:33:35 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/10 11:43:56 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/10 17:05:26 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,16 @@ double	new_angle(double num)
 	if (new == 6.23185)
 		new = 0;
 	return (new);
+}
+
+int	is_angle(float angle, float angle_2)
+{
+	int	new_angle;
+	int	testing;
+
+	new_angle = angle * 1000000;
+	testing = angle_2 * 1000000;
+	if (new_angle == testing)
+		return (1);
+	return (0);
 }
