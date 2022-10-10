@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:17:49 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/10 12:17:59 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/10 12:55:58 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	wall_floor_minimap(t_game *game, int pos_f, int pos_c, int color);
 /*Texture*/
 void	load_textures(t_game *game);
 void	put_pixel(t_image *image, int c, int f, int color);
+void	add_textures(t_game *game);
 
 /*Color*/
 int		get_colour(char *str);

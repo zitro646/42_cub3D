@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 12:16:17 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/10 12:17:08 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/10 12:59:08 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	player_pixel(t_game *game, int color, double f, double c)
 		while (j < M_SIZE / 2 + 5)
 		{
 			put_pixel(&game->mnmap,
-				 ((c - 0.5) * M_SIZE) + j,
-				 ((f - 0.5) * M_SIZE) + i, color);
+				((c - 0.5) * M_SIZE) + j,
+				((f - 0.5) * M_SIZE) + i, color);
 			j++;
 		}
 		i++;
@@ -51,12 +51,11 @@ void	player_pixel(t_game *game, int color, double f, double c)
 	ray_vision(game, color);
 }
 
-
 void	wall_floor_pixel(t_game *game, int pos_f, int pos_c, int color)
- {
+{
 	int	i;
 	int	j;
- 
+
 	i = 0;
 	while (i < M_SIZE)
 	{
@@ -65,10 +64,10 @@ void	wall_floor_pixel(t_game *game, int pos_f, int pos_c, int color)
 		{
 			if (i == 0 || j == 0)
 				put_pixel(&game->mnmap,
-					((pos_c * M_SIZE) + i), ((pos_f * M_SIZE ) + j), 0x000000);
+					((pos_c * M_SIZE) + i), ((pos_f * M_SIZE) + j), 0x000000);
 			else
 				put_pixel(&game->mnmap,
-					((pos_c * M_SIZE) + i), ((pos_f * M_SIZE ) + j), color);
+					((pos_c * M_SIZE) + i), ((pos_f * M_SIZE) + j), color);
 			j++;
 		}
 		i++;
@@ -77,8 +76,8 @@ void	wall_floor_pixel(t_game *game, int pos_f, int pos_c, int color)
 
 void	window(t_game *game, int start)
 {
-	int pos_f;
-	int pos_c;
+	int	pos_f;
+	int	pos_c;
 
 	pos_f = 0;
 	while (pos_f < game->size_f)
@@ -96,7 +95,8 @@ void	window(t_game *game, int start)
 	}
 	if (start == 1)
 		player_pixel(game, 0x0000FF, game->player.f, game->player.c);
-	mlx_put_image_to_window(game->mlx.mlx, game->mlx.window, game->mnmap.image, 0, 0);
+	mlx_put_image_to_window(game->mlx.mlx,
+		game->mlx.window, game->mnmap.image, 0, 0);
 }
 
 void	player_vision_cone(t_game *game)

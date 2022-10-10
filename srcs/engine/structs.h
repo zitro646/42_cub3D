@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:15:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/06 02:48:01 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/10/10 12:51:25 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct s_mlx
 	void	*window;
 	void	*screen;
 }	t_mlx;
-
 
 typedef struct s_player
 {
@@ -113,7 +112,6 @@ typedef struct s_game
 	char		*east_texture;
 	char		*south_texture;
 	char		*west_texture;
-
 }	t_game;
 
 #endif
