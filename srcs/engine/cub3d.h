@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:17:49 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/06 00:47:17 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/10/10 12:17:59 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,9 @@
 /*Cub*/
 int		cube(t_data_map *data);
 void	init(t_game *game, t_data_map *data);
+void	init_color_and_textures(t_game *game, t_data_map *data);
 int		hook_loop(t_game *game);
 int		close_esc(t_game *game);
-int		get_colour(char *str);
-int		colour_is_valid(char *str);
 
 /*Matrix*/
 void	create_matrix(char **file, int f, int c, t_matrix **matrix);
@@ -54,11 +53,14 @@ void	ray_vision(t_game *game, int color);
 void	player_pixel(t_game *game, int color, double f, double c);
 void	wall_floor_pixel(t_game *game, int pos_f, int pos_c, int color);
 void	window(t_game *game, int start);
+void	player_vision_cone(t_game *game);
 
 /*Key hook*/
 int		advance(int key_code, t_game *game);
 int		stop(int key_code, t_game *game);
+int		movement(t_game *game, double f, double c);
 void	hook(t_game *game, int key_code);
+void	finish_hook(double new_c, double new_f, t_game *game);
 
 /*Angle*/
 
@@ -72,13 +74,12 @@ void	ray(t_game *game);
 int		is_wall( int f, int c, t_game *game);
 
 /*RayDDA*/
-int	horizontal_check(int my, int mx, float  angle, t_game *game);
-int	vertical_check(int my, int mx, float  angle, t_game *game);
-int draw_new_line(t_game *game, int beginX, int beginY, int endX, int endY, int color);
-int	inside_matrix(t_game *game, int f, int c);
-float distance(float ax, float ay, float bx, float by);
-int	new_pos_is_wall( int y, int x, t_game *game);
-double  ray_vision_dda(t_game *game, double angle, int r);
+int		horizontal_check(int my, int mx, float angle, t_game *game);
+int		vertical_check(int my, int mx, float angle, t_game *game);
+int		inside_matrix(t_game *game, int f, int c);
+float	distance(float ax, float ay, float bx, float by);
+int		new_pos_is_wall( int y, int x, t_game *game);
+double	ray_vision_dda(t_game *game, double angle, int r);
 double	ray_vision_dda_testing(t_game *game, double angle, int r);
 
 /*DDA*/
@@ -94,5 +95,9 @@ void	wall_floor_minimap(t_game *game, int pos_f, int pos_c, int color);
 /*Texture*/
 void	load_textures(t_game *game);
 void	put_pixel(t_image *image, int c, int f, int color);
+
+/*Color*/
+int		get_colour(char *str);
+int		colour_is_valid(char *str);
 
 #endif

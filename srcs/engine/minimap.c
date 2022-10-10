@@ -6,33 +6,25 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 12:56:01 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/05 23:06:21 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/10/10 12:24:15 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	minimap(t_game *game)
+void	aux_minimap(double i, double j, t_game *game)
 {
-	double	i;
-	double	j;
 	int	x;
 	int	y;
 
 	x = 0;
-	i = game->player.f - 4;
-	j = game->player.c - 4;
-	if (i <= 0)
- 		i--;
-	if (j <= 0)
-		j--;
 	while (x < 9)
 	{
 		y = 0;
 		while (y < 9)
 		{
 			if ((i + x) < 0 || (i + x) >= game->size_f || (j + y) < 0
-					|| (j + y) >= game->size_c)
+				|| (j + y) >= game->size_c)
 				wall_floor_minimap(game, x, y, 0x000000);
 			else if (game->matrix[(int)i + x][(int)j + y].value == '1')
 				wall_floor_minimap(game, x, y, game->roof_color);
@@ -42,9 +34,23 @@ void	minimap(t_game *game)
 		}
 		x++;
 	}
+}
+
+void	minimap(t_game *game)
+{
+	double	i;
+	double	j;
+
+	i = game->player.f - 4;
+	j = game->player.c - 4;
+	if (i <= 0)
+		i--;
+	if (j <= 0)
+		j--;
+	aux_minimap(i, j, game);
 	player_minimap(game, 0X0000FF);
-	mlx_put_image_to_window(game->mlx.mlx, game->mlx.screen, game->minimap.image,
-			game->height - 135, game->width - 135);
+	mlx_put_image_to_window(game->mlx.mlx, game->mlx.screen,
+		game->minimap.image, game->height - 135, game->width - 135);
 }
 
 void	ray_vision_minimap(t_game *game, int color)
@@ -92,9 +98,11 @@ void	wall_floor_minimap(t_game *game, int pos_f, int pos_c, int color)
 		while (j < 15)
 		{
 			if (i == 0 || j == 0 || i == 14 || j == 14)
-				put_pixel(&game->minimap, (pos_c * 15 + i), (pos_f * 15 + j), 0x000000);
+				put_pixel(&game->minimap,
+					(pos_c * 15 + i), (pos_f * 15 + j), 0x000000);
 			else
-				put_pixel(&game->minimap, (pos_c * 15 + i), (pos_f * 15 + j), color);
+				put_pixel(&game->minimap,
+					(pos_c * 15 + i), (pos_f * 15 + j), color);
 			j++;
 		}
 		i++;

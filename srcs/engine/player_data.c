@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 12:52:30 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/04 11:50:11 by potero           ###   ########.fr       */
+/*   Updated: 2022/10/10 12:25:05 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ void	player_data_aux(t_game *game, int pos_f, int pos_c, char value)
 	double	aux;
 
 	aux = 0.5;
-
-	if (value == 'N' ||value == 'S' || value == 'E' || value == 'O')
+	if (value == 'N' || value == 'S' || value == 'E' || value == 'O')
 	{
 		game->player.f = pos_f + aux;
 		game->player.c = pos_c + aux;
@@ -31,7 +30,6 @@ void	player_data_aux(t_game *game, int pos_f, int pos_c, char value)
 			game->player.angle = (M_PI / 2);
 		else if (value == 'E')
 			game->matrix[pos_f][pos_c].value = '0';
-	//	printf("PLAYER START AT: (%f, %f)\n", game->player.c, game->player.f);
 	}
 }
 
@@ -48,7 +46,7 @@ void	player_data(t_game *game)
 		{
 			if (game->matrix[pos_f][pos_c].value != '1')
 				player_data_aux(game, pos_f, pos_c,
-						game->matrix[pos_f][pos_c].value);
+					game->matrix[pos_f][pos_c].value);
 			pos_c++;
 		}
 		pos_f++;
