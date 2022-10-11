@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:20:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/11 11:10:11 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/11 11:26:19 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	cube(t_data_map *data)
 	init(&game, data);
 	start_game(&game);
 	player_data(&game);
-	window(&game, 0);
 	hook_loop(&game);
 	return (0);
 }
@@ -38,15 +37,13 @@ void	init(t_game *game, t_data_map *data)
 	create_matrix(data->showmap, game->size_f, game->size_c, game->matrix);
 	game->player.speed_m = 1;
 	game->player.speed_t = (M_PI * 2) / 8;
-	game->width = 1000;
-	game->height = 1000;
+	game->width = 1200;
+	game->height = 1200;
 	game->diff_angle = (M_PI / 2) / game->width;
 	game->ray = calloc(sizeof(t_ray) * game->width, 1);
 	game->mlx.mlx = mlx_init();
 	game->mlx.screen = mlx_new_window(game->mlx.mlx,
 			game->height, game->width, "cub3D");
-	game->mlx.window = mlx_new_window(game->mlx.mlx,
-			(game->size_c * M_SIZE), (game->size_f * M_SIZE), "minimap");
 	game->scrn.image = mlx_new_image(game->mlx.mlx,
 			game->width, game->height);
 	game->mnmap.image = mlx_new_image(game->mlx.mlx,
@@ -74,9 +71,6 @@ void	init_color_and_textures(t_game *game, t_data_map *data)
 
 int	hook_loop(t_game *game)
 {
-	mlx_hook(game->mlx.window, 2, (1L << 0), advance, game);
-	mlx_hook(game->mlx.window, 3, (1L << 1), stop, game);
-	mlx_hook(game->mlx.window, 17, (1L << 17), close_esc, game);
 	mlx_hook(game->mlx.screen, 2, (1L << 0), advance, game);
 	mlx_hook(game->mlx.screen, 3, (1L << 1), stop, game);
 	mlx_hook(game->mlx.screen, 17, (1L << 17), close_esc, game);
@@ -86,8 +80,6 @@ int	hook_loop(t_game *game)
 
 int	close_esc(t_game *game)
 {
-	mlx_clear_window(game->mlx.mlx, game->mlx.window);
-	mlx_destroy_window(game->mlx.mlx, game->mlx.window);
 	mlx_clear_window(game->mlx.mlx, game->mlx.screen);
 	mlx_destroy_window(game->mlx.mlx, game->mlx.screen);
 	free_my_matrix(game->matrix);
