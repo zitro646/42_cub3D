@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 08:31:10 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/10/11 09:46:37 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/11 15:27:57 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,17 +74,17 @@ static void	add_data_variable_paths(t_data_map	*data, char **infile_var)
 		return ;
 	}
 	data->_north_texture_path = ft_strjoin(\
-			&ft_strnstr(infile_var[0], "NO", ft_strlen(infile_var[0]))[3], "");
+			&ft_strnstr(infile_var[0], "NO", ft_strlen(infile_var[0]))[2], "");
 	data->_south_texture_path = ft_strjoin(\
-			&ft_strnstr(infile_var[1], "SO", ft_strlen(infile_var[1]))[3], "");
+			&ft_strnstr(infile_var[1], "SO", ft_strlen(infile_var[1]))[2], "");
 	data->_west_texture_path = ft_strjoin(\
-			&ft_strnstr(infile_var[2], "WE", ft_strlen(infile_var[2]))[3], "");
+			&ft_strnstr(infile_var[2], "WE", ft_strlen(infile_var[2]))[2], "");
 	data->_east_texture_path = ft_strjoin(\
-			&ft_strnstr(infile_var[3], "EA", ft_strlen(infile_var[3]))[3], "");
+			&ft_strnstr(infile_var[3], "EA", ft_strlen(infile_var[3]))[2], "");
 	data->_floor_colour_path = ft_strjoin(\
-			&ft_strnstr(infile_var[4], "F", ft_strlen(infile_var[4]))[2], "");
+			&ft_strnstr(infile_var[4], "F", ft_strlen(infile_var[4]))[1], "");
 	data->_roof_colour_path = ft_strjoin(\
-			&ft_strnstr(infile_var[5], "C", ft_strlen(infile_var[5]))[2], "");
+			&ft_strnstr(infile_var[5], "C", ft_strlen(infile_var[5]))[1], "");
 }
 
 t_data_map	*mapreader(char *str_dir)

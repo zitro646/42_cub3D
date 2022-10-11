@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 08:34:09 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/10/11 09:45:35 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/11 15:22:24 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void		show_data(t_data_map	*data);
 void		see_matrix(char **map);
 
 //Parse map
+char		*replace_str(char *oldstr, char changechar, char *newchars);
 void		flatten_map(t_data_map	*data, char **map, int y, int i);
 void		resize_map(t_data_map	*data, char **map, int y, int i);
 void		switch_chars_on_map(t_data_map	*data, char change, char *newchar);

@@ -6,13 +6,13 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:15:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/11 13:12:22 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/11 13:45:12 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
-# define M_SIZE 64
+# define M_SIZE 32
 # define VERTICAL 1
 # define HORIZONTAL 0
 # define RED 0xFF0000

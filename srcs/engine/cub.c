@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:20:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/11 14:11:11 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:31:26 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ int	close_esc(t_game *game)
 	mlx_clear_window(game->mlx.mlx, game->mlx.screen);
 	mlx_destroy_window(game->mlx.mlx, game->mlx.screen);
 	free_my_matrix(game->matrix);
+	printf("Closing Cub3D\n");
 	exit(0);
 	return (0);
 }
-//	system("leaks test");
+//	system("leaks cub3D");

@@ -1,0 +1,21 @@
+F 140,140,140
+
+SO ./srcs/assets/south.xpm
+NO ./srcs/assets/north.xpm
+WE ./srcs/assets/west.xpm
+EA ./srcs/assets/east.xpm
+
+
+C 75,100,130
+
+
+
+
+
+
+
+111111
+100101
+101001 
+110W01
+111111

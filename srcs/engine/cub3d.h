@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:17:49 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/11 13:05:25 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/11 13:45:01 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	ray(t_game *game);
 int		is_wall( int f, int c, t_game *game);
 
 /*RayDDA*/
+double	ray_vision_dda_new_version(t_game *game, double angle, int r);
 int		inside_matrix(t_game *game, int f, int c);
 float	distance(float ax, float ay, float bx, float by);
 int		new_pos_is_wall( int y, int x, t_game *game);

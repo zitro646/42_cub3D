@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 10:38:08 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/10/11 13:41:41 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/11 15:31:30 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
 
 void	leaks(void)
 {
-	system("leaks -q test");
+	system("leaks -q cub3D");
 }
+
+// atexit(leaks);
 
 char	*get_dir(char *dir)
 {
@@ -37,14 +39,12 @@ int	main(int argc, char **argv)
 	t_data_map	*data;
 	char		*dir;
 
-	atexit(leaks);
 	if (argc != 2)
 	{
 		printf("Error no data inserted\n");
 		return (0);
 	}
 	dir = get_dir(argv[1]);
-	printf("%s\n", dir);
 	data = mapreader(dir);
 	show_data(data);
 	if (data_check(data))
@@ -58,5 +58,6 @@ int	main(int argc, char **argv)
 	}
 	free_all(data);
 	free(dir);
+	printf("Closing Cub3D\n");
 	return (0);
 }

@@ -6,12 +6,13 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 12:56:01 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/11 14:18:14 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:35:23 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+//inside_matrix(game,y,x)
 void	aux_minimap(t_game *game)
 {
 	int	x;
@@ -23,8 +24,8 @@ void	aux_minimap(t_game *game)
 		x = -4;
 		while (x < 5)
 		{
-			if (!inside_matrix(game, (int) game->player.f + y,
-					(int) game->player.c + x))
+			if (!inside_matrix(game, (int)game->player.f + y,
+					(int)game->player.c + x))
 				wall_floor_minimap(game, y + 4, x + 4, 0x000000);
 			else if (game->matrix[(int)game->player.f + y]
 				[(int)game->player.c + x].value == '1')

@@ -75,7 +75,7 @@ $(OBJ_PATH)/%.o: $(ENGINE_PATH)/%.c | $(OBJ_PATH)
 	$(CC) $(CFLAGS) -c $< -o $@
             
 $(NAME): $(OBJS) $(OBJS_LIBFT) $(OBJS_ENGINE) $(OBJS_MAPS) | $(MINILIBX_NAME)
-	$(MAKE) -sC $(MINILIBX_PATH) --silent
+#$(MAKE) -sC $(MINILIBX_PATH) --silent
 	$(GREEN) Objects compiled $(RESET)
 	$(CC) $(CFLAGS) $(OBJS_MAPS) $(OBJS_ENGINE) $(OBJS) $(OBJS_LIBFT) $(MINILIBX_FLAGS) -o $(NAME)
 	clear
@@ -90,11 +90,12 @@ norminette:
 	norminette $(SRCS)
 	norminette $(LIBFT_PATH)
 	norminette $(MAP_PATH)
+	norminette $(ENGINE_PATH)
 
 clean:
 	$(PURPLE) CLEANING OBJECTS $(RESET)
 	rm -rf $(OBJ_PATH)
-	$(MAKE) clean -sC $(MINILIBX_PATH)
+#$(MAKE) clean -sC $(MINILIBX_PATH)
 	
 fclean: clean
 	$(PURPLE) CLEANING DIRECTORY AND EXEC $(RESET)

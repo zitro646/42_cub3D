@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 12:52:30 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/10 12:25:05 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/11 15:08:04 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	player_data_aux(t_game *game, int pos_f, int pos_c, char value)
 	double	aux;
 
 	aux = 0.5;
-	if (value == 'N' || value == 'S' || value == 'E' || value == 'O')
+	if (value == 'N' || value == 'S' || value == 'E' || value == 'W')
 	{
 		game->player.f = pos_f + aux;
 		game->player.c = pos_c + aux;
@@ -26,8 +26,8 @@ void	player_data_aux(t_game *game, int pos_f, int pos_c, char value)
 			game->player.angle = 3 * M_PI / 2;
 		else if (value == 'S')
 			game->player.angle = (M_PI / 2);
-		else if (value == '0')
-			game->player.angle = (M_PI / 2);
+		else if (value == 'W')
+			game->player.angle = (M_PI);
 		else if (value == 'E')
 			game->matrix[pos_f][pos_c].value = '0';
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda_ray_horizontal.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 13:08:40 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/10/10 16:57:27 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/11 13:20:05 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	up(t_game *game, double angle, int r, float aTan)
 
 static void	down(t_game *game, double angle, int r, float aTan)
 {
+	(void)(angle);
 	game->ray[r].ry = (((int)(game->player.f * M_SIZE) / M_SIZE)
 			* M_SIZE) + M_SIZE;
 	if (is_angle ((M_PI * 2) / 8, angle))
