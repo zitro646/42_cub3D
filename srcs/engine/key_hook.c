@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 10:36:49 by potero            #+#    #+#             */
-/*   Updated: 2022/10/11 10:46:40 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/11 11:09:15 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	advance(int key_code, t_game *game)
 {
 	if (key_code == 53)
-		close_esc(game);
+		return (close_esc(game));
 	else if (key_code == 13)
 		game->player.advance = 1;
 	else if (key_code == 1)
@@ -101,7 +101,6 @@ void	finish_hook(double new_c, double new_f, t_game *game)
 	if (game->player.angle > (2 * M_PI) || game->player.angle < 0)
 		angle(game);
 	if (movement(game, new_f - 0.5, new_c - 0.5) == 0)
-//	if (movement(game, new_f, new_c) == 0)
 	{
 		game->player.f = new_f;
 		game->player.c = new_c;

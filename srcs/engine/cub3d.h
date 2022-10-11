@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:17:49 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/10 17:05:13 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/11 11:04:29 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		close_esc(t_game *game);
 
 /*Matrix*/
 void	create_matrix(char **file, int f, int c, t_matrix **matrix);
-void	free_my_matrix(t_matrix *matrix);
+void	free_my_matrix(t_matrix **matrix);
 
 /*Player Data*/
 void	player_data(t_game *game);
