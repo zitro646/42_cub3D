@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:15:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/10 16:40:49 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/11 10:51:13 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ typedef struct s_game
 	t_image		scrn;
 	t_image		mnmap;
 	t_image		minimap;
+	double		f;
 	double		diff_angle;
 	int			height;
 	int			width;

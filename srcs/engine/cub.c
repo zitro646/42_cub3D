@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:20:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/10 16:27:12 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/11 10:49:42 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	init(t_game *game, t_data_map *data)
 {
 	create_matrix(data->showmap, game->size_f, game->size_c, game->matrix);
 	game->player.speed_m = 1;
+//	game->player.speed_m = 0.5;
 	game->player.speed_t = (M_PI * 2) / 8;
 	game->width = 1000;
 	game->height = 1000;

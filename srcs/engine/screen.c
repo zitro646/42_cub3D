@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 12:07:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/10 12:50:12 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/11 10:53:29 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	select_texture(t_game *game, int r)
 
 int	aux_screen_game_r(t_game *game, int r, int y, int end)
 {
-	double			f;
 	double			step;
 	int				t;
 	int				index;
@@ -42,18 +41,20 @@ int	aux_screen_game_r(t_game *game, int r, int y, int end)
 
 	t = select_texture(game, r);
 	step = game->texture[t].height / game->ray[r].wall;
-	f = 0;
+	game->f = 0;
+	if (game->ray[r].wall > game->height)
+		game->f = ((game->ray[r].wall - game->height) / 2) * step;
 	while (y++ < end)
 	{
 		if (t == 1 || t == 3)
-			index = (int)f * game->texture[t].height
+			index = (int)game->f * game->texture[t].height
 				+ ((game->ray[r].hit_c - (int)game->ray[r].hit_c)
 					* game->texture[t].width);
 		else
-			index = (int)f * game->texture[t].height
+			index = (int)game->f * game->texture[t].height
 				+ ((game->ray[r].hit_f - (int)game->ray[r].hit_f)
 					* game->texture[t].width);
-		f += step;
+		game->f += step;
 		color = ((unsigned int *)(game->texture[t].add))[index];
 		put_pixel(&game->scrn, r, y, color);
 	}

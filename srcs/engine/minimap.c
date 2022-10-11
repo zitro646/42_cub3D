@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 12:56:01 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/10 12:24:15 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/11 10:01:47 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	aux_minimap(double i, double j, t_game *game)
 		y = 0;
 		while (y < 9)
 		{
-			if ((i + x) < 0 || (i + x) >= game->size_f || (j + y) < 0
+			if ((i + x) < -1 || (i + x) >= game->size_f || (j + y) < -1
 				|| (j + y) >= game->size_c)
 				wall_floor_minimap(game, x, y, 0x000000);
 			else if (game->matrix[(int)i + x][(int)j + y].value == '1')
@@ -43,9 +43,9 @@ void	minimap(t_game *game)
 
 	i = game->player.f - 4;
 	j = game->player.c - 4;
-	if (i <= 0)
+	if (i < 0)
 		i--;
-	if (j <= 0)
+	if (j < 0)
 		j--;
 	aux_minimap(i, j, game);
 	player_minimap(game, 0X0000FF);
