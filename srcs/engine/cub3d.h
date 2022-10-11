@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:17:49 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/11 11:04:29 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/11 12:59:52 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	player_data(t_game *game);
 void	screen_game(t_game *game);
 void	screen_game_r(t_game *game, int r);
 void	start_game(t_game *game);
+void	frame(t_game *game);
 
 /*Window*/
 void	ray_vision(t_game *game, int color);

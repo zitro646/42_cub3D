@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:20:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/11 11:26:19 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/11 12:54:37 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ int	cube(t_data_map *data)
 		return (0);
 	init(&game, data);
 	start_game(&game);
+	printf("1\n");
 	player_data(&game);
+	printf("2\n");
 	hook_loop(&game);
 	return (0);
 }

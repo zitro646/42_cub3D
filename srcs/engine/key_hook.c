@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 10:36:49 by potero            #+#    #+#             */
-/*   Updated: 2022/10/11 11:24:58 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/11 12:59:55 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,6 @@ void	finish_hook(double new_c, double new_f, t_game *game)
 		game->player.c = new_c;
 	}
 	ray(game);
+	frame(game);
 	minimap(game);
 }

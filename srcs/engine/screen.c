@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 12:07:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/11 10:53:29 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/11 13:00:34 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	aux_screen_game_r(t_game *game, int r, int y, int end)
 	game->f = 0;
 	if (game->ray[r].wall > game->height)
 		game->f = ((game->ray[r].wall - game->height) / 2) * step;
-	while (y++ < end)
+	while (++y < end)
 	{
 		if (t == 1 || t == 3)
 			index = (int)game->f * game->texture[t].height
@@ -56,9 +56,55 @@ int	aux_screen_game_r(t_game *game, int r, int y, int end)
 					* game->texture[t].width);
 		game->f += step;
 		color = ((unsigned int *)(game->texture[t].add))[index];
-		put_pixel(&game->scrn, r, y, color);
+		if (y < game->width)
+			put_pixel(&game->scrn, r, y, color);
 	}
 	return (y);
+}
+
+void frame(t_game *game)
+{
+	int	c;
+	int	f;
+
+	c = 0;
+	while (c < 5)
+	{
+		f = 0;
+		while (f < game->height)
+		{
+			put_pixel(&game->scrn, c, f, DARK_PURPLE);
+			f++;
+		}
+		c++;
+	}
+	while (c < game->width -5 )
+	{
+		f = 0;
+		while (f < 5)
+		{
+			put_pixel(&game->scrn, c, f, DARK_PURPLE);
+			f++;
+		}
+		while (f < game->height - 5)
+			f++;
+		while (f < game->height)
+		{
+			put_pixel(&game->scrn, c, f, DARK_PURPLE);
+			f++;
+		}
+		c++;
+	}
+	while (c < game->width)
+	{
+		f = 0;
+		while (f < game->height)
+		{
+			put_pixel(&game->scrn, c, f, DARK_PURPLE);
+			f++;
+		}
+		c++;
+	}
 }
 
 void	screen_game_r(t_game *game, int r)
@@ -70,12 +116,13 @@ void	screen_game_r(t_game *game, int r)
 
 	middle = game->height / 2;
 	y = -1;
+	y = 0;
 	start = middle - (game->ray[r].wall / 2);
 	end = start + (int)game->ray[r].wall;
-	while (y++ <= start)
+	while (++y <= start)
 		put_pixel(&game->scrn, r, y, game->roof_color);
 	y = (aux_screen_game_r(game, r, y - 1, end)) - 1;
-	while (y++ < game->height)
+	while (++y < game->height)
 		put_pixel(&game->scrn, r, y, game->floor_color);
 }
 
@@ -92,11 +139,10 @@ void	start_game(t_game *game)
 	x = -1;
 	while (++x < game->width)
 	{
-		y = -1;
+		y = 0;
 		while (++y < middle)
 			put_pixel(&game->scrn, x, y, game->roof_color);
-		y--;
-		while (y++ < game->height)
+		while (++y < game->height)
 			put_pixel(&game->scrn, x, y, game->floor_color);
 	}
 	mlx_put_image_to_window(game->mlx.mlx,
