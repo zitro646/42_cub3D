@@ -6,48 +6,41 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 12:56:01 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/11 13:43:10 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:18:14 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	aux_minimap(double i, double j, t_game *game)
+void	aux_minimap(t_game *game)
 {
 	int	x;
 	int	y;
 
-	x = 0;
-	while (x < 9)
+	y = -4;
+	while (y < 5)
 	{
-		y = 0;
-		while (y < 9)
+		x = -4;
+		while (x < 5)
 		{
-			if ((i + x) < -1 || (i + x) >= game->size_f || (j + y) < -1
-				|| (j + y) >= game->size_c)
-				wall_floor_minimap(game, x, y, 0x000000);
-			else if (game->matrix[(int)i + x][(int)j + y].value == '1')
-				wall_floor_minimap(game, x, y, game->roof_color);
-			else if (game->matrix[(int)i + x][(int)j + y].value != '1')
-				wall_floor_minimap(game, x, y, game->floor_color);
-			y++;
+			if (!inside_matrix(game, (int) game->player.f + y,
+					(int) game->player.c + x))
+				wall_floor_minimap(game, y + 4, x + 4, 0x000000);
+			else if (game->matrix[(int)game->player.f + y]
+				[(int)game->player.c + x].value == '1')
+				wall_floor_minimap(game, y + 4, x + 4, game->roof_color);
+			else if (game->matrix[(int)game->player.f + y]
+				[(int)game->player.c + x].value != '1')
+				wall_floor_minimap(game, y + 4, x + 4, game->floor_color);
+			x++;
 		}
-		x++;
+		y++;
 	}
 }
 
 void	minimap(t_game *game)
 {
-	double	i;
-	double	j;
-
-	i = game->player.f - 4;
-	j = game->player.c - 4;
-	if (i < 0)
-		i--;
-	if (j < 0)
-		j--;
-	aux_minimap(i, j, game);
+	aux_minimap(game);
 	player_minimap(game, 0X0000FF);
 	mlx_put_image_to_window(game->mlx.mlx, game->mlx.screen,
 		game->minimap.image, game->height - 140, game->width - 140);
