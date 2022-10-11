@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 08:34:09 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/09/29 11:32:41 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/11 09:45:35 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <stdio.h>
 
 t_data_map	*mapreader(char *str_dir);
-
 
 //Get sizes of File / Matrix
 int			get_file_height(char *str);

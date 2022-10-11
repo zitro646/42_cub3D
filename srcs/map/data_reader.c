@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 08:31:10 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/09/01 16:05:43 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/10/11 09:46:37 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ static void	add_data_variable_paths(t_data_map	*data, char **infile_var)
 			&ft_strnstr(infile_var[4], "F", ft_strlen(infile_var[4]))[2], "");
 	data->_roof_colour_path = ft_strjoin(\
 			&ft_strnstr(infile_var[5], "C", ft_strlen(infile_var[5]))[2], "");
-
 }
 
 t_data_map	*mapreader(char *str_dir)

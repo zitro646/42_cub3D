@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 12:05:07 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/09/01 16:27:34 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/10/11 09:47:22 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,6 @@ void	free_all(t_data_map *data_map)
 	free(data_map->_west_texture_path);
 	free(data_map->_roof_colour_path);
 	free(data_map->_floor_colour_path);
-	// ft_lstclear(data_map->player);
-	// free(data_map->player);
-	// //free_window(data_map);
-	// ft_lstclear(data_map->enemy);
-	// free(data_map->enemy);
 	free(data_map);
 	printf("-> FREE ALL DONE <-\n");
 }
-
-

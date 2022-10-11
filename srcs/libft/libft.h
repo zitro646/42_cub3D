@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 12:51:39 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/09/01 13:48:24 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/10/11 09:44:44 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ typedef struct data_map
 	char			*_west_texture_path;
 	char			*_floor_colour_path;
 	char			*_roof_colour_path;
-	// t_list			**player;
-	// t_list			**enemy;
 }	t_data_map;
 
 int			ft_isalpha(int c);
