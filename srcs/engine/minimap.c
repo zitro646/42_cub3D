@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 12:56:01 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/11 12:16:20 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/11 13:43:10 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	minimap(t_game *game)
 	aux_minimap(i, j, game);
 	player_minimap(game, 0X0000FF);
 	mlx_put_image_to_window(game->mlx.mlx, game->mlx.screen,
-		game->minimap.image, game->height - 135, game->width - 135);
+		game->minimap.image, game->height - 140, game->width - 140);
 }
 
 void	ray_vision_minimap(t_game *game, int color)

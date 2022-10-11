@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 10:38:08 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/09/07 12:42:46 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/10/11 13:41:41 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,17 @@ void	leaks(void)
 	system("leaks -q test");
 }
 
-char	*get_dir(char	*dir)
+char	*get_dir(char *dir)
 {
 	dir = ft_strjoin("./srcs/assets/", dir);
-	return (dir);
+	if (!ft_strnstr(&dir[ft_strlen(dir) - 4], ".cub", ft_strlen(dir)))
+	{
+		printf("No .cub detected\n");
+		free(dir);
+		return (NULL);
+	}
+	else
+		return (dir);
 }
 
 int	main(int argc, char **argv)

@@ -6,12 +6,12 @@ CYAN = @echo "\033[0;36m"
 RESET = "\033[1;0m"
 
 # VARIABLES #
-NAME = test
+NAME = cub3D
 LIBFT_NAME = libft.a
 
 AR = ar rcs
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra #-fsanitize=address -g3
+CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g3
 CFLAGS += -I ./$(INC_PATH) -I ./$(LIBFT_PATH)
 MINILIBX_FLAGS = -lmlx -framework OpenGL -framework AppKit
 
@@ -30,7 +30,7 @@ SRC =   main.c
 SRC_MAP = data_reader.c data_check.c data_check_aux.c get_file_height.c free_data.c map_work.c visualize_tools.c path_variables.c
 
 SRC_ENGINE = cub.c player_data.c matrix.c screen.c key_hook.c angle.c ray.c dda_ray.c\
-			 minimap.c window.c texture.c color.c dda_ray_horizontal.c dda_ray_vertical.c
+			 minimap.c window.c texture.c color.c dda_ray_horizontal.c dda_ray_vertical.c frame.c
 
 SRC_LIBFT = ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_memchr.c \
 ft_memcmp.c ft_strlen.c ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c  \

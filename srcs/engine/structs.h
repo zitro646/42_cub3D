@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:15:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/11 12:59:22 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/11 13:12:22 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define PURPLE 0x4B0082
 # define DARK_PURPLE 0x3C0068
 # define GREY 0x8C8C8C
+# define DARK_GREEN 0x186A3B 
 # include "cub3d.h"
 
 typedef struct s_matrix

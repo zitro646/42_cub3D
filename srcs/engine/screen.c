@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 12:07:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/11 13:00:34 by potero-d         ###   ########.fr       */
+/*   Updated: 2022/10/11 13:39:41 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,21 @@ int	select_texture(t_game *game, int r)
 	return (0);
 }
 
+int	index_function(t_game *game, int t, int r)
+{
+	int	index;
+
+	if (t == 1 || t == 3)
+		index = (int)game->f * game->texture[t].height
+			+ ((game->ray[r].hit_c - (int)game->ray[r].hit_c)
+				* game->texture[t].width);
+	else
+		index = (int)game->f * game->texture[t].height
+			+ ((game->ray[r].hit_f - (int)game->ray[r].hit_f)
+				* game->texture[t].width);
+	return (index);
+}
+
 int	aux_screen_game_r(t_game *game, int r, int y, int end)
 {
 	double			step;
@@ -46,65 +61,13 @@ int	aux_screen_game_r(t_game *game, int r, int y, int end)
 		game->f = ((game->ray[r].wall - game->height) / 2) * step;
 	while (++y < end)
 	{
-		if (t == 1 || t == 3)
-			index = (int)game->f * game->texture[t].height
-				+ ((game->ray[r].hit_c - (int)game->ray[r].hit_c)
-					* game->texture[t].width);
-		else
-			index = (int)game->f * game->texture[t].height
-				+ ((game->ray[r].hit_f - (int)game->ray[r].hit_f)
-					* game->texture[t].width);
+		index = index_function(game, t, r);
 		game->f += step;
 		color = ((unsigned int *)(game->texture[t].add))[index];
 		if (y < game->width)
 			put_pixel(&game->scrn, r, y, color);
 	}
 	return (y);
-}
-
-void frame(t_game *game)
-{
-	int	c;
-	int	f;
-
-	c = 0;
-	while (c < 5)
-	{
-		f = 0;
-		while (f < game->height)
-		{
-			put_pixel(&game->scrn, c, f, DARK_PURPLE);
-			f++;
-		}
-		c++;
-	}
-	while (c < game->width -5 )
-	{
-		f = 0;
-		while (f < 5)
-		{
-			put_pixel(&game->scrn, c, f, DARK_PURPLE);
-			f++;
-		}
-		while (f < game->height - 5)
-			f++;
-		while (f < game->height)
-		{
-			put_pixel(&game->scrn, c, f, DARK_PURPLE);
-			f++;
-		}
-		c++;
-	}
-	while (c < game->width)
-	{
-		f = 0;
-		while (f < game->height)
-		{
-			put_pixel(&game->scrn, c, f, DARK_PURPLE);
-			f++;
-		}
-		c++;
-	}
 }
 
 void	screen_game_r(t_game *game, int r)
