@@ -1,0 +1,13 @@
+SO ./ruta_a_la_textura_sur
+NO ./ruta_a_la_textura_norte
+C 225,30,0
+WE ./ruta_a_la_textura_oeste
+EA ./ruta_a_la_textura_este
+F 220,100,0
+
+
+1111111111
+1000100001
+10N0100001
+1000100001
+1111111111

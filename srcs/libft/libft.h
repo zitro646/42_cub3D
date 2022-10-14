@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 12:51:39 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/09/08 13:26:41 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/10/11 09:44:44 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef struct s_list
 
 typedef struct window
 {
+	void	*mlx_ptr;
+	void	*win_ptr;
 	void	*floor_title;
 	void	*player_title;
 	void	*enemy_title;

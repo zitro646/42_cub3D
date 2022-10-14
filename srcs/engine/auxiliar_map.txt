@@ -1,0 +1,34 @@
+
+cub.c
+
+Function cube()
+line 31:
+		window(&game, 0);
+
+Function init()
+line 48:
+		game->mlx.window = mlx_new_window(game->mlx.mlx,
+line 49:
+		(game->size_c * M_SIZE), (game->size_f * M_SIZE), "minimap");
+
+Function hook_loop()
+line 77:
+		mlx_hook(game->mlx.window, 2, (1L << 0), advance, game);
+line 78:
+		mlx_hook(game->mlx.window, 3, (1L << 1), stop, game);
+line 79:
+		mlx_hook(game->mlx.window, 17, (1L << 17), close_esc, game);
+
+Function close_esc()
+line 89:
+		mlx_clear_window(game->mlx.mlx, game->mlx.window);
+line 90:
+		mlx_destroy_window(game->mlx.mlx, game->mlx.window);
+
+key_hook.c
+
+Function finishin_hook()
+line 110:
+		mlx_clear_window(game->mlx.mlx, game->mlx.window);
+line 111:
+		window(game, 1);

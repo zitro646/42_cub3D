@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 12:42:57 by mortiz-d          #+#    #+#             */
-/*   Updated: 2022/08/31 12:51:21 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/10/11 15:42:30 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,23 @@ static	char	*get_var(char **file_data, \
 char	**get_infile_variables(char **file_data, char **identicators)
 {
 	char	**values;
+	char	*aux;
 	int		i;
 
 	i = 0;
 	values = ft_calloc(sizeof(char *), 6 + 1);
 	while (identicators[i])
 	{
-		values[i] = get_var(file_data, identicators[i], identicators);
+		aux = get_var(file_data, identicators[i], identicators);
+		if (aux != NULL)
+		{
+			values[i] = replace_str(aux, ' ', "");
+			free (aux);
+		}
+		else
+			values[i] = NULL;
 		i++;
 	}
+	see_matrix(values);
 	return (values);
 }

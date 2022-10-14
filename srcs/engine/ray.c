@@ -3,111 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 09:39:19 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/08 17:05:00 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/10/11 13:43:17 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_ray(t_game *game)
+void	ray_angle(t_game *game, int r)
 {
 	int	i;
 
-	i = 0;
-	while (i < game->width)
+	i = game->width / 2;
+	if (r == game->width / 2)
+		game->ray[r].ray_angle = game->player.angle;
+	else if (r < i)
 	{
-		game->ray[i].ray = i;
-	//	printf("ray[%i]:created\n", game->ray->ray);
-		i++;
+		game->ray[r].ray_angle = game->player.angle
+			- game->diff_angle * (i - r);
 	}
+	else if (r > i)
+	{
+		game->ray[r].ray_angle = game->player.angle
+			+ game->diff_angle * (r - i);
+		if (game->ray[r].ray_angle > 2 * M_PI || game->ray[r].ray_angle < 0)
+			game->ray[r].ray_angle = new_angle(game->ray[r].ray_angle);
+	}
+	if (game->ray[r].ray_angle > 2 * M_PI || game->ray[r].ray_angle < 0)
+			game->ray[r].ray_angle = new_angle(game->ray[r].ray_angle);
 }
 
-void    ray(t_game *game)
+void	ray(t_game *game)
 {
-	int r;
-	int	i;
-	double	new_hit_x;
-	double	new_hit_y;
-	double	cont;
-	double	pow_x;
-	double	pow_y;
-	double	abs;
+	int		r;
+	double	angle;
+	double	wall;
+	double	proportion;
 
-	r = game->width / 2;
-	i = 0;
-	game->ray[game->width / 2].ray_angle = game->player.angle;
-	while (r < game->width)
-	{
-		game->ray[r].ray_angle = game->ray[game->width / 2].ray_angle
-			+ game->diff_angle * i;
-		if (game->ray[r].ray_angle > 2 * M_PI || game->ray[r].ray_angle < 0)
-			game->ray[r].ray_angle = new_angle(game->ray[r].ray_angle);  
-		r++;
-		i++;
-	}
-	r = (game->width / 2) - 1;
-	i = 0;
-	while (r >= 0)
-	{
-		game->ray[r].ray_angle = game->ray[game->width / 2].ray_angle
-				- game->diff_angle * i;
-		if (game->ray[r].ray_angle > 2 * M_PI || game->ray[r].ray_angle < 0)
-			game->ray[r].ray_angle = new_angle(game->ray[r].ray_angle); 
-		r--;
-		i++;
-	}
-
+	mlx_clear_window(game->mlx.mlx, game->mlx.screen);
+	wall = game->width / 2;
+	proportion = tan(M_PI / 4) * (game->width / 2);
 	r = 0;
 	while (r < game->width)
 	{
-		cont = 0.3;
-		new_hit_x = (game->player.y * 15) + (cos(game->ray[r].ray_angle) * cont); 
-		new_hit_y = (game->player.x * 15) + (sin(game->ray[r].ray_angle) * cont);
-		while (!pos_is_wall(new_hit_x, new_hit_y, game))
-		{
-			new_hit_x = (game->player.y * 15) + (cos(game->ray[r].ray_angle) * cont); 
-			new_hit_y = (game->player.x * 15) + (sin(game->ray[r].ray_angle) * cont);
-			pos_is_wall(new_hit_x, new_hit_y, game);
-			cont += 0.3;
-		}
-		game->ray[r].hit_y = new_hit_x / 15;
-		game->ray[r].hit_x = new_hit_y / 15;
+		ray_angle(game, r);
+		game->ray[r].distance = ray_vision_dda(game, game->ray[r].ray_angle, r);
+		angle = -M_PI / 4 + (game->diff_angle * r);
+		game->ray[r].point = cos(angle) * game->ray[r].distance;
+		game->ray[r].wall = wall / (wall / proportion * game->ray[r].point);
+		screen_game_r(game, r);
 		r++;
 	}
-
-	r = 0;
-	while (r < game->width)
-	{
-		pow_x = pow(game->ray[r].hit_x - game->player.x, 2);
-		pow_y = pow(game->ray[r].hit_y - game->player.y, 2);
-		abs = pow_x + pow_y;
-		if (abs < 0)
-			abs *= - 1;
-		game->ray[r].distance = sqrt(abs);
-		r++;
-	}
-
-	r = 0;
-	while (r < game->width)
-	{
-		game->ray[r].point = cos(game->ray[r].ray_angle) * game->ray[r].distance;
-		r++;
-	}
-
-	// printf("ray[0]: %f, hit[0]: (%f, %f)\n", game->ray[0].ray_angle,
-	// 		game->ray[0].hit_x, game->ray[0].hit_y);
-	// printf("distance to hit: %f\n", game->ray[0].distance);
-	// printf("point: %f\n", game->ray[0].point);
-	// printf("ray[511]: %f, hit[511]: (%f, %f)\n", game->ray[511].ray_angle,
-	// 		game->ray[511].hit_x, game->ray[512].hit_y);
-	// printf("distance to hit: %f\n", game->ray[512].distance);
-	// printf("point: %f\n", game->ray[511].point);
-	// printf("ray[1023]: %f, hit[1023]: (%f, %f)\n", game->ray[1023].ray_angle,
-	// 		game->ray[1023].hit_x, game->ray[1023].hit_y);
-	// printf("distance to hit: %f\n", game->ray[1023].distance);
-	// printf("point: %f\n", game->ray[1023].point);
-
+	frame(game);
+	mlx_put_image_to_window(game->mlx.mlx,
+		game->mlx.screen, game->scrn.image, 0, 0);
 }

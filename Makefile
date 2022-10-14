@@ -6,12 +6,12 @@ CYAN = @echo "\033[0;36m"
 RESET = "\033[1;0m"
 
 # VARIABLES #
-NAME = test
+NAME = cub3D
 LIBFT_NAME = libft.a
 
 AR = ar rcs
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra #-fsanitize=address -g3
+CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g3
 CFLAGS += -I ./$(INC_PATH) -I ./$(LIBFT_PATH)
 MINILIBX_FLAGS = -lmlx -framework OpenGL -framework AppKit
 
@@ -29,7 +29,8 @@ SRC =   main.c
 
 SRC_MAP = data_reader.c data_check.c data_check_aux.c get_file_height.c free_data.c map_work.c visualize_tools.c path_variables.c
 
-SRC_ENGINE = cub.c map.c matrix.c screen.c key_hook.c angle.c ray.c dda_ray.c
+SRC_ENGINE = cub.c player_data.c matrix.c screen.c key_hook.c angle.c ray.c dda_ray.c\
+			 minimap.c window.c texture.c color.c dda_ray_horizontal.c dda_ray_vertical.c frame.c
 
 SRC_LIBFT = ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_memchr.c \
 ft_memcmp.c ft_strlen.c ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c  \
@@ -74,9 +75,9 @@ $(OBJ_PATH)/%.o: $(ENGINE_PATH)/%.c | $(OBJ_PATH)
 	$(CC) $(CFLAGS) -c $< -o $@
             
 $(NAME): $(OBJS) $(OBJS_LIBFT) $(OBJS_ENGINE) $(OBJS_MAPS) | $(MINILIBX_NAME)
-	$(MAKE) -sC $(MINILIBX_PATH)
+#$(MAKE) -sC $(MINILIBX_PATH) --silent
 	$(GREEN) Objects compiled $(RESET)
-	$(CC) $(CFLAGS) $(OBJS_MAPS) $(OBJS_ENGINE) $(OBJS) $(OBJS_LIBFT) $(MINILIBX_FLAGS) -o $(NAME) 
+	$(CC) $(CFLAGS) $(OBJS_MAPS) $(OBJS_ENGINE) $(OBJS) $(OBJS_LIBFT) $(MINILIBX_FLAGS) -o $(NAME)
 	clear
 	$(GREEN) Program asembled $(RESET)
 
@@ -89,11 +90,12 @@ norminette:
 	norminette $(SRCS)
 	norminette $(LIBFT_PATH)
 	norminette $(MAP_PATH)
+	norminette $(ENGINE_PATH)
 
 clean:
 	$(PURPLE) CLEANING OBJECTS $(RESET)
 	rm -rf $(OBJ_PATH)
-	$(MAKE) clean -sC $(MINILIBX_PATH)
+#$(MAKE) clean -sC $(MINILIBX_PATH)
 	
 fclean: clean
 	$(PURPLE) CLEANING DIRECTORY AND EXEC $(RESET)

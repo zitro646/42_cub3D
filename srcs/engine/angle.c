@@ -3,24 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   angle.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: potero-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:33:35 by potero-d          #+#    #+#             */
-/*   Updated: 2022/09/12 14:14:49 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/10/10 17:05:26 by potero-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
- //Normalizar el angulo (que esté en el primer giro siempre)
-void    angle(t_game *game)
+//Normalizar el angulo (que esté en el primer giro siempre)
+void	angle(t_game *game)
 {
+	double	new;
+	double	num;
+
+	num = game->player.angle;
+	while (num >= 0)
+		num -= (2 * M_PI);
+	num += (2 * M_PI);
 	if (game->player.angle < 0)
-		game->player.angle += (M_PI * 2);
-	else if (game->player.angle > (M_PI * 2))
-		game->player.angle -= (M_PI * 2);
-	
-	printf("Angle angled :)\n");
+		new = num + (2 * M_PI);
+	else
+		new = num;
+	if (new == 6.283185)
+		new = 0;
+	game->player.angle = new;
 }
 
 double	new_angle(double num)
@@ -33,17 +41,19 @@ double	new_angle(double num)
 		aux -= (2 * M_PI);
 	aux += (2 * M_PI);
 	new = aux;
+	if (new == 6.23185)
+		new = 0;
 	return (new);
 }
 
-void	looking_at(t_game *game)
+int	is_angle(float angle, float angle_2)
 {
-	if ((game->player.angle > 0) && (game->player.angle < M_PI / 2))
-		game->player.looking_at = 2; //abajo derecha
-	else if ((game->player.angle > M_PI / 2) && (game->player.angle < M_PI))
-		game->player.looking_at = 3; //abajo izquierda
-	else if ((game->player.angle > M_PI) && (game->player.angle < 3 * M_PI / 2))
-		game->player.looking_at = 4; //arriba izquierda
-	else if ((game->player.angle > 3 * M_PI / 2) && (game->player.angle <  2 * M_PI))
-		game->player.looking_at = 1; //arriba derecha
+	int	new_angle;
+	int	testing;
+
+	new_angle = angle * 1000000;
+	testing = angle_2 * 1000000;
+	if (new_angle == testing)
+		return (1);
+	return (0);
 }
