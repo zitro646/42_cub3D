@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub.c                                              :+:      :+:    :+:   */
+/*   re_cub.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:20:10 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/18 12:29:56 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/10/18 14:40:24 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "engine.h"
 
 int	cube(t_data_map *data)
 {
@@ -36,20 +36,24 @@ int	cube(t_data_map *data)
 void	init(t_game *game, t_data_map *data)
 {
 	create_matrix(data->showmap, game->size_f, game->size_c, game->matrix);
-	game->player.speed_m = 1;
-	game->player.speed_t = (M_PI * 2) / 8;
+	game->player.speed_m = 0.1;
+	game->player.speed_t = (M_PI * 2) / 16;
 	//1200;//
-	game->width = 1200;//W_WINDOW_SIZE;
-	game->height = 1200;//H_WINDOW_SIZE;
+	game->width = W_WINDOW_SIZE;
+	game->height = H_WINDOW_SIZE;
+	
 	game->diff_angle = (M_PI / 2) / game->width;
 	game->ray = calloc(sizeof(t_ray) * game->width, 1);
 	game->mlx.mlx = mlx_init();
+	//Cube3D
 	game->mlx.screen = mlx_new_window(game->mlx.mlx,
-			game->height, game->width, "cub3D");
+			game->width, game->height, "cub3D");
+	//Minimap
 	game->mlx.window = mlx_new_window(game->mlx.mlx,
 			(game->size_c * M_SIZE), (game->size_f * M_SIZE), "minimap");
 	game->scrn.image = mlx_new_image(game->mlx.mlx,
 			game->width, game->height);
+	//Cosas
 	game->mnmap.image = mlx_new_image(game->mlx.mlx,
 			(game->size_c * M_SIZE), (game->size_f * M_SIZE));
 	game->scrn.add = mlx_get_data_addr(game->scrn.image, &game->scrn.bpp,
@@ -75,10 +79,11 @@ void	init_color_and_textures(t_game *game, t_data_map *data)
 
 int	hook_loop(t_game *game)
 {
-		mlx_hook(game->mlx.window, 2, (1L << 0), advance, game);
-		mlx_hook(game->mlx.window, 3, (1L << 1), stop, game);
-		mlx_hook(game->mlx.window, 17, (1L << 17), close_esc, game);
-
+	//the other window
+	mlx_hook(game->mlx.window, 2, (1L << 0), advance, game);
+	mlx_hook(game->mlx.window, 3, (1L << 1), stop, game);
+	mlx_hook(game->mlx.window, 17, (1L << 17), close_esc, game);
+	//good window
 	mlx_hook(game->mlx.screen, 2, (1L << 0), advance, game);
 	mlx_hook(game->mlx.screen, 3, (1L << 1), stop, game);
 	mlx_hook(game->mlx.screen, 17, (1L << 17), close_esc, game);

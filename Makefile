@@ -11,14 +11,15 @@ LIBFT_NAME = libft.a
 
 AR = ar rcs
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g3
+CFLAGS = -Wall -Werror -Wextra #-fsanitize=address -g3
 CFLAGS += -I ./$(INC_PATH) -I ./$(LIBFT_PATH)
 MINILIBX_FLAGS = -lmlx -framework OpenGL -framework AppKit
 
 # PATHs #
 LIBFT_PATH  = srcs/libft
 MAP_PATH  = srcs/map
-ENGINE_PATH  = srcs/engine
+#ENGINE_PATH  = srcs/new_engine
+ENGINE_PATH  = srcs/new_engine
 MINILIBX_PATH = srcs/minilibx
 INC_PATH    = includes
 SRC_PATH    = srcs
@@ -29,7 +30,10 @@ SRC =   main.c
 
 SRC_MAP = data_reader.c data_check.c data_check_aux.c get_file_height.c free_data.c map_work.c visualize_tools.c path_variables.c
 
-SRC_ENGINE = cub.c player_data.c matrix.c screen.c key_hook.c angle.c ray.c dda_ray.c\
+SRC_ENGINE = re_cub.c re_screen.c re_window.c re_matrix.c re_color.c\
+			re_texture.c re_key_hook.c re_player_data.c re_angle.c
+
+#SRC_ENGINE = cub.c player_data.c matrix.c screen.c key_hook.c angle.c ray.c dda_ray.c\
 			 minimap.c window.c texture.c color.c dda_ray_horizontal.c dda_ray_vertical.c frame.c
 
 SRC_LIBFT = ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_memchr.c \
