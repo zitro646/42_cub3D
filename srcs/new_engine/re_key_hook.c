@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 10:36:49 by potero            #+#    #+#             */
-/*   Updated: 2022/10/18 14:31:39 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/10/18 15:52:02 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	finish_hook(double new_c, double new_f, t_game *game)
 		game->player.f = new_f;
 		game->player.c = new_c;
 	}
-	// printf("Player pos -> [%f][%f]\n", game->player.f,game->player.c);
+	printf("Player pos -> \nY :[%f]\nX: [%f]\n", game->player.f,game->player.c);
 	//ray(game);
 	// minimap(game);
 	mlx_clear_window(game->mlx.mlx, game->mlx.window);

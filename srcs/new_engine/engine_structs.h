@@ -6,7 +6,7 @@
 /*   By: mortiz-d <mortiz-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 11:15:53 by potero-d          #+#    #+#             */
-/*   Updated: 2022/10/18 12:41:45 by mortiz-d         ###   ########.fr       */
+/*   Updated: 2022/10/18 15:48:34 by mortiz-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,34 @@ typedef struct s_ray
 	float	distv;
 	float	disth;
 }	t_ray;
+
+//NEW RAY
+typedef struct s_newray
+{
+	double	camerax;
+	double	raydirx;
+	double	raydiry;
+	int		mapx;
+	int		mapy;
+	double	sidedistx;
+	double	sidedisty;
+	double	deltadistx;
+	double	deltadisty;
+	double	prepwalldist;
+	int		stepx;
+	int		stepy;
+	int		hit;
+	int		side;
+	int		drawstart;
+	int		drawend;
+	int		lineheight;
+	double	wallx;
+	double	wally;
+	int		texx;
+	int		texy;
+	double	step;
+	double	texpos;
+}	t_newray;
 
 typedef struct s_texture
 {
